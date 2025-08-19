@@ -1,4 +1,4 @@
-/*
+    /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -23,8 +23,12 @@ public class Main {
     System.out.println("2. Registrar Nuevo Usuario");
     System.out.println("0. Salir");
     System.out.print("Seleccione una opcion: ");
-    opcion = Integer.parseInt(scanner.nextLine());
-
+        try {
+                opcion = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("⚠️ Debe ingresar un número válido.");
+                opcion = -1;
+            }
     switch (opcion) {
         case 1 -> {
             System.out.print("Usuario: ");
