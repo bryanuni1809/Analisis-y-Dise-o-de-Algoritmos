@@ -70,7 +70,10 @@ public class Main {
                     System.out.println("Opcion invalida.");
                     break;
             }
-
+            if (opcion != 0) {
+                System.out.println("\nPresione ENTER para continuar...");
+                scanner.nextLine();
+            }
         } while (opcion != 0);
             scanner.close();
     }
