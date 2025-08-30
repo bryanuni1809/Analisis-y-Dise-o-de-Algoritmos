@@ -48,12 +48,20 @@ public class Main {
 
                 case 2:
                     System.out.print("Nuevo usuario: ");
-                    String nuevoUsuario = scanner.nextLine();
+                    String nuevoUsuario = scanner.nextLine().trim();
+                    if (nuevoUsuario.isEmpty()) {
+                        System.out.println(" El usuario no puede estar vacío.");
+                        break;
+                    }
                     System.out.print("Nueva contraseña: ");
-                    String nuevaContrasena = scanner.nextLine();
+                    String nuevaContrasena = scanner.nextLine().trim();
+                    if (nuevaContrasena.isEmpty()) {
+                        System.out.println("La contraseña no puede estar vacía.");
+                        break;
+                    }
                     auth.registrarUsuario(nuevoUsuario, nuevaContrasena);
                     break;
-
+                    
                 case 0:
                     System.out.println("Saliendo del sistema...");
                     break;
@@ -64,5 +72,6 @@ public class Main {
             }
 
         } while (opcion != 0);
+            scanner.close();
     }
 }
