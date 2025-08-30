@@ -20,6 +20,15 @@ import java.util.ArrayList;
  * @author BRYAN
  */
 public class ArchivoUtil {
+
+    private static void escribirLinea(String ruta, String linea, boolean append) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(ruta, append))) {
+            writer.write(linea);
+            writer.newLine();
+        } catch (IOException ex) {
+            System.out.println("Error al escribir en archivo " + ruta + ": " + ex.getMessage());
+        }
+    }
     public static void guardarEstudiante(Estudiante e, String ruta) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(ruta, true))) {
             writer.write(e.getDni() + "," + e.getNombres() + "," + e.getApellidos() + "," +
