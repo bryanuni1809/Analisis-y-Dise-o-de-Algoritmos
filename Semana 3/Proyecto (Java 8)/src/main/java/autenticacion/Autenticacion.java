@@ -17,8 +17,6 @@ import java.io.IOException;
 public class Autenticacion {
 private static final String ARCHIVO = "usuarios.txt";
 
-    // Método que valida si un usuario y contraseña existen en el archivo
-    // Complejidad: O(n) (búsqueda lineal)
     public boolean validarCredenciales(String usuario, String contrasena) {
         try (BufferedReader reader = new BufferedReader(new FileReader(ARCHIVO))) {
             String linea;
@@ -56,8 +54,6 @@ private static final String ARCHIVO = "usuarios.txt";
         return false;
     }
 
-    // Método que registra un nuevo usuario en el archivo
-    // Complejidad: O(1) (agrega al final del archivo)
     public void registrarUsuario(String usuario, String contrasena) {
         if (usuarioExiste(usuario)) {
             System.out.println("El usuario '" + usuario + "' ya está registrado.");
