@@ -13,7 +13,7 @@ SELECT TOP (100000)
     DATEADD(DAY, - (ABS(CHECKSUM(NEWID())) % 365), GETDATE())
 FROM sys.all_objects a
 CROSS JOIN sys.all_objects b;
-
+SELECT * FROM VentasExternas;
 SET STATISTICS IO ON;
 SET STATISTICS TIME ON;
 SELECT*FROM VentasExternas
