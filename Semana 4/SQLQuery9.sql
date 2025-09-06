@@ -1,0 +1,6 @@
+SET STATISTICS IO ON;
+SET STATISTICS TIME ON;
+
+SELECT SalesOrderID, ProductID, OrderQty, LineTotal
+FROM VentasGrandes
+ORDER BY LineTotal DESC;
