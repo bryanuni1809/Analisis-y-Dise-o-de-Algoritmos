@@ -27,7 +27,7 @@ public class Main {
             try {
                 opcion = Integer.parseInt(scanner.nextLine());
             } catch (NumberFormatException e) {
-                System.out.println("Debe ingresar un número valido.");
+                System.out.println("Debe ingresar un numero valido.");
                 opcion = -1;
             }
 

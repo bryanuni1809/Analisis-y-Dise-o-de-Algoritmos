@@ -7,6 +7,7 @@ package gestor;
 import entidades.Calificacion;
 import entidades.Curso;
 import entidades.Estudiante;
+import entidades.ExternalSort;
 import entidades.IdiomaNivel;
 import entidades.Matricula;
 import entidades.Profesor;
@@ -20,6 +21,7 @@ import java.util.Comparator;
 import java.util.Scanner;
 import util.ArchivoUtil;
 import entidades.Ordenaciones;
+import java.io.File;
 
 /**
  *
@@ -196,6 +198,7 @@ public class GestorAcademia {
                     System.out.println("1. Burbuja");
                     System.out.println("2. Seleccion");
                     System.out.println("3. Insercion");
+                    System.out.println("4. Ordenacion Externa (archivo)");
                     int ordest = Integer.parseInt(scanner.nextLine());
                         switch (ordest){
                             case 1:
@@ -207,16 +210,34 @@ public class GestorAcademia {
                             case 3:
                                 Ordenaciones.insercion(estudiantes,Comparator.comparing(Estudiante::getApellidos));
                                 break;
-                            default:
-                                System.out.println("Opcion invalida.");
-                                break;
-                        }
-                    System.out.println("=== Lista de Estudiantes Ordenados ===");
-                        for (Estudiante e : estudiantes) {
-                        System.out.println(e.mostrarInfo());
-                        }
+                            case 4:
+                                try {
+                                    File entrada =new File("estudiantes.txt");
+                                    File salida =new File("estudiantes_ordenados.txt");
+                                    ExternalSort.externalSort(entrada,salida,100);
+                                    System.out.println("Archivo de estudiantes ordenado generado: " +salida.getName());
+                                try (BufferedReader br =new BufferedReader(new FileReader(salida))) {
+                                    String linea;
+                                    System.out.println("=== Lista de Estudiantes Ordenados (archivo) ===");
+                                while ((linea = br.readLine()) != null) {
+                                    System.out.println(linea);
+                                }
+                            }
+                        }catch (Exception e) {
+                        System.out.println("Error en ordenación externa: " + e.getMessage());
+                    }
                     break;
-
+                default:
+                    System.out.println("Opcion invalida.");
+                    break;
+            }
+            if (ordest >= 1 && ordest <= 3) {
+                System.out.println("=== Lista de Estudiantes Ordenados ===");
+                for (Estudiante e : estudiantes) {
+                    System.out.println(e.mostrarInfo());
+                }
+            }
+            break;
                     case 2:
                         if (profesores.isEmpty()) {
                         System.out.println("No hay profesores registrados.");
@@ -226,6 +247,7 @@ public class GestorAcademia {
                     System.out.println("1. Burbuja");
                     System.out.println("2. Seleccion");
                     System.out.println("3. Insercion");
+                    System.out.println("4. Ordenación Externa (archivo)");
                     int ordprof = Integer.parseInt(scanner.nextLine());
                         switch (ordprof) {
                             case 1:
@@ -237,16 +259,36 @@ public class GestorAcademia {
                             case 3:
                                 Ordenaciones.insercion(profesores,Comparator.comparingInt(Profesor::getExperiencia));
                                 break;
-                            default:
-                                System.out.println("Opcion invalida.");
-                                break;
-                        }
-                        System.out.println("=== Lista de Profesores Ordenados ===");
-                            for (Profesor p : profesores) {
-                                System.out.println(p.mostrarInfo());
-                            }
-                break;
+                            case 4:
+                                try {
+                                    File entrada=new File("profesores.txt");
+                                    File salida =new File("profesores_ordenados.txt");
+                                    ExternalSort.externalSort(entrada,salida,100);
+                                    System.out.println("Archivo de profesores ordenado generado: " +salida.getName());
 
+                                try (BufferedReader br = new BufferedReader(new FileReader(salida))) {
+                                    String linea;
+                                    System.out.println("=== Lista de Profesores Ordenados (archivo) ===");
+                                while ((linea = br.readLine()) != null) {
+                                    System.out.println(linea);
+                                }
+                            }
+                        } catch (Exception e) {
+                            System.out.println("Error en ordenacion externa: " + e.getMessage());
+                    }
+                    break;
+                default:
+                    System.out.println("Opción inválida.");
+                    break;
+            }
+
+            if (ordprof >= 1 && ordprof <= 3) {
+                System.out.println("=== Lista de Profesores Ordenados ===");
+                for (Profesor p : profesores) {
+                    System.out.println(p.mostrarInfo());
+                }
+            }
+            break;
         case 0:
             System.out.println("Volviendo al menú principal...");
             break;
