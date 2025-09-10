@@ -198,7 +198,7 @@ public class GestorAcademia {
                     System.out.println("1. Burbuja");
                     System.out.println("2. Seleccion");
                     System.out.println("3. Insercion");
-                    System.out.println("4. Ordenación Externa (archivo)");
+                    System.out.println("4. Ordenacion Externa (archivo)");
                     int ordest = Integer.parseInt(scanner.nextLine());
                         switch (ordest){
                             case 1:
@@ -212,11 +212,11 @@ public class GestorAcademia {
                                 break;
                             case 4:
                                 try {
-                                    File entrada = new File("estudiantes.txt");
-                                    File salida = new File("estudiantes_ordenados.txt");
-                                    ExternalSort.externalSort(entrada, salida, 100); // bloque de 100 registros
-                                    System.out.println("Archivo de estudiantes ordenado generado: " + salida.getName());
-                                try (BufferedReader br = new BufferedReader(new FileReader(salida))) {
+                                    File entrada =new File("estudiantes.txt");
+                                    File salida =new File("estudiantes_ordenados.txt");
+                                    ExternalSort.externalSort(entrada,salida,100);
+                                    System.out.println("Archivo de estudiantes ordenado generado: " +salida.getName());
+                                try (BufferedReader br =new BufferedReader(new FileReader(salida))) {
                                     String linea;
                                     System.out.println("=== Lista de Estudiantes Ordenados (archivo) ===");
                                 while ((linea = br.readLine()) != null) {
@@ -228,11 +228,9 @@ public class GestorAcademia {
                     }
                     break;
                 default:
-                    System.out.println("Opción inválida.");
+                    System.out.println("Opcion invalida.");
                     break;
             }
-
-            // Mostrar la lista en memoria (para casos 1-3)
             if (ordest >= 1 && ordest <= 3) {
                 System.out.println("=== Lista de Estudiantes Ordenados ===");
                 for (Estudiante e : estudiantes) {
@@ -249,6 +247,7 @@ public class GestorAcademia {
                     System.out.println("1. Burbuja");
                     System.out.println("2. Seleccion");
                     System.out.println("3. Insercion");
+                    System.out.println("4. Ordenación Externa (archivo)");
                     int ordprof = Integer.parseInt(scanner.nextLine());
                         switch (ordprof) {
                             case 1:
@@ -262,10 +261,10 @@ public class GestorAcademia {
                                 break;
                             case 4:
                                 try {
-                                    File entrada = new File("profesores.txt");
-                                    File salida = new File("profesores_ordenados.txt");
-                                    ExternalSort.externalSort(entrada, salida, 100); // bloque de 100 registros
-                                    System.out.println("Archivo de profesores ordenado generado: " + salida.getName());
+                                    File entrada=new File("profesores.txt");
+                                    File salida =new File("profesores_ordenados.txt");
+                                    ExternalSort.externalSort(entrada,salida,100);
+                                    System.out.println("Archivo de profesores ordenado generado: " +salida.getName());
 
                                 try (BufferedReader br = new BufferedReader(new FileReader(salida))) {
                                     String linea;
@@ -275,7 +274,7 @@ public class GestorAcademia {
                                 }
                             }
                         } catch (Exception e) {
-                            System.out.println("Error en ordenación externa: " + e.getMessage());
+                            System.out.println("Error en ordenacion externa: " + e.getMessage());
                     }
                     break;
                 default:
