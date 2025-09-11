@@ -20,14 +20,14 @@ import java.util.PriorityQueue;
  * @author BRYAN
  */
 public class ExternalSort {
-    public static List<File> dividirYOrdenar(File archivoEntrada, int tamanoBloque) throws IOException {
-        List<File> archivosTemporales = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(archivoEntrada))) {
-            List<String> buffer = new ArrayList<>();
+    public static List<File> dividirYOrdenar(File archivoEntrada,int tamanoBloque) throws IOException {
+        List<File> archivosTemporales =new ArrayList<>();
+        try (BufferedReader br =new BufferedReader(new FileReader(archivoEntrada))) {
+            List<String> buffer=new ArrayList<>();
             String linea;
-            while ((linea = br.readLine()) != null) {
+            while ((linea=br.readLine()) != null) {
                 buffer.add(linea);
-                if (buffer.size() >= tamanoBloque) {
+                if (buffer.size() >=tamanoBloque) {
                     archivosTemporales.add(guardarOrdenado(buffer));
                     buffer.clear();
                 }
@@ -43,7 +43,7 @@ public class ExternalSort {
         File temp = File.createTempFile("bloque", ".txt");
         temp.deleteOnExit();
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(temp))) {
-            for (String linea:datos) {
+            for (String linea:datos){
                 bw.write(linea);
                 bw.newLine();
             }
@@ -53,18 +53,18 @@ public class ExternalSort {
     public static void mezclarArchivos(List<File> archivos, File archivoSalida) throws IOException {
         PriorityQueue<BufferedReader> cola = new PriorityQueue<>(
             Comparator.comparing(br -> {
-                try {
+                try{
                     br.mark(1000);
                     String linea = br.readLine();
                     br.reset();
                     return linea;
-                } catch (IOException e) {
+                }catch(IOException e){
                     return null;
                 }
             })
         );
 
-        for (File f : archivos) {
+        for (File f :archivos) {
             cola.add(new BufferedReader(new FileReader(f)));
         }
 
@@ -92,11 +92,11 @@ public class ExternalSort {
         mezclarArchivos(archivos, archivoSalida);
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[]args) throws IOException {
         File entrada = new File("estudiantes.txt");
         File salida = new File("estudiantes_ordenados.txt");
-        externalSort(entrada, salida, 1000);
-        System.out.println("Archivo ordenado generado: " + salida.getAbsolutePath());
+        externalSort(entrada,salida,1000);
+        System.out.println("Archivo ordenado generado: "+salida.getAbsolutePath());
     }
 }
 
