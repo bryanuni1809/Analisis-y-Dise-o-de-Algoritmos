@@ -32,18 +32,18 @@ public class ExternalSort {
                     buffer.clear();
                 }
             }
-            if (!buffer.isEmpty()) {
+            if (!buffer.isEmpty()){
                 archivosTemporales.add(guardarOrdenado(buffer));
             }
         }
         return archivosTemporales;
     }
     private static File guardarOrdenado(List<String> datos) throws IOException {
-        datos.sort(Comparator.naturalOrder()); // aquí puedes cambiar el criterio
+        datos.sort(Comparator.naturalOrder());
         File temp = File.createTempFile("bloque", ".txt");
         temp.deleteOnExit();
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(temp))) {
-            for (String linea : datos) {
+            for (String linea:datos) {
                 bw.write(linea);
                 bw.newLine();
             }
