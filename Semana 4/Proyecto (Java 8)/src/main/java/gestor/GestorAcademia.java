@@ -199,7 +199,7 @@ public class GestorAcademia {
                     System.out.println("2. Seleccion");
                     System.out.println("3. Insercion");
                     System.out.println("4. Ordenacion Externa (archivo)");
-                    int ordest = Integer.parseInt(scanner.nextLine());
+                    int ordest =Integer.parseInt(scanner.nextLine());
                         switch (ordest){
                             case 1:
                                 Ordenaciones.burbuja(estudiantes,Comparator.comparing(Estudiante::getApellidos));
@@ -248,7 +248,7 @@ public class GestorAcademia {
                     System.out.println("2. Seleccion");
                     System.out.println("3. Insercion");
                     System.out.println("4. Ordenación Externa (archivo)");
-                    int ordprof = Integer.parseInt(scanner.nextLine());
+                    int ordprof =Integer.parseInt(scanner.nextLine());
                         switch (ordprof) {
                             case 1:
                                 Ordenaciones.burbuja(profesores,Comparator.comparing(Profesor::getApellidos));

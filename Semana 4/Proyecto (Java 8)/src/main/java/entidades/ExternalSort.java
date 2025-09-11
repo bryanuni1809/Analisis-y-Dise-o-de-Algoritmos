@@ -22,27 +22,27 @@ import java.util.PriorityQueue;
 public class ExternalSort {
     public static List<File> dividirYOrdenar(File archivoEntrada,int tamanoBloque) throws IOException {
         List<File> archivosTemporales =new ArrayList<>();
-        try (BufferedReader br =new BufferedReader(new FileReader(archivoEntrada))) {
+        try(BufferedReader br =new BufferedReader(new FileReader(archivoEntrada))){
             List<String> buffer=new ArrayList<>();
             String linea;
-            while ((linea=br.readLine()) != null) {
+            while((linea=br.readLine()) != null) {
                 buffer.add(linea);
                 if (buffer.size() >=tamanoBloque) {
                     archivosTemporales.add(guardarOrdenado(buffer));
                     buffer.clear();
                 }
             }
-            if (!buffer.isEmpty()){
+            if(!buffer.isEmpty()){
                 archivosTemporales.add(guardarOrdenado(buffer));
             }
         }
         return archivosTemporales;
     }
-    private static File guardarOrdenado(List<String> datos) throws IOException {
+    private static File guardarOrdenado(List<String> datos) throws IOException{
         datos.sort(Comparator.naturalOrder());
-        File temp = File.createTempFile("bloque", ".txt");
+        File temp=File.createTempFile("bloque", ".txt");
         temp.deleteOnExit();
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(temp))) {
+        try (BufferedWriter bw=new BufferedWriter(new FileWriter(temp))) {
             for (String linea:datos){
                 bw.write(linea);
                 bw.newLine();
@@ -51,7 +51,7 @@ public class ExternalSort {
         return temp;
     }
     public static void mezclarArchivos(List<File> archivos, File archivoSalida) throws IOException {
-        PriorityQueue<BufferedReader> cola = new PriorityQueue<>(
+        PriorityQueue<BufferedReader> cola=new PriorityQueue<>(
             Comparator.comparing(br -> {
                 try{
                     br.mark(1000);
