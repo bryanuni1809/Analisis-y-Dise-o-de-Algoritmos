@@ -231,7 +231,7 @@ public class GestorAcademia {
                     System.out.println("Opcion invalida.");
                     break;
             }
-            if (ordest >=1&& ordest<=3) {
+            if(ordest>=1&&ordest<=3){
                 System.out.println("=== Lista de Estudiantes Ordenados ===");
                 for (Estudiante e : estudiantes) {
                     System.out.println(e.mostrarInfo());
@@ -249,7 +249,7 @@ public class GestorAcademia {
                     System.out.println("3. Insercion");
                     System.out.println("4. Ordenación Externa (archivo)");
                     int ordprof =Integer.parseInt(scanner.nextLine());
-                        switch (ordprof) {
+                        switch (ordprof){
                             case 1:
                                 Ordenaciones.burbuja(profesores,Comparator.comparing(Profesor::getApellidos));
                                 break;
@@ -305,7 +305,7 @@ public class GestorAcademia {
                 System.out.println("Opcion invalida.");
                 break;
         }
-    } while (opcion != 0);
+    } while (opcion !=0);
 }
 
 private void menuEstudiantes() {
@@ -355,7 +355,7 @@ private void menuProfesores() {
         System.out.print("Seleccione una opcion: ");
         opcion = Integer.parseInt(scanner.nextLine());
 
-        switch (opcion) {
+        switch (opcion){
             case 1:
                 registrarProfesor();
                 break;
