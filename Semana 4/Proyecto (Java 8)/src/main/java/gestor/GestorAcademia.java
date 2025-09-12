@@ -377,7 +377,7 @@ private void menuProfesores() {
         }
     } while (opcion != 0);
 }
-    private void menuCursos() {
+    private void menuCursos(){
     int opcion;
     do {
         System.out.println("\n--- GESTION DE CURSOS ---");
@@ -408,7 +408,7 @@ private void menuProfesores() {
             default:
                 System.out.println("Opcion invalida.");
         }
-    } while (opcion != 0);
+    } while (opcion !=0);
 }
 
 private void menuMatriculasNotas() {
@@ -434,10 +434,10 @@ private void menuMatriculasNotas() {
             default:
                 System.out.println("Opcion invalida.");
         }
-    } while (opcion != 0);
+    } while (opcion !=0);
 }
 
-private void menuNivelesIdioma() {
+private void menuNivelesIdioma(){
     int opcion;
     do {
         System.out.println("\n--- GESTION DE NIVELES DE IDIOMA ---");
