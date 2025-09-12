@@ -130,7 +130,7 @@ public class GestorAcademia {
         System.out.println("Error al cargar matrículas: " + e.getMessage());
     }
 }
-    private void cargarCalificaciones() {
+    private void cargarCalificaciones(){
     try (BufferedReader br = new BufferedReader(new FileReader("calificaciones.txt"))) {
         String linea;
         while ((linea = br.readLine()) != null) {
@@ -143,11 +143,11 @@ public class GestorAcademia {
                 calificaciones.add(c);
             }
         }
-    } catch (IOException e) {
+    } catch(IOException e){
         System.out.println("Error al cargar calificaciones: " + e.getMessage());
     }
 }
-    public void mostrarMenu() {
+    public void mostrarMenu(){
     int opcion;
     do {
         System.out.println("\n===== MENU PRINCIPAL =====");
@@ -162,7 +162,7 @@ public class GestorAcademia {
         System.out.print("Seleccione una opcion: ");
         opcion = Integer.parseInt(scanner.nextLine());
 
-        switch (opcion) {
+        switch(opcion){
             case 1:
                 menuEstudiantes();
                 break;
@@ -188,7 +188,7 @@ public class GestorAcademia {
                 System.out.println("0. Volver al menu principal");
                 int lista =Integer.parseInt(scanner.nextLine());
 
-                switch (lista){
+                switch(lista){
                     case 1:
                         if (estudiantes.isEmpty()) {
                         System.out.println("No hay estudiantes registrados.");
@@ -231,7 +231,7 @@ public class GestorAcademia {
                     System.out.println("Opcion invalida.");
                     break;
             }
-            if (ordest >= 1 && ordest <= 3) {
+            if (ordest >=1&& ordest<=3) {
                 System.out.println("=== Lista de Estudiantes Ordenados ===");
                 for (Estudiante e : estudiantes) {
                     System.out.println(e.mostrarInfo());
