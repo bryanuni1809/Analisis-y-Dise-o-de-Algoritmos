@@ -555,25 +555,25 @@ private void mostrarMenuReportesHTML(){
     private void registrarProfesor() {
         System.out.println("Registro de Profesor:");
         System.out.print("DNI: ");
-        String dni = scanner.nextLine();
+        String dni= scanner.nextLine();
         System.out.print("Nombres: ");
         String nombres = scanner.nextLine();
         System.out.print("Apellidos: ");
-        String apellidos = scanner.nextLine();
+        String apellidos= scanner.nextLine();
         System.out.print("Direccion: ");
         String direccion = scanner.nextLine();
         System.out.print("Telefono: ");
-        String telefono = scanner.nextLine();
+        String telefono =scanner.nextLine();
         System.out.print("Correo: ");
-        String correo = scanner.nextLine();
+        String correo =scanner.nextLine();
         System.out.print("Especialidad: ");
-        String especialidad = scanner.nextLine();
+        String especialidad= scanner.nextLine();
         System.out.print("Años de experiencia: ");
         int experiencia = Integer.parseInt(scanner.nextLine());
 
-        Profesor p = new Profesor(dni, nombres, apellidos, direccion, telefono, correo, especialidad, experiencia);
+        Profesor p = new Profesor(dni,nombres,apellidos,direccion,telefono,correo,especialidad,experiencia);
         profesores.add(p);
-        ArchivoUtil.guardarProfesor(p, "profesores.txt");
+        ArchivoUtil.guardarProfesor(p,"profesores.txt");
 
         System.out.println("Profesor registrado y guardado.");
     }
