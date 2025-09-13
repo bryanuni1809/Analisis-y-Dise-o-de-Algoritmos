@@ -471,7 +471,7 @@ private void menuNivelesIdioma(){
     } while (opcion != 0);
 }
 
-private void mostrarMenuReportesHTML() {
+private void mostrarMenuReportesHTML(){
     int opcion;
     do {
         System.out.println("\n--- GENERACION DE REPORTES HTML ---");
@@ -485,7 +485,7 @@ private void mostrarMenuReportesHTML() {
         System.out.print("Seleccione una opcion: ");
         opcion = Integer.parseInt(scanner.nextLine());
 
-        switch (opcion) {
+        switch (opcion){
             case 1:
                 generarReporteEstudiantesHTML();
                 break;
@@ -513,28 +513,28 @@ private void mostrarMenuReportesHTML() {
 
     } while (opcion != 0);
 }
- private void registrarEstudiante() {
+ private void registrarEstudiante(){
         System.out.println("Registro de Estudiante:");
         System.out.print("DNI: ");
-        String dni = scanner.nextLine();
+        String dni =scanner.nextLine();
         System.out.print("Nombres: ");
-        String nombres = scanner.nextLine();
+        String nombres =scanner.nextLine();
         System.out.print("Apellidos: ");
-        String apellidos = scanner.nextLine();
+        String apellidos =scanner.nextLine();
         System.out.print("Direccion: ");
-        String direccion = scanner.nextLine();
+        String direccion =scanner.nextLine();
         System.out.print("Telefono: ");
-        String telefono = scanner.nextLine();
+        String telefono =scanner.nextLine();
         System.out.print("Correo: ");
         String correo = scanner.nextLine();
         System.out.print("Fecha de nacimiento: ");
-        String fechaNac = scanner.nextLine();
+        String fechaNac =scanner.nextLine();
         System.out.print("Nivel de estudios: ");
-        String nivel = scanner.nextLine();
+        String nivel=scanner.nextLine();
 
-        Estudiante e = new Estudiante(dni, nombres, apellidos, direccion, telefono, correo, fechaNac, nivel);
+        Estudiante e = new Estudiante(dni,nombres,apellidos,direccion,telefono,correo,fechaNac,nivel);
         estudiantes.add(e);
-        ArchivoUtil.guardarEstudiante(e, "estudiantes.txt");
+        ArchivoUtil.guardarEstudiante(e,"estudiantes.txt");
 
         System.out.println("Estudiante registrado y guardado.");
     }
