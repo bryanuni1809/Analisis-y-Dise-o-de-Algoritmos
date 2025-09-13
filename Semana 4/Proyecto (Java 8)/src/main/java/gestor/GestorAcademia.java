@@ -581,11 +581,11 @@ private void mostrarMenuReportesHTML(){
     private void registrarCurso() {
         System.out.println("Registro de Curso:");
         System.out.print("Codigo del curso: ");
-        String codigo = scanner.nextLine();
+        String codigo= scanner.nextLine();
         System.out.print("Nombre del curso: ");
-        String nombre = scanner.nextLine();
+        String nombre= scanner.nextLine();
         System.out.print("Idioma: ");
-        String idioma = scanner.nextLine();
+        String idioma= scanner.nextLine();
         System.out.print("Nivel: ");
         String nivel = scanner.nextLine();
         System.out.print("DNI del profesor: ");
@@ -610,7 +610,7 @@ private void mostrarMenuReportesHTML(){
    private void registrarMatricula() {
         System.out.println("Registro de Matricula:");
         System.out.print("DNI del estudiante: ");
-        String dni = scanner.nextLine();
+        String dni =scanner.nextLine();
 
         Estudiante estudiante = null;
         for (Estudiante e : estudiantes) {
@@ -632,13 +632,13 @@ private void mostrarMenuReportesHTML(){
 
         System.out.println("Cursos disponibles:");
         for (Curso c : cursos) {
-            System.out.println("- " + c.getCodigo() + ": " + c.getNombre());
+            System.out.println("- " +c.getCodigo()+ ": " +c.getNombre());
         }
 
         System.out.print("Ingrese el codigo del curso: ");
-        String codigoCurso = scanner.nextLine();
+        String codigoCurso =scanner.nextLine();
 
-        Curso cursoSeleccionado = null;
+        Curso cursoSeleccionado =null;
         for (Curso c : cursos) {
             if (c.getCodigo().equals(codigoCurso)) {
                 cursoSeleccionado = c;
