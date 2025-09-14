@@ -638,7 +638,7 @@ private void mostrarMenuReportesHTML(){
         System.out.print("Ingrese el codigo del curso: ");
         String codigoCurso =scanner.nextLine();
 
-        Curso cursoSeleccionado =null;
+        Curso cursoSeleccionado=null;
         for (Curso c : cursos) {
             if (c.getCodigo().equals(codigoCurso)) {
                 cursoSeleccionado = c;
@@ -646,31 +646,31 @@ private void mostrarMenuReportesHTML(){
             }
         }
 
-        if (cursoSeleccionado == null) {
+        if (cursoSeleccionado==null) {
             System.out.println("Curso no encontrado.");
             return;
         }
 
         System.out.print("Fecha de matricula (ej. 25/06/2025): ");
-        String fecha = scanner.nextLine();
-        double monto = cursoSeleccionado.getPrecio();
+        String fecha=scanner.nextLine();
+        double monto=cursoSeleccionado.getPrecio();
 
-        Matricula m = new Matricula(codigoCurso, dni, fecha, monto);
+        Matricula m=new Matricula(codigoCurso, dni, fecha, monto);
         matriculas.add(m);
-        ArchivoUtil.guardarMatricula(m, "matriculas.txt");
+        ArchivoUtil.guardarMatricula(m,"matriculas.txt");
 
-        System.out.println("Matricula registrada para " + estudiante.getNombres() + " en el curso " + cursoSeleccionado.getNombre());
+        System.out.println("Matricula registrada para "+estudiante.getNombres()+" en el curso "+cursoSeleccionado.getNombre());
     }
 
     private void registrarCalificacion() {
         System.out.println("Registro de Calificaciones:");
         System.out.print("Ingrese el codigo del curso: ");
-        String codigoCurso = scanner.nextLine();
+        String codigoCurso=scanner.nextLine();
 
-        Curso cursoSeleccionado = null;
-        for (Curso c : cursos) {
+        Curso cursoSeleccionado=null;
+        for(Curso c : cursos){
             if (c.getCodigo().equals(codigoCurso)) {
-                cursoSeleccionado = c;
+                cursoSeleccionado=c;
                 break;
             }
         }
