@@ -674,18 +674,16 @@ private void mostrarMenuReportesHTML(){
                 break;
             }
         }
-
-        if (cursoSeleccionado == null) {
+        if(cursoSeleccionado == null){
             System.out.println("Curso no encontrado.");
             return;
         }
-
         System.out.print("Fecha del registro de calificacion: ");
-        String fecha = scanner.nextLine();
+        String fecha=scanner.nextLine();
 
-        boolean encontrado = false;
+        boolean encontrado=false;
 
-        for (Matricula m : matriculas) {
+        for (Matricula m:matriculas) {
             if (m.getCodigoCurso().equals(codigoCurso)) {
                 String dniEst = m.getDniEstudiante();
 
