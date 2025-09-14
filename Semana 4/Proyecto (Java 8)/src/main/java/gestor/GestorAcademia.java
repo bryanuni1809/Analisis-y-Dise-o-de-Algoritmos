@@ -695,14 +695,14 @@ private void mostrarMenuReportesHTML(){
                     }
                 }
 
-                if (est != null) {
-                    System.out.println("Estudiante: " + est.getNombres() + " " + est.getApellidos());
+                if (est != null){
+                    System.out.println("Estudiante: "+est.getNombres()+ " " +est.getApellidos());
                     System.out.print("Nota: ");
-                    double nota = Double.parseDouble(scanner.nextLine());
+                    double nota=Double.parseDouble(scanner.nextLine());
                     System.out.print("Observaciones: ");
-                    String obs = scanner.nextLine();
+                    String obs=scanner.nextLine();
 
-                    Calificacion c = new Calificacion(codigoCurso, dniEst, fecha, nota, obs);
+                    Calificacion c = new Calificacion(codigoCurso,dniEst,fecha,nota,obs);
                     calificaciones.add(c);
                     ArchivoUtil.guardarCalificacion(c, "calificaciones.txt");
 
@@ -712,7 +712,7 @@ private void mostrarMenuReportesHTML(){
             }
         }
 
-        if (!encontrado) {
+        if (!encontrado){
             System.out.println("No hay estudiantes matriculados en este curso.");
         }
     }
