@@ -777,7 +777,7 @@ private void modificarProfesor(){
             System.out.print("Opcion: ");
             int opcion=Integer.parseInt(scanner.nextLine());
 
-            switch (opcion) {
+            switch (opcion){
                 case 1:
                     System.out.print("Nueva especialidad: ");
                     String nuevaEsp = scanner.nextLine();
@@ -792,7 +792,6 @@ private void modificarProfesor(){
                     System.out.println("Opcion invalida.");
                     break;
             }
-
             ArchivoUtil.sobrescribirProfesores(profesores, "profesores.txt");
             System.out.println("Datos actualizados.");
             return;
@@ -801,12 +800,12 @@ private void modificarProfesor(){
 
     System.out.println("Profesor no encontrado.");
 }
-private void modificarCurso() {
+private void modificarCurso(){
     System.out.print("Ingrese codigo del curso a modificar: ");
-    String codigo = scanner.nextLine();
+    String codigo =scanner.nextLine();
 
-    for (Curso c : cursos) {
-        if (c.getCodigo().equals(codigo)) {
+    for(Curso c:cursos){
+        if(c.getCodigo().equals(codigo)){
             System.out.println("Curso encontrado:");
             System.out.println(c.mostrarInfo());
 
@@ -815,9 +814,9 @@ private void modificarCurso() {
             System.out.println("2. Capacidad maxima");
             System.out.println("3. Observaciones");
             System.out.print("Opcion: ");
-            int opcion = Integer.parseInt(scanner.nextLine());
+            int opcion=Integer.parseInt(scanner.nextLine());
 
-            switch (opcion) {
+            switch(opcion){
                 case 1:
                     System.out.print("Nuevo horario: ");
                     String horario = scanner.nextLine();
