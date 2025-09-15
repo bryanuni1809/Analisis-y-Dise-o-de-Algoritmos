@@ -819,17 +819,17 @@ private void modificarCurso(){
             switch(opcion){
                 case 1:
                     System.out.print("Nuevo horario: ");
-                    String horario = scanner.nextLine();
+                    String horario=scanner.nextLine();
                     c.setHorario(horario);
                     break;
                 case 2:
                     System.out.print("Nueva capacidad maxima: ");
-                    int capacidad = Integer.parseInt(scanner.nextLine());
+                    int capacidad=Integer.parseInt(scanner.nextLine());
                     c.setCapacidadMaxima(capacidad);
                     break;
                 case 3:
                     System.out.print("Nuevas observaciones: ");
-                    String obs = scanner.nextLine();
+                    String obs=scanner.nextLine();
                     c.setObservaciones(obs);
                     break;
                 default:
@@ -845,30 +845,30 @@ private void modificarCurso(){
 
     System.out.println("Curso no encontrado.");
 }
-private void registrarNivelIdioma() {
+private void registrarNivelIdioma(){
     System.out.println("Registro de Nivel de Idioma:");
     System.out.print("Codigo: ");
-    String codigo = scanner.nextLine();
+    String codigo=scanner.nextLine();
     System.out.print("Idioma: ");
-    String idioma = scanner.nextLine();
+    String idioma =scanner.nextLine();
     System.out.print("Nivel: ");
-    String nivel = scanner.nextLine();
+    String nivel=scanner.nextLine();
     System.out.print("Descripcion: ");
-    String descripcion = scanner.nextLine();
+    String descripcion =scanner.nextLine();
 
-    IdiomaNivel in = new IdiomaNivel(codigo, idioma, nivel, descripcion);
+    IdiomaNivel in =new IdiomaNivel(codigo, idioma, nivel, descripcion);
     nivelesIdioma.add(in);
-    ArchivoUtil.guardarNivelIdioma(in, "idiomas.txt");
+    ArchivoUtil.guardarNivelIdioma(in,"idiomas.txt");
 
     System.out.println("Nivel de idioma registrado.");
 }
 
-private void modificarNivelIdioma() {
+private void modificarNivelIdioma(){
     System.out.print("Ingrese codigo del nivel de idioma a modificar: ");
-    String codigo = scanner.nextLine();
+    String codigo=scanner.nextLine();
 
-    for (IdiomaNivel in : nivelesIdioma) {
-        if (in.getCodigo().equals(codigo)) {
+    for(IdiomaNivel in :nivelesIdioma){
+        if(in.getCodigo().equals(codigo)){
             System.out.println("Nivel encontrado:");
             System.out.println(in.mostrarInfo());
 
