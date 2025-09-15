@@ -720,8 +720,8 @@ private void mostrarMenuReportesHTML(){
     System.out.print("Ingrese DNI del estudiante a modificar: ");
     String dni = scanner.nextLine();
 
-    for (Estudiante e : estudiantes) {
-        if (e.getDni().equals(dni)) {
+    for (Estudiante e:estudiantes){
+        if (e.getDni().equals(dni)){
             System.out.println("Estudiante encontrado:");
             System.out.println(e.mostrarInfo());
 
@@ -730,22 +730,22 @@ private void mostrarMenuReportesHTML(){
             System.out.println("2. Telefono");
             System.out.println("3. Nivel de estudios");
             System.out.print("Opcion: ");
-            int opcion = Integer.parseInt(scanner.nextLine());
+            int opcion=Integer.parseInt(scanner.nextLine());
 
-            switch (opcion) {
+            switch(opcion){
                 case 1:
                     System.out.print("Nueva direccion: ");
-                    String nuevaDireccion = scanner.nextLine();
+                    String nuevaDireccion=scanner.nextLine();
                     e.setDireccion(nuevaDireccion);
                     break;
                 case 2:
                     System.out.print("Nuevo telefono: ");
-                    String nuevoTelefono = scanner.nextLine();
+                    String nuevoTelefono=scanner.nextLine();
                     e.setTelefono(nuevoTelefono);
                     break;
                 case 3:
                     System.out.print("Nuevo nivel de estudios: ");
-                    String nuevoNivel = scanner.nextLine();
+                    String nuevoNivel=scanner.nextLine();
                     e.setNivelEstudios(nuevoNivel);
                     break;
                 default:
@@ -762,12 +762,12 @@ private void mostrarMenuReportesHTML(){
     System.out.println("Estudiante no encontrado.");
 }
 
-private void modificarProfesor() {
+private void modificarProfesor(){
     System.out.print("Ingrese DNI del profesor a modificar: ");
-    String dni = scanner.nextLine();
+    String dni=scanner.nextLine();
 
-    for (Profesor p : profesores) {
-        if (p.getDni().equals(dni)) {
+    for(Profesor p :profesores){
+        if (p.getDni().equals(dni)){
             System.out.println("Profesor encontrado:");
             System.out.println(p.mostrarInfo());
 
@@ -775,7 +775,7 @@ private void modificarProfesor() {
             System.out.println("1. Especialidad");
             System.out.println("2. Años de experiencia");
             System.out.print("Opcion: ");
-            int opcion = Integer.parseInt(scanner.nextLine());
+            int opcion=Integer.parseInt(scanner.nextLine());
 
             switch (opcion) {
                 case 1:
