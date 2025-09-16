@@ -942,12 +942,12 @@ private void buscarNivelIdioma(){
 
     System.out.println("Nivel no encontrado.");
 }
-private void eliminarProfesor() {
+private void eliminarProfesor(){
     System.out.print("Ingrese DNI del profesor a eliminar: ");
     String dni = scanner.nextLine();
 
-    for (int i = 0; i < profesores.size(); i++) {
-        if (profesores.get(i).getDni().equals(dni)) {
+    for (int i = 0; i < profesores.size();i++){
+        if (profesores.get(i).getDni().equals(dni)){
             profesores.remove(i);
             ArchivoUtil.sobrescribirProfesores(profesores, "profesores.txt");
             System.out.println("Profesor eliminado.");
@@ -957,12 +957,12 @@ private void eliminarProfesor() {
 
     System.out.println("Profesor no encontrado.");
 }
-private void eliminarCurso() {
+private void eliminarCurso(){
     System.out.print("Ingrese codigo del curso a eliminar: ");
     String codigo = scanner.nextLine();
 
-    for (int i = 0; i < cursos.size(); i++) {
-        if (cursos.get(i).getCodigo().equals(codigo)) {
+    for (int i = 0; i<cursos.size();i++){
+        if (cursos.get(i).getCodigo().equals(codigo)){
             cursos.remove(i);
             ArchivoUtil.sobrescribirCursos(cursos, "cursos.txt");
             System.out.println("Curso eliminado.");
@@ -972,7 +972,7 @@ private void eliminarCurso() {
 
     System.out.println("Curso no encontrado.");
 }
-private void eliminarNivelIdioma() {
+private void eliminarNivelIdioma(){
     System.out.print("Ingrese codigo del nivel de idioma a eliminar: ");
     String codigo = scanner.nextLine();
 
