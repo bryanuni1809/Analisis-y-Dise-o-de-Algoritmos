@@ -917,24 +917,23 @@ private void buscarProfesor(){
 }
 private void buscarCurso(){
     System.out.print("Ingrese codigo del curso: ");
-    String codigo = scanner.nextLine();
+    String codigo=scanner.nextLine();
 
-    for (Curso c : cursos) {
-        if (c.getCodigo().equals(codigo)) {
+    for (Curso c :cursos){
+        if (c.getCodigo().equals(codigo)){
             System.out.println("Curso encontrado:");
             System.out.println(c.mostrarInfo());
             return;
         }
     }
-
     System.out.println("Curso no encontrado.");
 }
-private void buscarNivelIdioma() {
+private void buscarNivelIdioma(){
     System.out.print("Ingrese codigo del nivel de idioma: ");
     String codigo = scanner.nextLine();
 
-    for (IdiomaNivel in : nivelesIdioma) {
-        if (in.getCodigo().equals(codigo)) {
+    for (IdiomaNivel in : nivelesIdioma){
+        if (in.getCodigo().equals(codigo)){
             System.out.println("Nivel encontrado:");
             System.out.println(in.mostrarInfo());
             return;
