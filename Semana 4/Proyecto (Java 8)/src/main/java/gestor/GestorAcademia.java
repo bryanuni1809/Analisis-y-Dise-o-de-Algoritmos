@@ -902,21 +902,20 @@ private void modificarNivelIdioma(){
 
     System.out.println("Nivel no encontrado.");
 }
-private void buscarProfesor() {
+private void buscarProfesor(){
     System.out.print("Ingrese DNI del profesor: ");
     String dni = scanner.nextLine();
 
-    for (Profesor p : profesores) {
-        if (p.getDni().equals(dni)) {
+    for(Profesor p : profesores){
+        if (p.getDni().equals(dni)){
             System.out.println("Profesor encontrado:");
             System.out.println(p.mostrarInfo());
             return;
         }
     }
-
     System.out.println("Profesor no encontrado.");
 }
-private void buscarCurso() {
+private void buscarCurso(){
     System.out.print("Ingrese codigo del curso: ");
     String codigo = scanner.nextLine();
 
