@@ -22,6 +22,9 @@ import java.util.Scanner;
 import util.ArchivoUtil;
 import entidades.Ordenaciones;
 import java.io.File;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -29,7 +32,7 @@ import java.io.File;
  */
 public class GestorAcademia {
     private final Scanner scanner = new Scanner(System.in);
-    private final ArrayList<Estudiante> estudiantes = new ArrayList<>();
+    private final Map<String, Estudiante> estudiantes = new HashMap<>();
     private final ArrayList<Profesor> profesores = new ArrayList<>();
     private final ArrayList<Curso> cursos = new ArrayList<>();
     private final ArrayList<Matricula> matriculas = new ArrayList<>();
@@ -106,7 +109,7 @@ public class GestorAcademia {
                     partes[0], partes[1], partes[2], partes[3],
                     partes[4], partes[5], partes[6], partes[7]
                 );
-                estudiantes.add(e);
+            estudiantes.put(e.getDni(), e);
             }
         }
     } catch (IOException e) {
@@ -200,15 +203,16 @@ public class GestorAcademia {
                     System.out.println("3. Insercion");
                     System.out.println("4. Ordenacion Externa (archivo)");
                     int ordest =Integer.parseInt(scanner.nextLine());
+                    List<Estudiante> listaEstudiantes = new ArrayList<>(estudiantes.values());
                         switch (ordest){
                             case 1:
-                                Ordenaciones.burbuja(estudiantes,Comparator.comparing(Estudiante::getApellidos));
+                                 Ordenaciones.burbuja(listaEstudiantes, Comparator.comparing(Estudiante::getApellidos));
                                 break;
                             case 2:
-                                Ordenaciones.seleccion(estudiantes,Comparator.comparing(Estudiante::getApellidos));
+                                Ordenaciones.seleccion(listaEstudiantes, Comparator.comparing(Estudiante::getApellidos));   
                                 break;
                             case 3:
-                                Ordenaciones.insercion(estudiantes,Comparator.comparing(Estudiante::getApellidos));
+                                Ordenaciones.insercion(listaEstudiantes, Comparator.comparing(Estudiante::getApellidos));
                                 break;
                             case 4:
                                 try {
@@ -223,17 +227,18 @@ public class GestorAcademia {
                                     System.out.println(linea);
                                 }
                             }
-                        }catch (Exception e) {
+                        }catch (IOException e) {
                         System.out.println("Error en ordenación externa: " + e.getMessage());
                     }
                     break;
+
                 default:
                     System.out.println("Opcion invalida.");
                     break;
             }
             if(ordest>=1&&ordest<=3){
                 System.out.println("=== Lista de Estudiantes Ordenados ===");
-                for (Estudiante e : estudiantes) {
+                for (Estudiante e : listaEstudiantes) {
                     System.out.println(e.mostrarInfo());
                 }
             }
@@ -273,10 +278,11 @@ public class GestorAcademia {
                                     System.out.println(linea);
                                 }
                             }
-                        } catch (Exception e) {
+                        } catch (IOException e) {
                             System.out.println("Error en ordenacion externa: " + e.getMessage());
                     }
                     break;
+
                 default:
                     System.out.println("Opción inválida.");
                     break;
@@ -533,7 +539,7 @@ private void mostrarMenuReportesHTML(){
         String nivel=scanner.nextLine();
 
         Estudiante e = new Estudiante(dni,nombres,apellidos,direccion,telefono,correo,fechaNac,nivel);
-        estudiantes.add(e);
+        estudiantes.put(e.getDni(), e);
         ArchivoUtil.guardarEstudiante(e,"estudiantes.txt");
 
         System.out.println("Estudiante registrado y guardado.");
@@ -542,14 +548,12 @@ private void mostrarMenuReportesHTML(){
     private void buscarEstudiante() {
         System.out.print("Ingrese DNI del estudiante: ");
         String dni = scanner.nextLine();
-        for (Estudiante e : estudiantes) {
-            if (e.getDni().equals(dni)) {
-                System.out.println("Estudiante encontrado:");
-                System.out.println(e.mostrarInfo());
-                return;
-            }
+        Estudiante e = estudiantes.get(dni);
+            if (e != null) {
+        System.out.println("Estudiante encontrado: " + e.mostrarInfo());
+            } else {
+    System.out.println("Estudiante no encontrado.");
         }
-        System.out.println("Estudiante no encontrado.");
     }
 
     private void registrarProfesor() {
@@ -612,17 +616,11 @@ private void mostrarMenuReportesHTML(){
         System.out.print("DNI del estudiante: ");
         String dni =scanner.nextLine();
 
-        Estudiante estudiante = null;
-        for (Estudiante e : estudiantes) {
-            if (e.getDni().equals(dni)) {
-                estudiante = e;
-                break;
-            }
-        }
+        Estudiante estudiante = estudiantes.get(dni);
 
         if (estudiante == null) {
             System.out.println("Estudiante no encontrado. Primero debe registrarlo.");
-            return;
+        return;
         }
 
         if (cursos.isEmpty()) {
@@ -687,13 +685,7 @@ private void mostrarMenuReportesHTML(){
             if (m.getCodigoCurso().equals(codigoCurso)) {
                 String dniEst = m.getDniEstudiante();
 
-                Estudiante est = null;
-                for (Estudiante e : estudiantes) {
-                    if (e.getDni().equals(dniEst)) {
-                        est = e;
-                        break;
-                    }
-                }
+                Estudiante est = estudiantes.get(dniEst);   
 
                 if (est != null){
                     System.out.println("Estudiante: "+est.getNombres()+ " " +est.getApellidos());
@@ -720,8 +712,8 @@ private void mostrarMenuReportesHTML(){
     System.out.print("Ingrese DNI del estudiante a modificar: ");
     String dni = scanner.nextLine();
 
-    for (Estudiante e:estudiantes){
-        if (e.getDni().equals(dni)){
+    Estudiante e = estudiantes.get(dni);
+        if (e != null){
             System.out.println("Estudiante encontrado:");
             System.out.println(e.mostrarInfo());
 
@@ -754,12 +746,10 @@ private void mostrarMenuReportesHTML(){
             }
 
             System.out.println("Datos actualizados (solo en memoria).");
-            ArchivoUtil.sobrescribirEstudiantes(estudiantes, "estudiantes.txt");
-            return;
+            ArchivoUtil.sobrescribirEstudiantes(new ArrayList<>(estudiantes.values()), "estudiantes.txt");
+        }else{
+        System.out.println("Estudiante no encontrado.");
         }
-    }
-
-    System.out.println("Estudiante no encontrado.");
 }
 
 private void modificarProfesor(){
@@ -992,9 +982,9 @@ private void eliminarEstudiante() {
     String dni = scanner.nextLine();
 
     for (int i = 0; i < estudiantes.size(); i++) {
-        if (estudiantes.get(i).getDni().equals(dni)) {
-            estudiantes.remove(i);
-            ArchivoUtil.sobrescribirEstudiantes(estudiantes, "estudiantes.txt");
+        if (estudiantes.containsKey(dni)) {
+            estudiantes.remove(dni);
+            ArchivoUtil.sobrescribirEstudiantes(new ArrayList<>(estudiantes.values()), "estudiantes.txt");
             System.out.println("Estudiante eliminado correctamente.");
             return;
         }
@@ -1008,7 +998,7 @@ private void generarReporteEstudiantesHTML() {
         bw.write("table { width: 100%; border-collapse: collapse; } th, td { border: 1px solid black; padding: 8px; }");
         bw.write("</style></head><body><h1>Estudiantes Registrados</h1><table>");
         bw.write("<tr><th>DNI</th><th>Nombres</th><th>Apellidos</th><th>Dirección</th><th>Teléfono</th><th>Correo</th><th>Fecha Nac.</th><th>Nivel</th></tr>");
-        for (Estudiante e : estudiantes) {
+        for (Estudiante e : estudiantes.values()) {
             bw.write("<tr><td>" + e.getDni() + "</td><td>" + e.getNombres() + "</td><td>" + e.getApellidos() +
                      "</td><td>" + e.getDireccion() + "</td><td>" + e.getTelefono() + "</td><td>" + e.getCorreo() +
                      "</td><td>" + e.getFechaNacimiento() + "</td><td>" + e.getNivelEstudios() + "</td></tr>");
@@ -1098,5 +1088,6 @@ private void generarReporteNivelesIdiomaHTML() {
         System.out.println("Error al generar reporte de niveles de idioma: " + e.getMessage());
     }
 }
+
 }
 
