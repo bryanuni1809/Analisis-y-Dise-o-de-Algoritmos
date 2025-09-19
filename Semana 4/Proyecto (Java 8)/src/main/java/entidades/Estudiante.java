@@ -29,4 +29,9 @@ public class Estudiante extends Persona {
     public String mostrarInfo() {
         return super.mostrarInfo() + " | Fecha Nac: " + fechaNacimiento + " | Nivel: " + nivelEstudios;
     }
+
+    @Override
+    public String getTipo() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

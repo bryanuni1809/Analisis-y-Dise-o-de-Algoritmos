@@ -8,7 +8,7 @@ package entidades;
  *
  * @author BRYAN
  */
-public class Persona {
+public abstract class Persona {
     protected String dni;
     protected String nombres;
     protected String apellidos;
@@ -24,7 +24,6 @@ public class Persona {
         this.telefono = telefono;
         this.correo = correo;
     }
-
     public String getDni() { return dni; }
     public void setDni(String dni) { this.dni = dni; }
 
@@ -46,4 +45,5 @@ public class Persona {
     public String mostrarInfo() {
         return "DNI: " + dni + " | Nombre: " + nombres + " " + apellidos;
     }
+    public abstract String getTipo();
 }

@@ -29,4 +29,9 @@ public class Profesor extends Persona {
     public String mostrarInfo() {
         return super.mostrarInfo() + " | Especialidad: " + especialidad + " | Años experiencia: " + experiencia;
     }
+
+    @Override
+    public String getTipo() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
