@@ -32,6 +32,6 @@ public class Estudiante extends Persona {
 
     @Override
     public String getTipo() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "Estudiante";
     }
 }
