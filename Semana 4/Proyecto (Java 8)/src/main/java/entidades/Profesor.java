@@ -15,23 +15,23 @@ public class Profesor extends Persona {
     public Profesor(String dni, String nombres, String apellidos, String direccion,
                     String telefono, String correo, String especialidad, int experiencia) {
         super(dni, nombres, apellidos, direccion, telefono, correo);
-        this.especialidad = especialidad;
-        this.experiencia = experiencia;
+        this.especialidad=especialidad;
+        this.experiencia=experiencia;
     }
 
-    public String getEspecialidad() { return especialidad; }
+    public String getEspecialidad(){ return especialidad; }
     public void setEspecialidad(String especialidad) { this.especialidad = especialidad; }
 
-    public int getExperiencia() { return experiencia; }
+    public int getExperiencia(){ return experiencia; }
     public void setExperiencia(int experiencia) { this.experiencia = experiencia; }
 
     @Override
-    public String mostrarInfo() {
+    public String mostrarInfo(){
         return super.mostrarInfo() + " | Especialidad: " + especialidad + " | Años experiencia: " + experiencia;
     }
 
     @Override
-    public String getTipo() {
+    public String getTipo(){
         return "Profesor";
 }
 }
