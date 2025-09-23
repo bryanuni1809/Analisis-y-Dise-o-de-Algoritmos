@@ -19,15 +19,15 @@ public class Profesor extends Persona {
         this.experiencia=experiencia;
     }
 
-    public String getEspecialidad(){ return especialidad; }
-    public void setEspecialidad(String especialidad) { this.especialidad = especialidad; }
+    public String getEspecialidad(){return especialidad;}
+    public void setEspecialidad(String especialidad){ this.especialidad=especialidad;}
 
-    public int getExperiencia(){ return experiencia; }
-    public void setExperiencia(int experiencia) { this.experiencia = experiencia; }
+    public int getExperiencia(){return experiencia;}
+    public void setExperiencia(int experiencia){this.experiencia=experiencia;}
 
     @Override
     public String mostrarInfo(){
-        return super.mostrarInfo() + " | Especialidad: " + especialidad + " | Años experiencia: " + experiencia;
+        return super.mostrarInfo() +" | Especialidad: "+ especialidad + " | Años experiencia: " + experiencia;
     }
 
     @Override
