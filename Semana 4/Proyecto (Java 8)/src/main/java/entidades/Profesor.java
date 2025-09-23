@@ -8,7 +8,7 @@ package entidades;
  *
  * @author BRYAN
  */
-public class Profesor extends Persona {
+public class Profesor extends Persona{
     private String especialidad;
     private int experiencia;
 
@@ -27,7 +27,7 @@ public class Profesor extends Persona {
 
     @Override
     public String mostrarInfo(){
-        return super.mostrarInfo() +" | Especialidad: "+ especialidad + " | Años experiencia: " + experiencia;
+        return super.mostrarInfo()+" | Especialidad: "+especialidad+" | Años experiencia: "+experiencia;
     }
 
     @Override
