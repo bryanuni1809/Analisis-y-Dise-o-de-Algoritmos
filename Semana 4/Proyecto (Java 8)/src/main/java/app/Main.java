@@ -38,17 +38,17 @@ public class Main {
                     System.out.print("Contraseña: ");
                     String contrasena=scanner.nextLine();
 
-                    if (auth.validarCredenciales(usuario,contrasena)){
+                    if(auth.validarCredenciales(usuario,contrasena)){
                         System.out.println("Bienvenido, " + usuario);
                         new gestor.GestorAcademia().mostrarMenu();
-                    } else {
+                    }else{
                         System.out.println("Usuario o contraseña incorrectos.");
                     }
                     break;
 
                 case 2:
                     System.out.print("Nuevo usuario: ");
-                    String nuevoUsuario = scanner.nextLine().trim();
+                    String nuevoUsuario=scanner.nextLine().trim();
                     if (nuevoUsuario.isEmpty()) {
                         System.out.println(" El usuario no puede estar vacío.");
                         break;
@@ -70,11 +70,11 @@ public class Main {
                     System.out.println("Opcion invalida.");
                     break;
             }
-            if (opcion != 0) {
+            if(opcion != 0){
                 System.out.println("\nPresione ENTER para continuar...");
                 scanner.nextLine();
             }
-        } while (opcion != 0);
+        }while(opcion != 0);
             scanner.close();
     }
 }
