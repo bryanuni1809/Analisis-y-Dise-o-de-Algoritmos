@@ -18,25 +18,25 @@ public class Main {
         Autenticacion auth = new Autenticacion();
         int opcion;
 
-        do {
+        do{
             System.out.println("\n===== MULTILINGUA - AUTENTICACION =====");
             System.out.println("1. Iniciar Sesion");
             System.out.println("2. Registrar Nuevo Usuario");
             System.out.println("0. Salir");
             System.out.print("Seleccione una opcion: ");
-            try {
+            try{
                 opcion = Integer.parseInt(scanner.nextLine());
-            } catch (NumberFormatException e){
+            }catch (NumberFormatException e){
                 System.out.println("Debe ingresar un numero valido.");
                 opcion = -1;
             }
 
-            switch (opcion) {
+            switch(opcion){
                 case 1:
                     System.out.print("Usuario: ");
-                    String usuario = scanner.nextLine();
+                    String usuario=scanner.nextLine();
                     System.out.print("Contraseña: ");
-                    String contrasena = scanner.nextLine();
+                    String contrasena=scanner.nextLine();
 
                     if (auth.validarCredenciales(usuario,contrasena)){
                         System.out.println("Bienvenido, " + usuario);
