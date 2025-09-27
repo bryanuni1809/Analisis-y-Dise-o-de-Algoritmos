@@ -30,7 +30,7 @@ import java.util.Map;
  *
  * @author BRYAN
  */
-public class GestorAcademia {
+public class GestorAcademia{
     private final Scanner scanner = new Scanner(System.in);
     private final Map<String, Estudiante> estudiantes = new HashMap<>();
     private final ArrayList<Profesor> profesores = new ArrayList<>();
@@ -474,7 +474,7 @@ private void menuNivelesIdioma(){
             default:
                 System.out.println("Opcion invalida.");
         }
-    } while (opcion != 0);
+    } while(opcion != 0);
 }
 
 private void mostrarMenuReportesHTML(){
@@ -491,7 +491,7 @@ private void mostrarMenuReportesHTML(){
         System.out.print("Seleccione una opcion: ");
         opcion = Integer.parseInt(scanner.nextLine());
 
-        switch (opcion){
+        switch(opcion){
             case 1:
                 generarReporteEstudiantesHTML();
                 break;

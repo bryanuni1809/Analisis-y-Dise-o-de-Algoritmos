@@ -25,23 +25,23 @@ public class ArchivoUtil {
         try (BufferedWriter writer=new BufferedWriter(new FileWriter(ruta, append))) {
             writer.write(linea);
             writer.newLine();
-        } catch (IOException ex) {
+        } catch(IOException ex){
             System.out.println("Error al escribir en archivo " + ruta + ": " + ex.getMessage());
         }
     }
-    public static void guardarEstudiante(Estudiante e, String ruta) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(ruta, true))) {
+    public static void guardarEstudiante(Estudiante e,String ruta){
+        try (BufferedWriter writer=new BufferedWriter(new FileWriter(ruta, true))) {
             writer.write(e.getDni() + "," + e.getNombres() + "," + e.getApellidos() + "," +
                          e.getDireccion() + "," + e.getTelefono() + "," + e.getCorreo() + "," +
                          e.getFechaNacimiento() + "," + e.getNivelEstudios());
             writer.newLine();
-        } catch (IOException ex) {
+        } catch (IOException ex){
             System.out.println("Error al guardar estudiante: " + ex.getMessage());
         }
     }
 
-    public static void guardarProfesor(Profesor p, String ruta) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(ruta, true))) {
+    public static void guardarProfesor(Profesor p,String ruta){
+        try (BufferedWriter writer=new BufferedWriter(new FileWriter(ruta,true))) {
             writer.write(p.getDni() + "," + p.getNombres() + "," + p.getApellidos() + "," +
                          p.getDireccion() + "," + p.getTelefono() + "," + p.getCorreo() + "," +
                          p.getEspecialidad() + "," + p.getExperiencia());
