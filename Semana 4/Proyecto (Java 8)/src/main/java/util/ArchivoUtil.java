@@ -21,8 +21,8 @@ import java.util.ArrayList;
  */
 public class ArchivoUtil {
 
-    private static void escribirLinea(String ruta, String linea, boolean append) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(ruta, append))) {
+    private static void escribirLinea(String ruta,String linea,boolean append) {
+        try (BufferedWriter writer=new BufferedWriter(new FileWriter(ruta, append))) {
             writer.write(linea);
             writer.newLine();
         } catch (IOException ex) {

@@ -11,11 +11,11 @@ import java.util.Scanner;
  *
  * @author BRYAN
  */
-public class Main {
+public class Main{
 
     public static void main(String[] args){
-        Scanner scanner = new Scanner(System.in);
-        Autenticacion auth = new Autenticacion();
+        Scanner scanner=new Scanner(System.in);
+        Autenticacion auth=new Autenticacion();
         int opcion;
 
         do{
@@ -70,11 +70,11 @@ public class Main {
                     System.out.println("Opcion invalida.");
                     break;
             }
-            if(opcion != 0){
+            if(opcion !=0){
                 System.out.println("\nPresione ENTER para continuar...");
                 scanner.nextLine();
             }
-        }while(opcion != 0);
+        }while(opcion !=0);
             scanner.close();
     }
 }
