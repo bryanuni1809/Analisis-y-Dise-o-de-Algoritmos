@@ -559,13 +559,13 @@ private void mostrarMenuReportesHTML(){
     private void registrarProfesor() {
         System.out.println("Registro de Profesor:");
         System.out.print("DNI: ");
-        String dni= scanner.nextLine();
+        String dni=scanner.nextLine();
         System.out.print("Nombres: ");
-        String nombres = scanner.nextLine();
+        String nombres=scanner.nextLine();
         System.out.print("Apellidos: ");
-        String apellidos= scanner.nextLine();
+        String apellidos=scanner.nextLine();
         System.out.print("Direccion: ");
-        String direccion = scanner.nextLine();
+        String direccion= scanner.nextLine();
         System.out.print("Telefono: ");
         String telefono =scanner.nextLine();
         System.out.print("Correo: ");
@@ -573,9 +573,9 @@ private void mostrarMenuReportesHTML(){
         System.out.print("Especialidad: ");
         String especialidad= scanner.nextLine();
         System.out.print("Años de experiencia: ");
-        int experiencia = Integer.parseInt(scanner.nextLine());
+        int experiencia =Integer.parseInt(scanner.nextLine());
 
-        Profesor p = new Profesor(dni,nombres,apellidos,direccion,telefono,correo,especialidad,experiencia);
+        Profesor p= new Profesor(dni,nombres,apellidos,direccion,telefono,correo,especialidad,experiencia);
         profesores.add(p);
         ArchivoUtil.guardarProfesor(p,"profesores.txt");
 
@@ -591,15 +591,15 @@ private void mostrarMenuReportesHTML(){
         System.out.print("Idioma: ");
         String idioma= scanner.nextLine();
         System.out.print("Nivel: ");
-        String nivel = scanner.nextLine();
+        String nivel= scanner.nextLine();
         System.out.print("DNI del profesor: ");
         String dniProfesor = scanner.nextLine();
         System.out.print("Horario: ");
-        String horario = scanner.nextLine();
+        String horario= scanner.nextLine();
         System.out.print("Duracion (en semanas): ");
-        int duracion = Integer.parseInt(scanner.nextLine());
+        int duracion =Integer.parseInt(scanner.nextLine());
         System.out.print("Capacidad maxima: ");
-        int capacidad = Integer.parseInt(scanner.nextLine());
+        int capacidad =Integer.parseInt(scanner.nextLine());
         System.out.print("Precio: ");
         double precio = Double.parseDouble(scanner.nextLine());
         System.out.print("Observaciones: ");
