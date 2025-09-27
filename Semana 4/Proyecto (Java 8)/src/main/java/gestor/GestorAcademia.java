@@ -605,25 +605,25 @@ private void mostrarMenuReportesHTML(){
         System.out.print("Observaciones: ");
         String obs = scanner.nextLine();
 
-        Curso c = new Curso(codigo, nombre, idioma, nivel, dniProfesor, horario, duracion, capacidad, precio, obs);
+        Curso c=new Curso(codigo, nombre, idioma, nivel, dniProfesor, horario, duracion, capacidad, precio, obs);
         cursos.add(c);
         ArchivoUtil.guardarCurso(c, "cursos.txt");
 
         System.out.println("Curso registrado correctamente.");
     }
-   private void registrarMatricula() {
+   private void registrarMatricula(){
         System.out.println("Registro de Matricula:");
         System.out.print("DNI del estudiante: ");
         String dni =scanner.nextLine();
 
-        Estudiante estudiante = estudiantes.get(dni);
+        Estudiante estudiante =estudiantes.get(dni);
 
-        if (estudiante == null) {
+        if (estudiante == null){
             System.out.println("Estudiante no encontrado. Primero debe registrarlo.");
         return;
         }
 
-        if (cursos.isEmpty()) {
+        if (cursos.isEmpty()){
             System.out.println("No hay cursos disponibles. Primero registre cursos.");
             return;
         }
