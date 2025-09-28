@@ -632,19 +632,18 @@ private void mostrarMenuReportesHTML(){
         for (Curso c : cursos) {
             System.out.println("- " +c.getCodigo()+ ": " +c.getNombre());
         }
-
         System.out.print("Ingrese el codigo del curso: ");
         String codigoCurso =scanner.nextLine();
 
         Curso cursoSeleccionado=null;
-        for (Curso c : cursos) {
+        for (Curso c:cursos){
             if (c.getCodigo().equals(codigoCurso)) {
-                cursoSeleccionado = c;
+                cursoSeleccionado=c;
                 break;
             }
         }
 
-        if (cursoSeleccionado==null) {
+        if (cursoSeleccionado==null){
             System.out.println("Curso no encontrado.");
             return;
         }
@@ -652,27 +651,25 @@ private void mostrarMenuReportesHTML(){
         System.out.print("Fecha de matricula (ej. 25/06/2025): ");
         String fecha=scanner.nextLine();
         double monto=cursoSeleccionado.getPrecio();
-
         Matricula m=new Matricula(codigoCurso, dni, fecha, monto);
         matriculas.add(m);
         ArchivoUtil.guardarMatricula(m,"matriculas.txt");
-
         System.out.println("Matricula registrada para "+estudiante.getNombres()+" en el curso "+cursoSeleccionado.getNombre());
     }
 
-    private void registrarCalificacion() {
+    private void registrarCalificacion(){
         System.out.println("Registro de Calificaciones:");
         System.out.print("Ingrese el codigo del curso: ");
         String codigoCurso=scanner.nextLine();
 
         Curso cursoSeleccionado=null;
-        for(Curso c : cursos){
-            if (c.getCodigo().equals(codigoCurso)) {
+        for(Curso c:cursos){
+            if (c.getCodigo().equals(codigoCurso)){
                 cursoSeleccionado=c;
                 break;
             }
         }
-        if(cursoSeleccionado == null){
+        if(cursoSeleccionado==null){
             System.out.println("Curso no encontrado.");
             return;
         }
@@ -681,8 +678,8 @@ private void mostrarMenuReportesHTML(){
 
         boolean encontrado=false;
 
-        for (Matricula m:matriculas) {
-            if (m.getCodigoCurso().equals(codigoCurso)) {
+        for (Matricula m:matriculas){
+            if (m.getCodigoCurso().equals(codigoCurso)){
                 String dniEst = m.getDniEstudiante();
 
                 Estudiante est = estudiantes.get(dniEst);   
