@@ -87,7 +87,7 @@ public class ServicioIdiomas {
         if (nuevoNivel != null) in.setNivel(nuevoNivel);
         if (nuevaDescripcion != null) in.setDescripcion(nuevaDescripcion);
 
-        ArchivoUtil.sobrescribirNivelesIdioma(nivelesIdioma, ARCHIVO);
+        ArchivoUtil.sobrescribirNivelesIdioma((ArrayList<IdiomaNivel>) nivelesIdioma, ARCHIVO);
         System.out.println("✅ Nivel de idioma modificado exitosamente");
         return true;
     }
@@ -96,7 +96,7 @@ public class ServicioIdiomas {
         for (int i = 0; i < nivelesIdioma.size(); i++) {
             if (nivelesIdioma.get(i).getCodigo().equals(codigo)) {
                 nivelesIdioma.remove(i);
-                ArchivoUtil.sobrescribirNivelesIdioma(nivelesIdioma, ARCHIVO);
+                ArchivoUtil.sobrescribirNivelesIdioma((ArrayList<IdiomaNivel>) nivelesIdioma, ARCHIVO);
                 System.out.println("✅ Nivel de idioma eliminado exitosamente");
                 return true;
             }

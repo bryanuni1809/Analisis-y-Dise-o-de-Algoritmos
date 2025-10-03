@@ -92,7 +92,7 @@ public class ServicioProfesores {
         if (nuevaEspecialidad != null) p.setEspecialidad(nuevaEspecialidad);
         if (nuevaExperiencia != null) p.setExperiencia(nuevaExperiencia);
 
-        ArchivoUtil.sobrescribirProfesores(profesores, ARCHIVO);
+        ArchivoUtil.sobrescribirProfesores((ArrayList<Profesor>) profesores, ARCHIVO);
         System.out.println("Profesor modificado exitosamente");
         return true;
     }
@@ -101,7 +101,7 @@ public class ServicioProfesores {
         for (int i = 0; i < profesores.size(); i++) {
             if (profesores.get(i).getDni().equals(dni)) {
                 profesores.remove(i);
-                ArchivoUtil.sobrescribirProfesores(profesores, ARCHIVO);
+                ArchivoUtil.sobrescribirProfesores((ArrayList<Profesor>) profesores, ARCHIVO);
                 System.out.println("✅ Profesor eliminado exitosamente");
                 return true;
             }
@@ -120,9 +120,5 @@ public class ServicioProfesores {
 
     public int getTotalProfesores() {
         return profesores.size();
-    }
-
-    List<Profesor> obtenerTodosProfesores() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

@@ -99,7 +99,7 @@ public class ServicioCursos {
         if (nuevaCapacidad != null) c.setCapacidadMaxima(nuevaCapacidad);
         if (nuevasObservaciones != null) c.setObservaciones(nuevasObservaciones);
 
-        ArchivoUtil.sobrescribirCursos(cursos, ARCHIVO);
+        ArchivoUtil.sobrescribirCursos((ArrayList<Curso>) cursos, ARCHIVO);
         System.out.println("✅ Curso modificado exitosamente");
         return true;
     }
@@ -108,7 +108,7 @@ public class ServicioCursos {
         for (int i = 0; i < cursos.size(); i++) {
             if (cursos.get(i).getCodigo().equals(codigo)) {
                 cursos.remove(i);
-                ArchivoUtil.sobrescribirCursos(cursos, ARCHIVO);
+                ArchivoUtil.sobrescribirCursos((ArrayList<Curso>) cursos, ARCHIVO);
                 System.out.println("✅ Curso eliminado exitosamente");
                 return true;
             }
