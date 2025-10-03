@@ -37,8 +37,4 @@ public class IdiomaNivel {
         return "Codigo: " + codigo + " | Idioma: " + idioma + " | Nivel: " + nivel +
                "\nDescripcion: " + descripcion;
     }
-
-    public String getDuracion() {
-        throw new UnsupportedOperationException("Not supported yet."); 
-    }
 }
