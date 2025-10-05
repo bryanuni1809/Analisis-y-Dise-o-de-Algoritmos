@@ -25,6 +25,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import util.Validador;
 
 /**
  *
@@ -403,30 +404,52 @@ private void mostrarMenuReportesHTML(){
     } while (opcion != 0);
 }
  private void registrarEstudiante(){
-        System.out.println("Registro de Estudiante:");
-        System.out.print("DNI: ");
-        String dni =scanner.nextLine();
+         try {
+        System.out.println("\nREGISTRO DE NUEVO ESTUDIANTE");
+        String dni = leerDNI();
+        // Verificar si el estudiante ya existe
+        if (estudiantes.containsKey(dni)) {
+            System.out.println("Ya existe un estudiante registrado con este DNI.");
+            return;
+        }
+        
         System.out.print("Nombres: ");
-        String nombres =scanner.nextLine();
+        String nombres = Validador.formatearTexto(scanner.nextLine());
+        Validador.validarSoloLetras(nombres, "nombres");
+        
         System.out.print("Apellidos: ");
-        String apellidos =scanner.nextLine();
-        System.out.print("Direccion: ");
-        String direccion =scanner.nextLine();
-        System.out.print("Telefono: ");
-        String telefono =scanner.nextLine();
-        System.out.print("Correo: ");
-        String correo = scanner.nextLine();
-        System.out.print("Fecha de nacimiento: ");
-        String fechaNac =scanner.nextLine();
+        String apellidos = Validador.formatearTexto(scanner.nextLine());
+        Validador.validarSoloLetras(apellidos, "apellidos");
+        
+        System.out.print("Dirección: ");
+        String direccion = scanner.nextLine().trim();
+        Validador.validarNoVacio(direccion, "dirección");
+        
+        String telefono = leerTelefono();
+        String correo = leerEmail();
+        
+        String fechaNacimiento = leerFecha("Fecha de nacimiento (dd/MM/yyyy): ");
+        Validador.validarEdadEstudiante(fechaNacimiento, 12, 80);
+        
         System.out.print("Nivel de estudios: ");
-        String nivel=scanner.nextLine();
-
-        Estudiante e = new Estudiante(dni,nombres,apellidos,direccion,telefono,correo,fechaNac,nivel);
+        String nivelEstudios = scanner.nextLine().trim();
+        Validador.validarNoVacio(nivelEstudios, "nivel de estudios");
+        
+        // Validación completa de todos los datos
+        Validador.validarDatosEstudiante(dni, nombres, apellidos, direccion, telefono, correo, fechaNacimiento, nivelEstudios);
+        
+        Estudiante e = new Estudiante(dni, nombres, apellidos, direccion, telefono, correo, fechaNacimiento, nivelEstudios);
         estudiantes.put(e.getDni(), e);
-        ArchivoUtil.guardarEstudiante(e,"estudiantes.txt");
-
-        System.out.println("Estudiante registrado y guardado.");
+        ArchivoUtil.guardarEstudiante(e, "estudiantes.txt");
+        
+        System.out.println("Estudiante registrado y validado exitosamente!");
+        
+    } catch (IllegalArgumentException e) {
+        System.out.println("Error de validación: " + e.getMessage());
+    } catch (Exception e) {
+        System.out.println("Error inesperado: " + e.getMessage());
     }
+}
 
     private void buscarEstudiante() {
         System.out.print("Ingrese DNI del estudiante: ");
@@ -440,60 +463,92 @@ private void mostrarMenuReportesHTML(){
     }
 
     private void registrarProfesor() {
-        System.out.println("Registro de Profesor:");
-        System.out.print("DNI: ");
-        String dni=scanner.nextLine();
+        try {
+        System.out.println("\nREGISTRO DE NUEVO PROFESOR");
+        String dni = leerDNI();
         System.out.print("Nombres: ");
-        String nombres=scanner.nextLine();
+        String nombres = Validador.formatearTexto(scanner.nextLine());
+        Validador.validarSoloLetras(nombres, "nombres");
+        
         System.out.print("Apellidos: ");
-        String apellidos=scanner.nextLine();
-        System.out.print("Direccion: ");
-        String direccion= scanner.nextLine();
-        System.out.print("Telefono: ");
-        String telefono =scanner.nextLine();
-        System.out.print("Correo: ");
-        String correo =scanner.nextLine();
+        String apellidos = Validador.formatearTexto(scanner.nextLine());
+        Validador.validarSoloLetras(apellidos, "apellidos");
+        
+        System.out.print("Dirección: ");
+        String direccion = scanner.nextLine().trim();
+        Validador.validarNoVacio(direccion, "dirección");
+        
+        String telefono = leerTelefono();
+        String correo = leerEmail();
+        
         System.out.print("Especialidad: ");
-        String especialidad= scanner.nextLine();
-        System.out.print("Años de experiencia: ");
-        int experiencia =Integer.parseInt(scanner.nextLine());
-
-        Profesor p= new Profesor(dni,nombres,apellidos,direccion,telefono,correo,especialidad,experiencia);
+        String especialidad = Validador.formatearTexto(scanner.nextLine());
+        Validador.validarSoloLetras(especialidad, "especialidad");
+        
+        int experiencia = leerEnteroValidado("Años de experiencia: ",0,50);
+        
+        // Validación completa
+        Validador.validarDatosProfesor(dni, nombres, apellidos, direccion, telefono, correo, especialidad, experiencia);
+        
+        Profesor p = new Profesor(dni, nombres, apellidos, direccion, telefono, correo, especialidad, experiencia);
         profesores.add(p);
-        ArchivoUtil.guardarProfesor(p,"profesores.txt");
-
-        System.out.println("Profesor registrado y guardado.");
+        ArchivoUtil.guardarProfesor(p, "profesores.txt");
+        
+        System.out.println("Profesor registrado y validado exitosamente!");
+        
+    } catch (IllegalArgumentException e) {
+        System.out.println("Error de validación: " + e.getMessage());
     }
-
+}
     private void registrarCurso() {
-        System.out.println("Registro de Curso:");
-        System.out.print("Codigo del curso: ");
-        String codigo= scanner.nextLine();
+        try {
+        System.out.println("\nREGISTRO DE NUEVO CURSO");
+        
+        System.out.print("Código del curso (Formato: XXX-999): ");
+        String codigo = Validador.formatearCodigoCurso(scanner.nextLine());
+        Validador.validarCodigoCurso(codigo);
+        
         System.out.print("Nombre del curso: ");
-        String nombre= scanner.nextLine();
+        String nombre = scanner.nextLine().trim();
+        Validador.validarNoVacio(nombre, "nombre del curso");
+        
         System.out.print("Idioma: ");
-        String idioma= scanner.nextLine();
+        String idioma = Validador.formatearTexto(scanner.nextLine());
+        Validador.validarIdioma(idioma);
+        
         System.out.print("Nivel: ");
-        String nivel= scanner.nextLine();
+        String nivel = scanner.nextLine().trim();
+        Validador.validarNivelIdioma(nivel);
+        
         System.out.print("DNI del profesor: ");
-        String dniProfesor = scanner.nextLine();
+        String dniProfesor = scanner.nextLine().trim();
+        Validador.validarDNI(dniProfesor);
+        
         System.out.print("Horario: ");
-        String horario= scanner.nextLine();
-        System.out.print("Duracion (en semanas): ");
-        int duracion =Integer.parseInt(scanner.nextLine());
-        System.out.print("Capacidad maxima: ");
-        int capacidad =Integer.parseInt(scanner.nextLine());
-        System.out.print("Precio: ");
-        double precio = Double.parseDouble(scanner.nextLine());
+        String horario = scanner.nextLine().trim();
+        Validador.validarNoVacio(horario, "horario");
+        
+        int duracion = leerEnteroValidado("Duración (en semanas): ", 1, 52);
+        int capacidad = leerEnteroValidado("Capacidad máxima: ", 1, 50);
+        double precio = leerDoubleValidado("Precio: S/", 0, 10000);
+        
         System.out.print("Observaciones: ");
-        String obs = scanner.nextLine();
-
-        Curso c=new Curso(codigo, nombre, idioma, nivel, dniProfesor, horario, duracion, capacidad, precio, obs);
+        String obs = scanner.nextLine().trim();
+        Validador.validarNoVacio(obs, "observaciones");
+        
+        // Validación completa
+        Validador.validarDatosCurso(codigo, nombre, idioma, nivel, dniProfesor, horario, duracion, capacidad, precio, obs);
+        
+        Curso c = new Curso(codigo, nombre, idioma, nivel, dniProfesor, horario, duracion, capacidad, precio, obs);
         cursos.add(c);
         ArchivoUtil.guardarCurso(c, "cursos.txt");
-
-        System.out.println("Curso registrado correctamente.");
+        
+        System.out.println("Curso registrado y validado exitosamente!");
+        
+    } catch (IllegalArgumentException e) {
+        System.out.println("Error de validación: " + e.getMessage());
     }
+}
    private void registrarMatricula(){
         System.out.println("Registro de Matricula:");
         System.out.print("DNI del estudiante: ");
@@ -541,53 +596,61 @@ private void mostrarMenuReportesHTML(){
     }
 
     private void registrarCalificacion(){
+        try {
         System.out.println("Registro de Calificaciones:");
-        System.out.print("Ingrese el codigo del curso: ");
-        String codigoCurso=scanner.nextLine();
+        System.out.print("Ingrese el código del curso: ");
+        String codigoCurso = scanner.nextLine().trim();
+        Validador.validarCodigoCurso(codigoCurso);
 
-        Curso cursoSeleccionado=null;
-        for(Curso c:cursos){
-            if (c.getCodigo().equals(codigoCurso)){
-                cursoSeleccionado=c;
+        Curso cursoSeleccionado = null;
+        for (Curso c : cursos) {
+            if (c.getCodigo().equals(codigoCurso)) {
+                cursoSeleccionado = c;
                 break;
             }
         }
-        if(cursoSeleccionado==null){
+        
+        if (cursoSeleccionado == null) {
             System.out.println("Curso no encontrado.");
             return;
         }
-        System.out.print("Fecha del registro de calificacion: ");
-        String fecha=scanner.nextLine();
 
-        boolean encontrado=false;
+        String fecha = leerFecha("Fecha del registro de calificación (dd/MM/yyyy): ");
 
-        for (Matricula m:matriculas){
-            if (m.getCodigoCurso().equals(codigoCurso)){
+        boolean encontrado = false;
+        for (Matricula m : matriculas) {
+            if (m.getCodigoCurso().equals(codigoCurso)) {
                 String dniEst = m.getDniEstudiante();
-
                 Estudiante est = estudiantes.get(dniEst);   
 
-                if (est != null){
-                    System.out.println("Estudiante: "+est.getNombres()+ " " +est.getApellidos());
-                    System.out.print("Nota: ");
-                    double nota=Double.parseDouble(scanner.nextLine());
+                if (est != null) {
+                    System.out.println("Estudiante: " + est.getNombres() + " " + est.getApellidos());
+                    
+                    double nota = leerDoubleValidado("Nota (0-20): ", 0, 20);
+                    Validador.validarNota(nota);
+                    
                     System.out.print("Observaciones: ");
-                    String obs=scanner.nextLine();
+                    String obs = scanner.nextLine().trim();
+                    Validador.validarNoVacio(obs, "observaciones");
 
-                    Calificacion c = new Calificacion(codigoCurso,dniEst,fecha,nota,obs);
+                    Calificacion c = new Calificacion(codigoCurso, dniEst, fecha, nota, obs);
                     calificaciones.add(c);
                     ArchivoUtil.guardarCalificacion(c, "calificaciones.txt");
 
-                    System.out.println("Calificacion registrada.");
+                    System.out.println("Calificación registrada y validada.");
                     encontrado = true;
                 }
             }
         }
 
-        if (!encontrado){
+        if (!encontrado) {
             System.out.println("No hay estudiantes matriculados en este curso.");
         }
+
+    } catch (IllegalArgumentException e) {
+        System.out.println("Error de validación: " + e.getMessage());
     }
+}
     private void modificarEstudiante() {
     System.out.print("Ingrese DNI del estudiante a modificar: ");
     String dni = scanner.nextLine();
@@ -1170,6 +1233,88 @@ private void ordenacionExterna(){
         
     } catch (Exception e) {
         System.out.println("Error: " + e.getMessage());
+    }
+}
+private String leerDNI() {
+    while (true) {
+        try {
+            System.out.print("DNI: ");
+            String dni = scanner.nextLine().trim();
+            Validador.validarDNI(dni);
+            return dni;
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            System.out.println("Por favor, ingrese un DNI válido (8 dígitos).");
+        }
+    }
+}
+
+private String leerEmail() {
+    while (true) {
+        try {
+            System.out.print("Correo electrónico: ");
+            String email = scanner.nextLine().trim();
+            Validador.validarEmail(email);
+            return email;
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
+
+private String leerTelefono() {
+    while (true) {
+        try {
+            System.out.print("Teléfono: ");
+            String telefono = scanner.nextLine().trim();
+            Validador.validarTelefono(telefono);
+            return telefono;
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
+
+private String leerFecha(String mensaje) {
+    while (true) {
+        try {
+            System.out.print(mensaje);
+            String fecha = scanner.nextLine().trim();
+            Validador.validarFecha(fecha, "fecha");
+            return fecha;
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
+
+private int leerEnteroValidado(String mensaje, int min, int max) {
+    while (true) {
+        try {
+            System.out.print(mensaje);
+            int valor = Integer.parseInt(scanner.nextLine().trim());
+            Validador.validarRangoEntero(valor, min, max, "valor");
+            return valor;
+        } catch (NumberFormatException e) {
+            System.out.println("❌ Error: Debe ingresar un número entero válido.");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
+
+private double leerDoubleValidado(String mensaje, double min, double max) {
+    while (true) {
+        try {
+            System.out.print(mensaje);
+            double valor = Double.parseDouble(scanner.nextLine().trim());
+            Validador.validarRangoDouble(valor, min, max, "valor");
+            return valor;
+        } catch (NumberFormatException e) {
+            System.out.println("❌ Error: Debe ingresar un número válido.");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
 }
