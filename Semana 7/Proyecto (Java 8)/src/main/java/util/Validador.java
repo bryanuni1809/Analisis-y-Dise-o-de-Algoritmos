@@ -140,17 +140,17 @@ public class Validador {
         }
     }
     
-    public static void validarNota(double nota) {
-        validarRangoDouble(nota, 0, 20, "nota");
+    public static void validarNota(double nota){
+        validarRangoDouble(nota, 0,20,"nota");
     }
     
-    public static void validarPrecio(double precio) {
+    public static void validarPrecio(double precio){
         if (precio < 0) {
             throw new IllegalArgumentException("El precio no puede ser negativo");
         }
     }
     
-    public static void validarEdad(int edad, int min, int max) {
+    public static void validarEdad(int edad,int min,int max){
         validarRangoEntero(edad, min, max, "edad");
     }
     
@@ -165,11 +165,11 @@ public class Validador {
     
     // ========== VALIDACIONES DE NEGOCIO ==========
     
-    public static void validarCapacidadCurso(int capacidad) {
-        validarRangoEntero(capacidad, 1, 50, "capacidad del curso");
+    public static void validarCapacidadCurso(int capacidad){
+        validarRangoEntero(capacidad,1,50,"capacidad del curso");
     }
     
-    public static void validarDuracionCurso(int duracion) {
+    public static void validarDuracionCurso(int duracion){
         validarRangoEntero(duracion, 1, 52, "duración del curso (semanas)");
     }
     
