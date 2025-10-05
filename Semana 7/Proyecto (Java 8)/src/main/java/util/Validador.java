@@ -79,7 +79,7 @@ public class Validador {
         }
     }
     
-    public static void validarSoloLetras(String texto, String nombreCampo) {
+    public static void validarSoloLetras(String texto,String nombreCampo) {
         validarNoVacio(texto, nombreCampo);
         
         if (!SOLO_LETRAS_REGEX.matcher(texto).matches()) {
@@ -87,7 +87,7 @@ public class Validador {
         }
     }
     
-    public static void validarSoloNumeros(String texto, String nombreCampo) {
+    public static void validarSoloNumeros(String texto,String nombreCampo) {
         validarNoVacio(texto, nombreCampo);
         
         if (!SOLO_NUMEROS_REGEX.matcher(texto).matches()) {
@@ -103,28 +103,28 @@ public class Validador {
         }
     }
     
-    public static void validarFecha(String fecha, String nombreCampo) {
+    public static void validarFecha(String fecha,String nombreCampo) {
         validarNoVacio(fecha, nombreCampo);
         
         try {
             LocalDate.parse(fecha, DATE_FORMATTER);
-        } catch (DateTimeParseException e) {
+        } catch (DateTimeParseException e){
             throw new IllegalArgumentException("Formato de fecha inválido para '" + nombreCampo + "'. Use: dd/MM/yyyy");
         }
     }
     
-    public static void validarFechaPasada(String fecha, String nombreCampo) {
+    public static void validarFechaPasada(String fecha,String nombreCampo) {
         validarFecha(fecha, nombreCampo);
         
         LocalDate fechaDate = LocalDate.parse(fecha, DATE_FORMATTER);
         LocalDate hoy = LocalDate.now();
         
         if (fechaDate.isAfter(hoy)) {
-            throw new IllegalArgumentException("La fecha '" + nombreCampo + "' no puede ser futura");
+            throw new IllegalArgumentException("La fecha '" +nombreCampo + "' no puede ser futura");
         }
     }
     
-    public static void validarRangoEntero(int valor, int min, int max, String nombreCampo) {
+    public static void validarRangoEntero(int valor,int min,int max, String nombreCampo) {
         if (valor < min || valor > max) {
             throw new IllegalArgumentException(
                 "El campo '" + nombreCampo + "' debe estar entre " + min + " y " + max
@@ -132,8 +132,8 @@ public class Validador {
         }
     }
     
-    public static void validarRangoDouble(double valor, double min, double max, String nombreCampo) {
-        if (valor < min || valor > max) {
+    public static void validarRangoDouble(double valor,double min,double max, String nombreCampo){
+        if (valor < min || valor > max){
             throw new IllegalArgumentException(
                 "❌ El campo '" + nombreCampo + "' debe estar entre " + min + " y " + max
             );
