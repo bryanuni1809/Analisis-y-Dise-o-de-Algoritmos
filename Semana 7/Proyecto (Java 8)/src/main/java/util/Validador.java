@@ -119,21 +119,21 @@ public class Validador {
         LocalDate fechaDate=LocalDate.parse(fecha, DATE_FORMATTER);
         LocalDate hoy=LocalDate.now();
         
-        if (fechaDate.isAfter(hoy)) {
+        if (fechaDate.isAfter(hoy)){
             throw new IllegalArgumentException("La fecha '" +nombreCampo + "' no puede ser futura");
         }
     }
     
-    public static void validarRangoEntero(int valor,int min,int max, String nombreCampo) {
-        if (valor < min || valor > max) {
+    public static void validarRangoEntero(int valor,int min,int max,String nombreCampo){
+        if (valor < min || valor > max){
             throw new IllegalArgumentException(
-                "El campo '" + nombreCampo + "' debe estar entre " + min + " y " + max
+                "El campo '" + nombreCampo + "' debe estar entre "+min+ " y " + max
             );
         }
     }
     
     public static void validarRangoDouble(double valor,double min,double max, String nombreCampo){
-        if (valor < min || valor > max){
+        if (valor < min || valor>max){
             throw new IllegalArgumentException(
                 "❌ El campo '" + nombreCampo + "' debe estar entre " + min + " y " + max
             );
@@ -141,24 +141,24 @@ public class Validador {
     }
     
     public static void validarNota(double nota){
-        validarRangoDouble(nota, 0,20,"nota");
+        validarRangoDouble(nota,0,20,"nota");
     }
     
     public static void validarPrecio(double precio){
-        if (precio < 0) {
+        if (precio<0){
             throw new IllegalArgumentException("El precio no puede ser negativo");
         }
     }
     
     public static void validarEdad(int edad,int min,int max){
-        validarRangoEntero(edad, min, max, "edad");
+        validarRangoEntero(edad,min,max,"edad");
     }
     
-    public static void validarExperiencia(int experiencia) {
-        if (experiencia < 0) {
+    public static void validarExperiencia(int experiencia){
+        if (experiencia<0){
             throw new IllegalArgumentException("Los años de experiencia no pueden ser negativos");
         }
-        if (experiencia > 50) {
+        if (experiencia>50){
             throw new IllegalArgumentException("Los años de experiencia no pueden ser mayores a 50");
         }
     }
