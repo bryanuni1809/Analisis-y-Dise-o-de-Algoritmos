@@ -103,21 +103,21 @@ public class Validador {
         }
     }
     
-    public static void validarFecha(String fecha,String nombreCampo) {
-        validarNoVacio(fecha, nombreCampo);
+    public static void validarFecha(String fecha,String nombreCampo){
+        validarNoVacio(fecha,nombreCampo);
         
         try {
-            LocalDate.parse(fecha, DATE_FORMATTER);
+            LocalDate.parse(fecha,DATE_FORMATTER);
         } catch (DateTimeParseException e){
-            throw new IllegalArgumentException("Formato de fecha inválido para '" + nombreCampo + "'. Use: dd/MM/yyyy");
+            throw new IllegalArgumentException("Formato de fecha inválido para '"+nombreCampo+"'. Use: dd/MM/yyyy");
         }
     }
     
-    public static void validarFechaPasada(String fecha,String nombreCampo) {
-        validarFecha(fecha, nombreCampo);
+    public static void validarFechaPasada(String fecha,String nombreCampo){
+        validarFecha(fecha,nombreCampo);
         
-        LocalDate fechaDate = LocalDate.parse(fecha, DATE_FORMATTER);
-        LocalDate hoy = LocalDate.now();
+        LocalDate fechaDate=LocalDate.parse(fecha, DATE_FORMATTER);
+        LocalDate hoy=LocalDate.now();
         
         if (fechaDate.isAfter(hoy)) {
             throw new IllegalArgumentException("La fecha '" +nombreCampo + "' no puede ser futura");
