@@ -79,26 +79,26 @@ public class Validador {
         }
     }
     
-    public static void validarSoloLetras(String texto,String nombreCampo) {
+    public static void validarSoloLetras(String texto,String nombreCampo){
         validarNoVacio(texto, nombreCampo);
         
         if (!SOLO_LETRAS_REGEX.matcher(texto).matches()) {
-            throw new IllegalArgumentException("El campo '" + nombreCampo + "' solo puede contener letras y espacios");
+            throw new IllegalArgumentException("El campo '"+nombreCampo+"' solo puede contener letras y espacios");
         }
     }
     
     public static void validarSoloNumeros(String texto,String nombreCampo) {
         validarNoVacio(texto, nombreCampo);
         
-        if (!SOLO_NUMEROS_REGEX.matcher(texto).matches()) {
+        if (!SOLO_NUMEROS_REGEX.matcher(texto).matches()){
             throw new IllegalArgumentException("El campo '" + nombreCampo + "' solo puede contener números");
         }
     }
     
-    public static void validarCodigoCurso(String codigo) {
+    public static void validarCodigoCurso(String codigo){
         validarNoVacio(codigo, "código de curso");
         
-        if (!CODIGO_CURSO_REGEX.matcher(codigo).matches()) {
+        if (!CODIGO_CURSO_REGEX.matcher(codigo).matches()){
             throw new IllegalArgumentException("Formato de código de curso inválido. Use: XXX-999 (ej: ENG-101)");
         }
     }
