@@ -87,16 +87,16 @@ public class Validador {
         }
     }
     
-    public static void validarSoloNumeros(String texto,String nombreCampo) {
+    public static void validarSoloNumeros(String texto,String nombreCampo){
         validarNoVacio(texto,nombreCampo);
         
         if (!SOLO_NUMEROS_REGEX.matcher(texto).matches()){
-            throw new IllegalArgumentException("El campo '" + nombreCampo + "' solo puede contener números");
+            throw new IllegalArgumentException("El campo '"+ nombreCampo+"' solo puede contener números");
         }
     }
     
     public static void validarCodigoCurso(String codigo){
-        validarNoVacio(codigo, "código de curso");
+        validarNoVacio(codigo,"código de curso");
         
         if (!CODIGO_CURSO_REGEX.matcher(codigo).matches()){
             throw new IllegalArgumentException("Formato de código de curso inválido. Use: XXX-999 (ej: ENG-101)");
@@ -106,26 +106,25 @@ public class Validador {
     public static void validarFecha(String fecha,String nombreCampo){
         validarNoVacio(fecha,nombreCampo);
         
-        try {
+        try{
             LocalDate.parse(fecha,DATE_FORMATTER);
-        } catch (DateTimeParseException e){
+        }catch(DateTimeParseException e){
             throw new IllegalArgumentException("Formato de fecha inválido para '"+nombreCampo+"'. Use: dd/MM/yyyy");
         }
     }
     
     public static void validarFechaPasada(String fecha,String nombreCampo){
         validarFecha(fecha,nombreCampo);
-        
         LocalDate fechaDate=LocalDate.parse(fecha, DATE_FORMATTER);
         LocalDate hoy=LocalDate.now();
         
-        if (fechaDate.isAfter(hoy)){
+        if(fechaDate.isAfter(hoy)){
             throw new IllegalArgumentException("La fecha '" +nombreCampo + "' no puede ser futura");
         }
     }
     
     public static void validarRangoEntero(int valor,int min,int max,String nombreCampo){
-        if (valor < min || valor > max){
+        if(valor < min || valor > max){
             throw new IllegalArgumentException(
                 "El campo '" + nombreCampo + "' debe estar entre "+min+ " y " + max
             );
@@ -133,9 +132,9 @@ public class Validador {
     }
     
     public static void validarRangoDouble(double valor,double min,double max, String nombreCampo){
-        if (valor < min || valor>max){
+        if (valor< min || valor>max){
             throw new IllegalArgumentException(
-                "El campo '" +nombreCampo + "' debe estar entre " + min + " y " + max
+                "El campo '" +nombreCampo +"' debe estar entre "+min +" y " + max
             );
         }
     }
@@ -197,7 +196,7 @@ public class Validador {
         validarSoloLetras(idioma,"idioma");
         
         String[] idiomasValidos={"Inglés","Francés","Alemán","Italiano","Portugués","Chino","Japonés"};
-        boolean valido =false;
+        boolean valido=false;
         
         for(String i :idiomasValidos){
             if (i.equalsIgnoreCase(idioma)){
@@ -262,10 +261,10 @@ public class Validador {
     // ========== UTILIDADES DE FORMATEO ==========
     
     public static String formatearTexto(String texto){
-        if (texto==null) return "";
+        if(texto==null) return "";
         
         texto=texto.trim();
-        if (texto.isEmpty())return "";
+        if(texto.isEmpty())return "";
         
         // Capitalizar primera letra de cada palabra
         String[] palabras =texto.split("\\s+");
