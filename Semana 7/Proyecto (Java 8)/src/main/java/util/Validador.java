@@ -15,38 +15,38 @@ import java.util.regex.Pattern;
  */
 public class Validador {
     // Patrones de validación
-    private static final Pattern EMAIL_REGEX = 
+    private static final Pattern EMAIL_REGEX= 
         Pattern.compile("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$");
     
-    private static final Pattern DNI_REGEX = 
+    private static final Pattern DNI_REGEX= 
         Pattern.compile("^[0-9]{8}$");
     
-    private static final Pattern TELEFONO_REGEX = 
-        Pattern.compile("^9[0-9]{8}$"); // Perú: 9 dígitos, empieza con 9
+    private static final Pattern TELEFONO_REGEX= 
+        Pattern.compile("^9[0-9]{8}$");
     
     private static final Pattern SOLO_LETRAS_REGEX = 
         Pattern.compile("^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$");
     
     private static final Pattern CODIGO_CURSO_REGEX = 
-        Pattern.compile("^[A-Z]{3}-[0-9]{3}$"); // Ejemplo: ENG-101
+        Pattern.compile("^[A-Z]{3}-[0-9]{3}$");
     
-    private static final Pattern SOLO_NUMEROS_REGEX = 
+    private static final Pattern SOLO_NUMEROS_REGEX= 
         Pattern.compile("^[0-9]+$");
     
-    private static final DateTimeFormatter DATE_FORMATTER = 
+    private static final DateTimeFormatter DATE_FORMATTER= 
         DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     // ========== VALIDACIONES BÁSICAS ==========
     
-    public static void validarNoVacio(String texto, String nombreCampo) {
-        if (texto == null || texto.trim().isEmpty()) {
+    public static void validarNoVacio(String texto,String nombreCampo){
+        if (texto==null || texto.trim().isEmpty()){
             throw new IllegalArgumentException("El campo '" + nombreCampo + "' no puede estar vacío");
         }
     }
     
-    public static void validarLongitud(String texto, String nombreCampo, int min, int max) {
+    public static void validarLongitud(String texto, String nombreCampo, int min, int max){
         validarNoVacio(texto, nombreCampo);
-        if (texto.length() < min || texto.length() > max) {
+        if (texto.length()<min || texto.length()>max){
             throw new IllegalArgumentException(
                 "El campo '" + nombreCampo + "' debe tener entre " + min + " y " + max + " caracteres"
             );
@@ -55,40 +55,40 @@ public class Validador {
     
     // ========== VALIDACIONES ESPECÍFICAS ==========
     
-    public static void validarDNI(String dni) {
+    public static void validarDNI(String dni){
         validarNoVacio(dni, "DNI");
         
-        if (!DNI_REGEX.matcher(dni).matches()) {
+        if (!DNI_REGEX.matcher(dni).matches()){
             throw new IllegalArgumentException("El DNI debe tener exactamente 8 dígitos numéricos");
         }
     }
     
-    public static void validarEmail(String email) {
-        validarNoVacio(email, "correo electrónico");
+    public static void validarEmail(String email){
+        validarNoVacio(email,"correo electrónico");
         
-        if (!EMAIL_REGEX.matcher(email).matches()) {
+        if (!EMAIL_REGEX.matcher(email).matches()){
             throw new IllegalArgumentException("Formato de correo electrónico inválido");
         }
     }
     
-    public static void validarTelefono(String telefono) {
+    public static void validarTelefono(String telefono){
         validarNoVacio(telefono, "teléfono");
         
-        if (!TELEFONO_REGEX.matcher(telefono).matches()) {
+        if (!TELEFONO_REGEX.matcher(telefono).matches()){
             throw new IllegalArgumentException("El teléfono debe tener 9 dígitos y comenzar con 9");
         }
     }
     
     public static void validarSoloLetras(String texto,String nombreCampo){
-        validarNoVacio(texto, nombreCampo);
+        validarNoVacio(texto,nombreCampo);
         
-        if (!SOLO_LETRAS_REGEX.matcher(texto).matches()) {
+        if (!SOLO_LETRAS_REGEX.matcher(texto).matches()){
             throw new IllegalArgumentException("El campo '"+nombreCampo+"' solo puede contener letras y espacios");
         }
     }
     
     public static void validarSoloNumeros(String texto,String nombreCampo) {
-        validarNoVacio(texto, nombreCampo);
+        validarNoVacio(texto,nombreCampo);
         
         if (!SOLO_NUMEROS_REGEX.matcher(texto).matches()){
             throw new IllegalArgumentException("El campo '" + nombreCampo + "' solo puede contener números");
@@ -135,7 +135,7 @@ public class Validador {
     public static void validarRangoDouble(double valor,double min,double max, String nombreCampo){
         if (valor < min || valor>max){
             throw new IllegalArgumentException(
-                "❌ El campo '" +nombreCampo + "' debe estar entre " + min + " y " + max
+                "El campo '" +nombreCampo + "' debe estar entre " + min + " y " + max
             );
         }
     }
