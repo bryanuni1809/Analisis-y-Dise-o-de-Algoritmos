@@ -232,47 +232,47 @@ public class Validador {
     
     // ========== MÉTODOS DE VALIDACIÓN CON RESPUESTA BOOLEANA ==========
     
-    public static boolean esDNIValido(String dni) {
-        try {
+    public static boolean esDNIValido(String dni){
+        try{
             validarDNI(dni);
             return true;
-        } catch (IllegalArgumentException e) {
+        }catch(IllegalArgumentException e){
             return false;
         }
     }
     
-    public static boolean esEmailValido(String email) {
-        try {
+    public static boolean esEmailValido(String email){
+        try{
             validarEmail(email);
             return true;
-        } catch (IllegalArgumentException e) {
+        }catch(IllegalArgumentException e){
             return false;
         }
     }
     
-    public static boolean esTelefonoValido(String telefono) {
-        try {
+    public static boolean esTelefonoValido(String telefono){
+        try{
             validarTelefono(telefono);
             return true;
-        } catch (IllegalArgumentException e) {
+        } catch(IllegalArgumentException e){
             return false;
         }
     }
     
     // ========== UTILIDADES DE FORMATEO ==========
     
-    public static String formatearTexto(String texto) {
-        if (texto == null) return "";
+    public static String formatearTexto(String texto){
+        if (texto==null) return "";
         
-        texto = texto.trim();
-        if (texto.isEmpty()) return "";
+        texto=texto.trim();
+        if (texto.isEmpty())return "";
         
         // Capitalizar primera letra de cada palabra
-        String[] palabras = texto.split("\\s+");
-        StringBuilder resultado = new StringBuilder();
+        String[] palabras =texto.split("\\s+");
+        StringBuilder resultado=new StringBuilder();
         
-        for (String palabra : palabras) {
-            if (!palabra.isEmpty()) {
+        for (String palabra :palabras){
+            if (!palabra.isEmpty()){
                 resultado.append(Character.toUpperCase(palabra.charAt(0)))
                         .append(palabra.substring(1).toLowerCase())
                         .append(" ");
@@ -282,7 +282,7 @@ public class Validador {
         return resultado.toString().trim();
     }
     
-    public static String formatearCodigoCurso(String codigo) {
+    public static String formatearCodigoCurso(String codigo){
         if (codigo == null) return "";
         return codigo.trim().toUpperCase();
     }
