@@ -186,7 +186,7 @@ public class Validador {
             }
         }
         
-        if (!valido) {
+        if (!valido){
             throw new IllegalArgumentException(
                 "Nivel de idioma inválido. Use: A1, A2, B1, B2, C1, C2, Principiante, Intermedio o Avanzado"
             );
@@ -196,37 +196,37 @@ public class Validador {
     public static void validarIdioma(String idioma){
         validarSoloLetras(idioma,"idioma");
         
-        String[] idiomasValidos={"Inglés", "Francés", "Alemán", "Italiano", "Portugués", "Chino", "Japonés"};
-        boolean valido = false;
+        String[] idiomasValidos={"Inglés","Francés","Alemán","Italiano","Portugués","Chino","Japonés"};
+        boolean valido =false;
         
-        for (String i : idiomasValidos){
+        for (String i :idiomasValidos){
             if (i.equalsIgnoreCase(idioma)){
-                valido = true;
+                valido =true;
                 break;
             }
         }
         
         if (!valido){
             throw new IllegalArgumentException(
-                "Idioma no soportado. Idiomas disponibles: " + String.join(", ", idiomasValidos)
+                "Idioma no soportado. Idiomas disponibles: "+String.join(", ",idiomasValidos)
             );
         }
     }
     
     // ========== VALIDACIONES DE EDAD A PARTIR DE FECHA ==========
     
-    public static int calcularEdad(String fechaNacimiento) {
+    public static int calcularEdad(String fechaNacimiento){
         validarFechaPasada(fechaNacimiento, "fecha de nacimiento");
         
-        LocalDate nacimiento = LocalDate.parse(fechaNacimiento, DATE_FORMATTER);
-        LocalDate hoy = LocalDate.now();
+        LocalDate nacimiento =LocalDate.parse(fechaNacimiento,DATE_FORMATTER);
+        LocalDate hoy =LocalDate.now();
         
-        return hoy.getYear() - nacimiento.getYear() - 
-               (hoy.getDayOfYear() < nacimiento.getDayOfYear() ? 1 : 0);
+        return hoy.getYear()- nacimiento.getYear() - 
+               (hoy.getDayOfYear() <nacimiento.getDayOfYear() ? 1 : 0);
     }
     
-    public static void validarEdadEstudiante(String fechaNacimiento, int minEdad, int maxEdad) {
-        int edad = calcularEdad(fechaNacimiento);
+    public static void validarEdadEstudiante(String fechaNacimiento,int minEdad,int maxEdad){
+        int edad=calcularEdad(fechaNacimiento);
         validarEdad(edad, minEdad, maxEdad);
     }
     
