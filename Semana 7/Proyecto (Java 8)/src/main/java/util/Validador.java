@@ -173,15 +173,15 @@ public class Validador {
         validarRangoEntero(duracion, 1, 52, "duración del curso (semanas)");
     }
     
-    public static void validarNivelIdioma(String nivel) {
-        validarNoVacio(nivel, "nivel de idioma");
+    public static void validarNivelIdioma(String nivel){
+        validarNoVacio(nivel,"nivel de idioma");
         
-        String[] nivelesValidos = {"A1", "A2", "B1", "B2", "C1", "C2", "Principiante", "Intermedio", "Avanzado"};
+        String[] nivelesValidos = {"A1","A2","B1","B2","C1","C2","Principiante","Intermedio","Avanzado"};
         boolean valido = false;
         
-        for (String n : nivelesValidos) {
-            if (n.equalsIgnoreCase(nivel)) {
-                valido = true;
+        for(String n :nivelesValidos){
+            if(n.equalsIgnoreCase(nivel)){
+                valido=true;
                 break;
             }
         }
