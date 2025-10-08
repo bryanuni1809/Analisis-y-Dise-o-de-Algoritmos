@@ -135,7 +135,7 @@ public class Validador {
     public static void validarRangoDouble(double valor,double min,double max, String nombreCampo){
         if (valor < min || valor>max){
             throw new IllegalArgumentException(
-                "❌ El campo '" + nombreCampo + "' debe estar entre " + min + " y " + max
+                "❌ El campo '" +nombreCampo + "' debe estar entre " + min + " y " + max
             );
         }
     }
@@ -170,14 +170,14 @@ public class Validador {
     }
     
     public static void validarDuracionCurso(int duracion){
-        validarRangoEntero(duracion, 1, 52, "duración del curso (semanas)");
+        validarRangoEntero(duracion,1,52,"duración del curso (semanas)");
     }
     
     public static void validarNivelIdioma(String nivel){
         validarNoVacio(nivel,"nivel de idioma");
         
         String[] nivelesValidos = {"A1","A2","B1","B2","C1","C2","Principiante","Intermedio","Avanzado"};
-        boolean valido = false;
+        boolean valido=false;
         
         for(String n :nivelesValidos){
             if(n.equalsIgnoreCase(nivel)){
@@ -199,14 +199,14 @@ public class Validador {
         String[] idiomasValidos={"Inglés","Francés","Alemán","Italiano","Portugués","Chino","Japonés"};
         boolean valido =false;
         
-        for (String i :idiomasValidos){
+        for(String i :idiomasValidos){
             if (i.equalsIgnoreCase(idioma)){
-                valido =true;
+                valido=true;
                 break;
             }
         }
         
-        if (!valido){
+        if(!valido){
             throw new IllegalArgumentException(
                 "Idioma no soportado. Idiomas disponibles: "+String.join(", ",idiomasValidos)
             );
@@ -218,11 +218,11 @@ public class Validador {
     public static int calcularEdad(String fechaNacimiento){
         validarFechaPasada(fechaNacimiento, "fecha de nacimiento");
         
-        LocalDate nacimiento =LocalDate.parse(fechaNacimiento,DATE_FORMATTER);
+        LocalDate nacimiento=LocalDate.parse(fechaNacimiento,DATE_FORMATTER);
         LocalDate hoy =LocalDate.now();
         
-        return hoy.getYear()- nacimiento.getYear() - 
-               (hoy.getDayOfYear() <nacimiento.getDayOfYear() ? 1 : 0);
+        return hoy.getYear()-nacimiento.getYear()- 
+               (hoy.getDayOfYear()<nacimiento.getDayOfYear() ? 1 : 0);
     }
     
     public static void validarEdadEstudiante(String fechaNacimiento,int minEdad,int maxEdad){
@@ -303,34 +303,34 @@ public class Validador {
         validarNoVacio(nivelEstudios, "nivel de estudios");
     }
     
-    public static void validarDatosProfesor(String dni, String nombres, String apellidos,
-                                          String direccion, String telefono, String correo,
-                                          String especialidad, int experiencia) {
+    public static void validarDatosProfesor(String dni,String nombres,String apellidos,
+                                          String direccion,String telefono,String correo,
+                                          String especialidad,int experiencia) {
         
         validarDNI(dni);
-        validarSoloLetras(nombres, "nombres");
-        validarSoloLetras(apellidos, "apellidos");
-        validarNoVacio(direccion, "dirección");
+        validarSoloLetras(nombres,"nombres");
+        validarSoloLetras(apellidos,"apellidos");
+        validarNoVacio(direccion,"dirección");
         validarTelefono(telefono);
         validarEmail(correo);
-        validarSoloLetras(especialidad, "especialidad");
+        validarSoloLetras(especialidad,"especialidad");
         validarExperiencia(experiencia);
     }
     
-    public static void validarDatosCurso(String codigo, String nombre, String idioma, String nivel,
-                                       String profesorDni, String horario, int duracion,
+    public static void validarDatosCurso(String codigo,String nombre,String idioma,String nivel,
+                                       String profesorDni,String horario, int duracion,
                                        int capacidad, double precio, String observaciones) {
         
         validarCodigoCurso(codigo);
-        validarNoVacio(nombre, "nombre del curso");
+        validarNoVacio(nombre,"nombre del curso");
         validarIdioma(idioma);
         validarNivelIdioma(nivel);
         validarDNI(profesorDni);
-        validarNoVacio(horario, "horario");
+        validarNoVacio(horario,"horario");
         validarDuracionCurso(duracion);
         validarCapacidadCurso(capacidad);
         validarPrecio(precio);
-        validarNoVacio(observaciones, "observaciones");
+        validarNoVacio(observaciones,"observaciones");
     }
 }
 
