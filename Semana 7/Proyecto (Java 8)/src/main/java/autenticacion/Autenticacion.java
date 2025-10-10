@@ -48,23 +48,23 @@ private static final String ARCHIVO="usuarios.txt";
                     }
                 }
             }
-        } catch (IOException ex) {
+        }catch(IOException ex){
             System.out.println("Error al verificar usuario: " + ex.getMessage());
         }
         return false;
     }
 
-    public void registrarUsuario(String usuario, String contrasena) {
-        if (usuarioExiste(usuario)) {
-            System.out.println("El usuario '" + usuario + "' ya está registrado.");
+    public void registrarUsuario(String usuario, String contrasena){
+        if(usuarioExiste(usuario)){
+            System.out.println("El usuario '"+usuario+"' ya está registrado.");
             return;
         }
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(ARCHIVO, true))) {
-            writer.write(usuario + "," + contrasena);
+        try(BufferedWriter writer=new BufferedWriter(new FileWriter(ARCHIVO, true))){
+            writer.write(usuario+","+contrasena);
             writer.newLine();
             System.out.println("Usuario registrado con éxito.");
-        } catch (IOException e) {
-            System.out.println("Error al registrar usuario: " + e.getMessage());
+        }catch(IOException e){
+            System.out.println("Error al registrar usuario: " +e.getMessage());
         }
     }
 }
