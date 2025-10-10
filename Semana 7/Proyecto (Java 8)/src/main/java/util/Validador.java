@@ -261,7 +261,7 @@ public class Validador {
     // ========== UTILIDADES DE FORMATEO ==========
     
     public static String formatearTexto(String texto){
-        if(texto==null) return "";
+        if(texto==null)return "";
         
         texto=texto.trim();
         if(texto.isEmpty())return "";
@@ -270,7 +270,7 @@ public class Validador {
         String[] palabras =texto.split("\\s+");
         StringBuilder resultado=new StringBuilder();
         
-        for (String palabra :palabras){
+        for (String palabra:palabras){
             if (!palabra.isEmpty()){
                 resultado.append(Character.toUpperCase(palabra.charAt(0)))
                         .append(palabra.substring(1).toLowerCase())
@@ -282,7 +282,7 @@ public class Validador {
     }
     
     public static String formatearCodigoCurso(String codigo){
-        if (codigo == null) return "";
+        if(codigo==null)return "";
         return codigo.trim().toUpperCase();
     }
     
@@ -293,13 +293,13 @@ public class Validador {
                                             String fechaNacimiento, String nivelEstudios) {
         
         validarDNI(dni);
-        validarSoloLetras(nombres, "nombres");
-        validarSoloLetras(apellidos, "apellidos");
-        validarNoVacio(direccion, "dirección");
+        validarSoloLetras(nombres,"nombres");
+        validarSoloLetras(apellidos,"apellidos");
+        validarNoVacio(direccion,"dirección");
         validarTelefono(telefono);
         validarEmail(correo);
-        validarEdadEstudiante(fechaNacimiento, 12, 80); // Edad entre 12 y 80 años
-        validarNoVacio(nivelEstudios, "nivel de estudios");
+        validarEdadEstudiante(fechaNacimiento,12,80); // Edad entre 12 y 80 años
+        validarNoVacio(nivelEstudios,"nivel de estudios");
     }
     
     public static void validarDatosProfesor(String dni,String nombres,String apellidos,
