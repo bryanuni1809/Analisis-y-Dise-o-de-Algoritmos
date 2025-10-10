@@ -30,20 +30,20 @@ private static final String ARCHIVO="usuarios.txt";
                     }
                 }
             }
-        } catch (IOException ex) {
-            System.out.println("Error al leer usuarios: " + ex.getMessage());
+        }catch(IOException ex){
+            System.out.println("Error al leer usuarios: "+ex.getMessage());
         }
         return false;
     }
 
-    private boolean usuarioExiste(String usuario) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(ARCHIVO))) {
+    private boolean usuarioExiste(String usuario){
+        try(BufferedReader reader=new BufferedReader(new FileReader(ARCHIVO))){
             String linea;
-            while ((linea = reader.readLine()) != null) {
+            while((linea=reader.readLine())!= null){
                 String[] partes = linea.split(",");
-                if (partes.length == 2) {
+                if(partes.length == 2){
                     String u = partes[0].trim();
-                    if (u.equals(usuario)) {
+                    if(u.equals(usuario)){
                         return true;
                     }
                 }
