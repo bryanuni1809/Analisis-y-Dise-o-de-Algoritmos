@@ -20,18 +20,18 @@ public class Estudiante extends Persona{
     }
 
     public String getFechaNacimiento(){return fechaNacimiento;}
-    public void setFechaNacimiento(String fechaNacimiento){ this.fechaNacimiento = fechaNacimiento; }
+    public void setFechaNacimiento(String fechaNacimiento){this.fechaNacimiento=fechaNacimiento;}
 
     public String getNivelEstudios(){return nivelEstudios;}
-    public void setNivelEstudios(String nivelEstudios){ this.nivelEstudios = nivelEstudios; }
+    public void setNivelEstudios(String nivelEstudios){this.nivelEstudios=nivelEstudios;}
 
     @Override
-    public String mostrarInfo() {
-        return super.mostrarInfo() + " | Fecha Nac: " + fechaNacimiento + " | Nivel: " + nivelEstudios;
+    public String mostrarInfo(){
+        return super.mostrarInfo()+" | Fecha Nac: "+fechaNacimiento+" | Nivel: "+nivelEstudios;
     }
 
     @Override
-    public String getTipo() {
+    public String getTipo(){
         return "Estudiante";
     }
 }
