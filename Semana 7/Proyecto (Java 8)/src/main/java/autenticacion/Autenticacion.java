@@ -49,12 +49,12 @@ private static final String ARCHIVO="usuarios.txt";
                 }
             }
         }catch(IOException ex){
-            System.out.println("Error al verificar usuario: " + ex.getMessage());
+            System.out.println("Error al verificar usuario: "+ex.getMessage());
         }
         return false;
     }
 
-    public void registrarUsuario(String usuario, String contrasena){
+    public void registrarUsuario(String usuario,String contrasena){
         if(usuarioExiste(usuario)){
             System.out.println("El usuario '"+usuario+"' ya está registrado.");
             return;
