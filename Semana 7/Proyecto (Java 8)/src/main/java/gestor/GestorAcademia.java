@@ -61,7 +61,7 @@ public class GestorAcademia{
                     Double.parseDouble(partes[8]),
                     partes[9]
                 );
-                cursos.add(c);
+                cursos.put(c.getCodigo(), c);
             }
         }
     } catch (IOException e) {
@@ -79,7 +79,7 @@ public class GestorAcademia{
                     partes[4], partes[5], partes[6],
                     Integer.parseInt(partes[7])
                 );
-                profesores.add(p);
+                profesores.put(p.getDni(), p);
             }
         }
     } catch (IOException e) {
@@ -93,7 +93,7 @@ public class GestorAcademia{
             String[] partes = linea.split(",");
             if (partes.length >= 4) {
                 IdiomaNivel in = new IdiomaNivel(partes[0], partes[1], partes[2], partes[3]);
-                nivelesIdioma.add(in);
+                nivelesIdioma.put(in.getCodigo(), in);
             }
         }
     } catch (IOException e) {
@@ -491,7 +491,7 @@ private void mostrarMenuReportesHTML(){
         Validador.validarDatosProfesor(dni, nombres, apellidos, direccion, telefono, correo, especialidad, experiencia);
         
         Profesor p = new Profesor(dni, nombres, apellidos, direccion, telefono, correo, especialidad, experiencia);
-        profesores.add(p);
+        profesores.put(dni, p);
         ArchivoUtil.guardarProfesor(p, "profesores.txt");
         
         System.out.println("Profesor registrado y validado exitosamente!");
@@ -535,12 +535,10 @@ private void mostrarMenuReportesHTML(){
         System.out.print("Observaciones: ");
         String obs = scanner.nextLine().trim();
         Validador.validarNoVacio(obs, "observaciones");
-        
-        // Validación completa
         Validador.validarDatosCurso(codigo, nombre, idioma, nivel, dniProfesor, horario, duracion, capacidad, precio, obs);
         
         Curso c = new Curso(codigo, nombre, idioma, nivel, dniProfesor, horario, duracion, capacidad, precio, obs);
-        cursos.add(c);
+        cursos.put(codigo, c);
         ArchivoUtil.guardarCurso(c, "cursos.txt");
         
         System.out.println("Curso registrado y validado exitosamente!");
@@ -553,28 +551,23 @@ private void mostrarMenuReportesHTML(){
         System.out.println("Registro de Matricula:");
         System.out.print("DNI del estudiante: ");
         String dni =scanner.nextLine();
-
         Estudiante estudiante =estudiantes.get(dni);
-
         if (estudiante == null){
             System.out.println("Estudiante no encontrado. Primero debe registrarlo.");
         return;
         }
-
         if (cursos.isEmpty()){
             System.out.println("No hay cursos disponibles. Primero registre cursos.");
             return;
         }
-
         System.out.println("Cursos disponibles:");
-        for (Curso c : cursos) {
+        for (Curso c : cursos.values()) {
             System.out.println("- " +c.getCodigo()+ ": " +c.getNombre());
         }
         System.out.print("Ingrese el codigo del curso: ");
         String codigoCurso =scanner.nextLine();
-
         Curso cursoSeleccionado=null;
-        for (Curso c:cursos){
+        for (Curso c:cursos.values()){
             if (c.getCodigo().equals(codigoCurso)) {
                 cursoSeleccionado=c;
                 break;
@@ -603,7 +596,7 @@ private void mostrarMenuReportesHTML(){
         Validador.validarCodigoCurso(codigoCurso);
 
         Curso cursoSeleccionado = null;
-        for (Curso c : cursos) {
+        for (Curso c : cursos.values()) {
             if (c.getCodigo().equals(codigoCurso)) {
                 cursoSeleccionado = c;
                 break;
@@ -698,8 +691,7 @@ private void mostrarMenuReportesHTML(){
 private void modificarProfesor(){
     System.out.print("Ingrese DNI del profesor a modificar: ");
     String dni=scanner.nextLine();
-
-    for(Profesor p :profesores){
+    Profesor p=profesores.get(dni);
         if (p.getDni().equals(dni)){
             System.out.println("Profesor encontrado:");
             System.out.println(p.mostrarInfo());
@@ -725,23 +717,19 @@ private void modificarProfesor(){
                     System.out.println("Opcion invalida.");
                     break;
             }
-            ArchivoUtil.sobrescribirProfesores(profesores, "profesores.txt");
+            ArchivoUtil.sobrescribirProfesores(new ArrayList<>(profesores.values()), "profesores.txt");
             System.out.println("Datos actualizados.");
-            return;
-        }
+        }else{
+        System.out.println("Profesor no encontrado.");
     }
-
-    System.out.println("Profesor no encontrado.");
 }
 private void modificarCurso(){
     System.out.print("Ingrese codigo del curso a modificar: ");
     String codigo =scanner.nextLine();
-
-    for(Curso c:cursos){
+    Curso c=cursos.get(codigo);
         if(c.getCodigo().equals(codigo)){
             System.out.println("Curso encontrado:");
             System.out.println(c.mostrarInfo());
-
             System.out.println("Que desea modificar?");
             System.out.println("1. Horario");
             System.out.println("2. Capacidad maxima");
@@ -770,13 +758,11 @@ private void modificarCurso(){
                     break;
             }
 
-            ArchivoUtil.sobrescribirCursos(cursos, "cursos.txt");
+            ArchivoUtil.sobrescribirCursos(new ArrayList<>(cursos.values()), "cursos.txt");
             System.out.println("Datos del curso actualizados.");
-            return;
-        }
+        }else{
+            System.out.println("Curso no encontrado.");
     }
-
-    System.out.println("Curso no encontrado.");
 }
 private void registrarNivelIdioma(){
     System.out.println("Registro de Nivel de Idioma:");
@@ -790,7 +776,7 @@ private void registrarNivelIdioma(){
     String descripcion =scanner.nextLine();
 
     IdiomaNivel in =new IdiomaNivel(codigo, idioma, nivel, descripcion);
-    nivelesIdioma.add(in);
+    nivelesIdioma.put(nivel, in);
     ArchivoUtil.guardarNivelIdioma(in,"idiomas.txt");
 
     System.out.println("Nivel de idioma registrado.");
@@ -799,8 +785,7 @@ private void registrarNivelIdioma(){
 private void modificarNivelIdioma(){
     System.out.print("Ingrese codigo del nivel de idioma a modificar: ");
     String codigo=scanner.nextLine();
-
-    for(IdiomaNivel in :nivelesIdioma){
+    IdiomaNivel in=nivelesIdioma.get(codigo);
         if(in.getCodigo().equals(codigo)){
             System.out.println("Nivel encontrado:");
             System.out.println(in.mostrarInfo());
@@ -826,14 +811,11 @@ private void modificarNivelIdioma(){
                     System.out.println("Opcion invalida.");
                     break;
             }
-
-            ArchivoUtil.sobrescribirNivelesIdioma(nivelesIdioma, "idiomas.txt");
+            ArchivoUtil.sobrescribirNivelesIdioma(new ArrayList<>(nivelesIdioma.values()), "idiomas.txt");
             System.out.println("Nivel actualizado.");
-            return;
-        }
+        }else{
+        System.out.println("Nivel no encontrado.");    
     }
-
-    System.out.println("Nivel no encontrado.");
 }
 private void buscarProfesor(){
     System.out.print("Ingrese DNI del profesor: ");
@@ -892,17 +874,12 @@ private void eliminarCurso(){
 private void eliminarNivelIdioma(){
     System.out.print("Ingrese codigo del nivel de idioma a eliminar: ");
     String codigo = scanner.nextLine();
-
-    for (int i = 0; i < nivelesIdioma.size(); i++) {
-        if (nivelesIdioma.get(i).getCodigo().equals(codigo)) {
-            nivelesIdioma.remove(i);
-            ArchivoUtil.sobrescribirNivelesIdioma(nivelesIdioma, "idiomas.txt");
+        if (nivelesIdioma.remove(codigo) !=null) {
+            ArchivoUtil.sobrescribirNivelesIdioma(new ArrayList<>(nivelesIdioma.values()), "idiomas.txt");
             System.out.println("Nivel de idioma eliminado.");
-            return;
-        }
-    }
-
-    System.out.println("Nivel de idioma no encontrado.");
+        }else{
+        System.out.println("Nivel de idioma no encontrado.");    
+    }   
 }
 private void eliminarEstudiante() {
     System.out.print("Ingrese DNI del estudiante a eliminar: ");
@@ -942,7 +919,7 @@ private void generarReporteProfesoresHTML() {
         bw.write("table { width: 100%; border-collapse: collapse; } th, td { border: 1px solid black; padding: 8px; }");
         bw.write("</style></head><body><h1>Profesores Registrados</h1><table>");
         bw.write("<tr><th>DNI</th><th>Nombres</th><th>Apellidos</th><th>Dirección</th><th>Teléfono</th><th>Correo</th><th>Especialidad</th><th>Experiencia</th></tr>");
-        for (Profesor p : profesores) {
+        for (Profesor p : profesores.values()) {
             bw.write("<tr><td>" + p.getDni() + "</td><td>" + p.getNombres() + "</td><td>" + p.getApellidos() +
                      "</td><td>" + p.getDireccion() + "</td><td>" + p.getTelefono() + "</td><td>" + p.getCorreo() +
                      "</td><td>" + p.getEspecialidad() + "</td><td>" + p.getExperiencia() + "</td></tr>");
@@ -959,7 +936,7 @@ private void generarReporteCursosHTML() {
         bw.write("table { width: 100%; border-collapse: collapse; } th, td { border: 1px solid black; padding: 8px; }");
         bw.write("</style></head><body><h1>Cursos Registrados</h1><table>");
         bw.write("<tr><th>Código</th><th>Nombre</th><th>Idioma</th><th>Nivel</th><th>Profesor</th><th>Horario</th><th>Duración</th><th>Capacidad</th><th>Precio</th><th>Observaciones</th></tr>");
-        for (Curso c : cursos) {
+        for (Curso c : cursos.values()) {
             bw.write("<tr><td>" + c.getCodigo() + "</td><td>" + c.getNombre() + "</td><td>" + c.getIdioma() + "</td><td>" + c.getNivel() + "</td><td>" +
                      c.getProfesorDni() + "</td><td>" + c.getHorario() + "</td><td>" + c.getDuracion() + "</td><td>" + c.getCapacidadMaxima() +
                      "</td><td>" + c.getPrecio() + "</td><td>" + c.getObservaciones() + "</td></tr>");
@@ -976,7 +953,7 @@ private void generarReporteMatriculasHTML() {
         bw.write("table { width: 100%; border-collapse: collapse; } th, td { border: 1px solid black; padding: 8px; }");
         bw.write("</style></head><body><h1>Matrículas Registradas</h1><table>");
         bw.write("<tr><th>DNI Estudiante</th><th>Código Curso</th><th>Fecha</th><th>Monto Pagado</th></tr>");
-        for (Matricula m : matriculas) {
+        for (Matricula m :matriculas) {
             bw.write("<tr><td>" + m.getDniEstudiante() + "</td><td>" + m.getCodigoCurso() + "</td><td>" + m.getFechaMatricula()+ "</td><td>" + m.getMonto() + "</td></tr>");
         }
         bw.write("</table></body></html>");
@@ -991,7 +968,7 @@ private void generarReporteCalificacionesHTML() {
         bw.write("table { width: 100%; border-collapse: collapse; } th, td { border: 1px solid black; padding: 8px; }");
         bw.write("</style></head><body><h1>Calificaciones Registradas</h1><table>");
         bw.write("<tr><th>Código Curso</th><th>DNI Estudiante</th><th>Fecha</th><th>Nota</th><th>Observaciones</th></tr>");
-        for (Calificacion c : calificaciones) {
+        for (Calificacion c :calificaciones) {
             bw.write("<tr><td>" + c.getCodigoCurso() + "</td><td>" + c.getDniEstudiante() + "</td><td>" + c.getFecha() + "</td><td>" + c.getNota() + "</td><td>" + c.getObservaciones() + "</td></tr>");
         }
         bw.write("</table></body></html>");
@@ -1006,7 +983,7 @@ private void generarReporteNivelesIdiomaHTML() {
         bw.write("table { width: 100%; border-collapse: collapse; } th, td { border: 1px solid black; padding: 8px; }");
         bw.write("</style></head><body><h1>Niveles de Idioma Registrados</h1><table>");
         bw.write("<tr><th>Idioma</th><th>Nivel</th><th>Descripción</th></tr>");
-        for (IdiomaNivel n : nivelesIdioma) {
+        for (IdiomaNivel n :nivelesIdioma.values()) {
             bw.write("<tr><td>" + n.getIdioma() + "</td><td>" + n.getNivel() + "</td><td>" + n.getDescripcion() + "</td></tr>");
         }
         bw.write("</table></body></html>");
@@ -1100,7 +1077,7 @@ private void ordenarProfesores() {
         return;
     }
     
-    List<Profesor> listaProfesores = new ArrayList<>(profesores);
+    List<Profesor> listaProfesores = new ArrayList<>(profesores.values());
     
     System.out.println("\n=== ORDENAR PROFESORES - MERGE SORT ===");
     System.out.println("1. Por Apellidos (A-Z)");
@@ -1143,7 +1120,7 @@ private void ordenarCursos(){
         System.out.println("No hay cursos registrados.");
         return;
     }
-    List<Curso> listaCursos = new ArrayList<>(cursos);
+    List<Curso> listaCursos = new ArrayList<>(cursos.values());
     System.out.println("\n=== ORDENAR CURSOS - MERGE SORT ===");
     System.out.println("1. Por Nombre (A-Z)");
     System.out.println("2. Por Idioma (A-Z)");
@@ -1215,8 +1192,12 @@ private void ordenacionExterna(){
         System.out.println("Archivo ordenado generado: " + salida.getName());
         System.out.println("Tiempo total: " + (endTime - startTime) + " ms");
         
-    } catch (Exception e) {
-        System.out.println("Error: " + e.getMessage());
+    }catch(IOException e){
+        System.out.println("Error de E/S: " + e.getMessage());
+    }catch(NumberFormatException e){
+        System.out.println("Error en formato numérico: " + e.getMessage());
+    }catch(IllegalArgumentException e){
+        System.out.println("Error en parámetros: " + e.getMessage());
     }
 }
 private String leerDNI() {
@@ -1259,7 +1240,7 @@ private String leerTelefono() {
     }
 }
 
-private String leerFecha(String mensaje) {
+private String leerFecha(String mensaje){
     while (true) {
         try {
             System.out.print(mensaje);
@@ -1272,7 +1253,7 @@ private String leerFecha(String mensaje) {
     }
 }
 
-private int leerEnteroValidado(String mensaje, int min, int max) {
+private int leerEnteroValidado(String mensaje, int min, int max){
     while (true) {
         try {
             System.out.print(mensaje);
@@ -1280,22 +1261,22 @@ private int leerEnteroValidado(String mensaje, int min, int max) {
             Validador.validarRangoEntero(valor, min, max, "valor");
             return valor;
         } catch (NumberFormatException e) {
-            System.out.println("❌ Error: Debe ingresar un número entero válido.");
+            System.out.println("Error: Debe ingresar un número entero válido.");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
     }
 }
 
-private double leerDoubleValidado(String mensaje, double min, double max) {
+private double leerDoubleValidado(String mensaje,double min,double max) {
     while (true) {
         try {
             System.out.print(mensaje);
             double valor = Double.parseDouble(scanner.nextLine().trim());
-            Validador.validarRangoDouble(valor, min, max, "valor");
+            Validador.validarRangoDouble(valor,min,max,"valor");
             return valor;
         } catch (NumberFormatException e) {
-            System.out.println("❌ Error: Debe ingresar un número válido.");
+            System.out.println("Error: Debe ingresar un número válido.");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
