@@ -34,11 +34,11 @@ import util.Validador;
 public class GestorAcademia{
     private final Scanner scanner = new Scanner(System.in);
     private final Map<String, Estudiante> estudiantes = new HashMap<>();
-    private final ArrayList<Profesor> profesores = new ArrayList<>();
-    private final ArrayList<Curso> cursos = new ArrayList<>();
+    private final Map<String, Profesor> profesores = new HashMap<>(); 
+    private final Map<String, Curso> cursos = new HashMap<>(); 
     private final ArrayList<Matricula> matriculas = new ArrayList<>();
     private final ArrayList<Calificacion> calificaciones = new ArrayList<>();
-    private final ArrayList<IdiomaNivel> nivelesIdioma = new ArrayList<>();
+    private final Map<String, IdiomaNivel> nivelesIdioma = new HashMap<>();
     
     public GestorAcademia() {
     cargarEstudiantes();
@@ -838,72 +838,56 @@ private void modificarNivelIdioma(){
 private void buscarProfesor(){
     System.out.print("Ingrese DNI del profesor: ");
     String dni = scanner.nextLine();
-
-    for(Profesor p : profesores){
-        if (p.getDni().equals(dni)){
+    Profesor p=profesores.get(dni);
+        if (p !=null){
             System.out.println("Profesor encontrado:");
             System.out.println(p.mostrarInfo());
-            return;
-        }
-    }
+        }else{
     System.out.println("Profesor no encontrado.");
+    }
 }
 private void buscarCurso(){
     System.out.print("Ingrese codigo del curso: ");
     String codigo=scanner.nextLine();
-
-    for (Curso c :cursos){
-        if (c.getCodigo().equals(codigo)){
+    Curso c=cursos.get(codigo);
+        if (c !=null){
             System.out.println("Curso encontrado:");
             System.out.println(c.mostrarInfo());
-            return;
+        }else{
+        System.out.println("Curso no encontrado.");
         }
     }
-    System.out.println("Curso no encontrado.");
-}
+        
 private void buscarNivelIdioma(){
     System.out.print("Ingrese codigo del nivel de idioma: ");
     String codigo = scanner.nextLine();
-
-    for (IdiomaNivel in : nivelesIdioma){
-        if (in.getCodigo().equals(codigo)){
+    IdiomaNivel in=nivelesIdioma.get(codigo);
+        if (in !=null){
             System.out.println("Nivel encontrado:");
             System.out.println(in.mostrarInfo());
-            return;
-        }
-    }
-
-    System.out.println("Nivel no encontrado.");
+        }else{
+            System.out.println("Nivel no encontrado.");
+        }   
 }
 private void eliminarProfesor(){
     System.out.print("Ingrese DNI del profesor a eliminar: ");
-    String dni = scanner.nextLine();
-
-    for (int i = 0; i < profesores.size();i++){
-        if (profesores.get(i).getDni().equals(dni)){
-            profesores.remove(i);
-            ArchivoUtil.sobrescribirProfesores(profesores, "profesores.txt");
+    String dni=scanner.nextLine();
+    if (profesores.remove(dni) != null){
+            ArchivoUtil.sobrescribirProfesores(new ArrayList<>(profesores.values()), "profesores.txt");
             System.out.println("Profesor eliminado.");
-            return;
-        }
+        }else{
+        System.out.println("Profesor no encontrado.");
     }
-
-    System.out.println("Profesor no encontrado.");
 }
 private void eliminarCurso(){
     System.out.print("Ingrese codigo del curso a eliminar: ");
     String codigo = scanner.nextLine();
-
-    for (int i = 0; i<cursos.size();i++){
-        if (cursos.get(i).getCodigo().equals(codigo)){
-            cursos.remove(i);
-            ArchivoUtil.sobrescribirCursos(cursos, "cursos.txt");
+        if (cursos.remove(codigo) !=null){
+            ArchivoUtil.sobrescribirCursos(new ArrayList<>(cursos.values()), "cursos.txt");
             System.out.println("Curso eliminado.");
-            return;
-        }
+        }else{
+        System.out.println("Curso no encontrado.");    
     }
-
-    System.out.println("Curso no encontrado.");
 }
 private void eliminarNivelIdioma(){
     System.out.print("Ingrese codigo del nivel de idioma a eliminar: ");
