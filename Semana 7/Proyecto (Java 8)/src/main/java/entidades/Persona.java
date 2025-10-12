@@ -33,17 +33,17 @@ public abstract class Persona{
     public String getApellidos(){return apellidos;}
     public void setApellidos(String apellidos){this.apellidos=apellidos;}
 
-    public String getDireccion() {return direccion; }
-    public void setDireccion(String direccion) { this.direccion = direccion; }
+    public String getDireccion(){return direccion;}
+    public void setDireccion(String direccion){this.direccion=direccion;}
 
-    public String getTelefono() {return telefono; }
-    public void setTelefono(String telefono) { this.telefono = telefono; }
+    public String getTelefono(){return telefono;}
+    public void setTelefono(String telefono){this.telefono=telefono;}
 
-    public String getCorreo() { return correo; }
-    public void setCorreo(String correo) { this.correo = correo; }
+    public String getCorreo(){return correo;}
+    public void setCorreo(String correo){this.correo=correo;}
 
-    public String mostrarInfo() {
-        return "DNI: " + dni + " | Nombre: " + nombres + " " + apellidos;
+    public String mostrarInfo(){
+        return "DNI: " +dni+" | Nombre: "+nombres+" "+apellidos;
     }
     public abstract String getTipo();
 }
