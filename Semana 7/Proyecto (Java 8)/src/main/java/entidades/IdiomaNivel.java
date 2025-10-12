@@ -27,14 +27,14 @@ public class IdiomaNivel{
     public String getIdioma(){return idioma;}
     public void setIdioma(String idioma){this.idioma=idioma;}
 
-    public String getNivel() { return nivel; }
-    public void setNivel(String nivel) { this.nivel = nivel; }
+    public String getNivel(){return nivel;}
+    public void setNivel(String nivel){this.nivel=nivel;}
 
-    public String getDescripcion() { return descripcion; }
-    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
+    public String getDescripcion(){return descripcion;}
+    public void setDescripcion(String descripcion){this.descripcion=descripcion;}
 
-    public String mostrarInfo() {
-        return "Codigo: " + codigo + " | Idioma: " + idioma + " | Nivel: " + nivel +
-               "\nDescripcion: " + descripcion;
+    public String mostrarInfo(){
+        return "Codigo: " +codigo+" | Idioma: "+idioma+ " | Nivel: "+nivel+
+               "\nDescripcion: " +descripcion;
     }
 }
