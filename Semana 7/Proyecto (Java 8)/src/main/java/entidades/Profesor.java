@@ -20,7 +20,7 @@ public class Profesor extends Persona{
     }
 
     public String getEspecialidad(){return especialidad;}
-    public void setEspecialidad(String especialidad){ this.especialidad=especialidad;}
+    public void setEspecialidad(String especialidad){this.especialidad=especialidad;}
 
     public int getExperiencia(){return experiencia;}
     public void setExperiencia(int experiencia){this.experiencia=experiencia;}

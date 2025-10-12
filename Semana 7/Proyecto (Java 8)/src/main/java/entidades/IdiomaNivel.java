@@ -22,7 +22,7 @@ public class IdiomaNivel{
     }
 
     public String getCodigo(){return codigo;}
-    public void setCodigo(String codigo){ this.codigo=codigo;}
+    public void setCodigo(String codigo){this.codigo=codigo;}
 
     public String getIdioma(){return idioma;}
     public void setIdioma(String idioma){this.idioma=idioma;}
@@ -35,6 +35,6 @@ public class IdiomaNivel{
 
     public String mostrarInfo(){
         return "Codigo: " +codigo+" | Idioma: "+idioma+ " | Nivel: "+nivel+
-               "\nDescripcion: " +descripcion;
+               "\nDescripcion: "+descripcion;
     }
 }
