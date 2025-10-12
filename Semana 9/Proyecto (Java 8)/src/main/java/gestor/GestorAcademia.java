@@ -1361,6 +1361,19 @@ private void validarTodasLasEntidades() {
     System.out.println("Entidades válidas: " + validas);
     System.out.println("Entidades inválidas: " + invalidas);
     System.out.println("Total: " + todasLasEntidades.size());
+    if (!invalidosPorTipo.isEmpty()) {
+        System.out.println("\n🔍 Detalle de entidades inválidas por tipo:");
+        for (Map.Entry<String, Integer> entry : invalidosPorTipo.entrySet()) {
+            System.out.println("   • " + entry.getKey() + ": " + entry.getValue() + " inválidos");
+        }
+    }
+    System.out.println("\n?ESTADÍSTICAS POR TIPO:");
+    System.out.println("Estudiantes: " + estudiantes.size());
+    System.out.println("Profesores: " + profesores.size());
+    System.out.println("Cursos: " + cursos.size());
+    System.out.println("Niveles de Idioma: " + nivelesIdioma.size());
+    System.out.println("Matrículas: " + matriculas.size());
+    System.out.println("Calificaciones: " + calificaciones.size());
 }
 private void mostrarTodasLasEntidades() {
     System.out.println("\n=== INFORMACIÓN GENERAL DEL SISTEMA ===");
