@@ -1679,7 +1679,7 @@ private void menuBusquedaExterna(){
         System.out.println("4. Búsqueda en Todos los Archivos");
         System.out.println("0. Volver al menú principal");
         System.out.print("Seleccione una opción: ");
-        opcion = Integer.parseInt(scanner.nextLine());
+        opcion=Integer.parseInt(scanner.nextLine());
 
         switch (opcion) {
             case 1:
@@ -1733,7 +1733,7 @@ private void buscarEnArchivoEstudiantes(){
         System.out.println("\nRESULTADOS ENCONTRADOS EN ESTUDIANTES:");
         if(resultados.isEmpty()) {
             System.out.println("No se encontraron estudiantes que coincidan con: '" + termino + "'");
-        } else{
+        }else{
             for (int i = 0; i < resultados.size(); i++) {
                 String[] datos = resultados.get(i).split(",");
                 System.out.println("\nESTUDIANTE #" + (i + 1) + ":");
@@ -1795,7 +1795,7 @@ private void buscarEnArchivoProfesores(){
         if (resultados.isEmpty()) {
             System.out.println("No se encontraron profesores que coincidan con: '" + termino + "'");
         } else {
-            for (int i = 0; i < resultados.size(); i++) {
+            for (int i = 0; i<resultados.size(); i++){
                 String[] datos = resultados.get(i).split(",");
                 System.out.println("\nPROFESOR #" + (i + 1) + ":");
                 System.out.println("   DNI: " + (datos.length > 0 ? datos[0] : "N/A"));
@@ -1817,7 +1817,7 @@ private void buscarEnArchivoProfesores(){
     }
 }
 private void buscarEnArchivoCursos(){
-    try {
+    try{
         System.out.print("Ingrese término de búsqueda: ");
         String termino = scanner.nextLine();
         System.out.println("\n=== OPCIONES DE BÚSQUEDA EN CURSOS ===");
@@ -1832,7 +1832,7 @@ private void buscarEnArchivoCursos(){
         long startTime = System.currentTimeMillis();
         List<String> resultados;
         
-        if (opcionBusqueda == 1) {
+        if (opcionBusqueda ==1){
             // Búsqueda en todas las columnas
             resultados = BusquedaExterna.buscarEnArchivoMultiple("cursos.txt", termino);
         }else{
@@ -1843,7 +1843,7 @@ private void buscarEnArchivoCursos(){
         long endTime=System.currentTimeMillis();
         // Mostrar resultados formateados
         System.out.println("\nRESULTADOS ENCONTRADOS EN CURSOS:");
-        if (resultados.isEmpty()) {
+        if (resultados.isEmpty()){
             System.out.println("No se encontraron cursos que coincidan con: '" + termino + "'");
         } else {
             for (int i = 0; i < resultados.size(); i++) {
@@ -1892,14 +1892,14 @@ private void buscarEnTodosLosArchivos(){
                 System.out.println(datos[1] + " " + datos[2] + " (DNI: " + datos[0] + ")");
             }
         }
-        totalResultados += resultadosEstudiantes.size();
+        totalResultados+=resultadosEstudiantes.size();
         // Buscar en profesores
         System.out.println("\n--- PROFESORES.TXT ---");
         List<String> resultadosProfesores =BusquedaExterna.buscarEnArchivoMultiple("profesores.txt", termino);
-        if (resultadosProfesores.isEmpty()) {
+        if(resultadosProfesores.isEmpty()){
             System.out.println("No se encontraron profesores");
-        } else {
-            for (String resultado : resultadosProfesores) {
+        }else{
+            for (String resultado : resultadosProfesores){
                 String[] datos = resultado.split(",");
                 System.out.println(datos[1] + " " + datos[2] + " - " + datos[6] + " (DNI: " + datos[0] + ")");
             }
@@ -1907,8 +1907,8 @@ private void buscarEnTodosLosArchivos(){
         totalResultados += resultadosProfesores.size();
         // Buscar en cursos
         System.out.println("\n--- CURSOS.TXT ---");
-        List<String> resultadosCursos = BusquedaExterna.buscarEnArchivoMultiple("cursos.txt", termino);
-        if (resultadosCursos.isEmpty()) {
+        List<String> resultadosCursos=BusquedaExterna.buscarEnArchivoMultiple("cursos.txt", termino);
+        if (resultadosCursos.isEmpty()){
             System.out.println("No se encontraron cursos");
         } else {
             for (String resultado : resultadosCursos) {
@@ -1916,13 +1916,13 @@ private void buscarEnTodosLosArchivos(){
                 System.out.println(datos[1] + " (" + datos[0] + ") - " + datos[2] + " " + datos[3]);
             }
         }
-        totalResultados +=resultadosCursos.size();
+        totalResultados+=resultadosCursos.size();
         long endTime= System.currentTimeMillis();
         
         System.out.println("\nRESUMEN DE BÚSQUEDA GLOBAL:");
-        System.out.println("Tiempo total de búsqueda: " + (endTime - startTime) + " ms");
-        System.out.println("Estudiantes encontrados: " +resultadosEstudiantes.size());
-        System.out.println("Profesores encontrados: " +resultadosProfesores.size());
+        System.out.println("Tiempo total de búsqueda: "+ (endTime - startTime) + " ms");
+        System.out.println("Estudiantes encontrados: "+resultadosEstudiantes.size());
+        System.out.println("Profesores encontrados: "+resultadosProfesores.size());
         System.out.println("Cursos encontrados: " + resultadosCursos.size());
         System.out.println("Total general de resultados: " + totalResultados);
         
