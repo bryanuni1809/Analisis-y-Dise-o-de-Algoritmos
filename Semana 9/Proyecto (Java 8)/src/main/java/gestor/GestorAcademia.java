@@ -25,6 +25,7 @@ import interfaces.IEntidad;
 import interfaces.IValidable;
 import java.io.File;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import util.BusquedaExterna;
@@ -42,6 +43,10 @@ public class GestorAcademia{
     private final ArrayList<Matricula> matriculas = new ArrayList<>();
     private final ArrayList<Calificacion> calificaciones = new ArrayList<>();
     private final Map<String, IdiomaNivel> nivelesIdioma = new HashMap<>();
+    private Map<String, LinkedList<Estudiante>> estudiantesPorNivel;
+    private Map<String, LinkedList<Estudiante>> estudiantesPorEdad;
+    private Map<String, LinkedList<String>> indicePorNombre; // nombre -> lista de DNI's
+    private Map<String, LinkedList<String>> indicePorCurso;
     
     public GestorAcademia() {
     cargarEstudiantes();
@@ -50,6 +55,8 @@ public class GestorAcademia{
     cargarMatriculas();
     cargarCalificaciones();
     cargarNivelesIdioma();
+    inicializarMultilistas();
+    inicializarListasInvertidas();
     }
     private void cargarCursos() {
     try (BufferedReader br = new BufferedReader(new FileReader("cursos.txt"))) {
@@ -169,6 +176,7 @@ public class GestorAcademia{
         System.out.println("9. Búsqueda Externa");
         System.out.println("10. Validar Todas las Entidades");
         System.out.println("11. Mostrar Todas las Entidades");
+        System.out.println("12. Sistema de Multilistas");
         System.out.println("0. Salir");
         System.out.print("Seleccione una opcion: ");
         opcion = Integer.parseInt(scanner.nextLine());
@@ -206,6 +214,9 @@ public class GestorAcademia{
                 break;
             case 11:
                 mostrarTodasLasEntidades();
+                break;
+            case 12:
+                menuMultilistas();
                 break;
             case 0:
                 System.out.println("Cerrando sesion...");
@@ -1726,10 +1737,7 @@ private void buscarEnArchivoEstudiantes(){
             int columna = Integer.parseInt(scanner.nextLine());
             resultados = BusquedaExterna.buscarEnArchivo("estudiantes.txt", termino, columna);
         }
-        
         long endTime = System.currentTimeMillis();
-        
-        // Mostrar resultados formateados
         System.out.println("\nRESULTADOS ENCONTRADOS EN ESTUDIANTES:");
         if(resultados.isEmpty()) {
             System.out.println("No se encontraron estudiantes que coincidan con: '" + termino + "'");
@@ -1745,8 +1753,6 @@ private void buscarEnArchivoEstudiantes(){
                 System.out.println("   Correo: " + (datos.length > 5 ? datos[5] : "N/A"));
                 System.out.println("   Fecha Nacimiento: " + (datos.length > 6 ? datos[6] : "N/A"));
                 System.out.println("   Nivel Estudios: " + (datos.length > 7 ? datos[7] : "N/A"));
-                
-                // Calcular edad si tenemos fecha de nacimiento
                 if(datos.length >6 && !datos[6].isEmpty()) {
                     try{
                         int edad = Validador.calcularEdad(datos[6]);
@@ -1790,7 +1796,6 @@ private void buscarEnArchivoProfesores(){
             resultados =BusquedaExterna.buscarEnArchivo("profesores.txt", termino, columna);
         }
         long endTime=System.currentTimeMillis();
-        // Mostrar resultados formateados
         System.out.println("\nRESULTADOS ENCONTRADOS EN PROFESORES:");
         if (resultados.isEmpty()) {
             System.out.println("No se encontraron profesores que coincidan con: '" + termino + "'");
@@ -1833,7 +1838,6 @@ private void buscarEnArchivoCursos(){
         List<String> resultados;
         
         if (opcionBusqueda ==1){
-            // Búsqueda en todas las columnas
             resultados = BusquedaExterna.buscarEnArchivoMultiple("cursos.txt", termino);
         }else{
             System.out.print("Número de columna: ");
@@ -1841,7 +1845,6 @@ private void buscarEnArchivoCursos(){
             resultados = BusquedaExterna.buscarEnArchivo("cursos.txt", termino, columna);
         }
         long endTime=System.currentTimeMillis();
-        // Mostrar resultados formateados
         System.out.println("\nRESULTADOS ENCONTRADOS EN CURSOS:");
         if (resultados.isEmpty()){
             System.out.println("No se encontraron cursos que coincidan con: '" + termino + "'");
@@ -1893,7 +1896,6 @@ private void buscarEnTodosLosArchivos(){
             }
         }
         totalResultados+=resultadosEstudiantes.size();
-        // Buscar en profesores
         System.out.println("\n--- PROFESORES.TXT ---");
         List<String> resultadosProfesores =BusquedaExterna.buscarEnArchivoMultiple("profesores.txt", termino);
         if(resultadosProfesores.isEmpty()){
@@ -1905,7 +1907,6 @@ private void buscarEnTodosLosArchivos(){
             }
         }
         totalResultados += resultadosProfesores.size();
-        // Buscar en cursos
         System.out.println("\n--- CURSOS.TXT ---");
         List<String> resultadosCursos=BusquedaExterna.buscarEnArchivoMultiple("cursos.txt", termino);
         if (resultadosCursos.isEmpty()){
@@ -1930,6 +1931,156 @@ private void buscarEnTodosLosArchivos(){
         System.out.println("Error en búsqueda global: " +e.getMessage());
         System.out.println("Verifica que existan los archivos: estudiantes.txt, profesores.txt, cursos.txt");
     }
+}
+private void inicializarMultilistas() {
+    System.out.println("Inicializando sistema de multilistas...");
+    estudiantesPorNivel = new HashMap<>();
+    estudiantesPorEdad = new HashMap<>();
+    int contador = 0;
+    for (Estudiante e : estudiantes.values()) {
+        // Multilista por nivel de estudios
+        String nivel = e.getNivelEstudios();
+        if (nivel != null && !nivel.trim().isEmpty()) {
+            estudiantesPorNivel
+                .computeIfAbsent(nivel, k -> new LinkedList<>())
+                .add(e);
+            contador++;
+        }
+        // Multilista por rango de edad
+        try {
+            int edad = Validador.calcularEdad(e.getFechaNacimiento());
+            String rangoEdad = obtenerRangoEdad(edad);
+            estudiantesPorEdad
+                .computeIfAbsent(rangoEdad, k -> new LinkedList<>())
+                .add(e);
+        } catch(Exception ex){
+            System.out.println("Error calculando edad para: " + e.getDni());
+        }
+    }
+    System.out.println("Multilistas inicializadas: " + contador + " estudiantes procesados");
+    System.out.println("Niveles distintos: " + estudiantesPorNivel.size());
+    System.out.println("Rangos de edad: " + estudiantesPorEdad.size());
+}
+
+private String obtenerRangoEdad(int edad) {
+    if (edad <=18) return "18 o menos";
+    else if (edad <=25) return "19-25";
+    else if (edad <=35) return "26-35";
+    else if (edad <=50) return "36-50";
+    else return "51 o más";
+}
+
+private void inicializarListasInvertidas() {
+    System.out.println("Inicializando listas invertidas...");
+    
+    indicePorNombre = new HashMap<>();
+    indicePorCurso = new HashMap<>();
+    
+    int palabrasIndexadas= 0;
+    int matriculasIndexadas=0;
+    for (Estudiante e:estudiantes.values()) {
+        String nombreCompleto=(e.getNombres() + " " + e.getApellidos()).toLowerCase();
+        String[] palabras =nombreCompleto.split("\\s+"); // Dividir por espacios
+        
+        for (String palabra :palabras){
+            if (palabra.length()>2 && !palabra.equals("de") && !palabra.equals("la")) {
+                indicePorNombre
+                    .computeIfAbsent(palabra,k -> new LinkedList<>())
+                    .add(e.getDni());
+                palabrasIndexadas++;
+            }
+        }
+    }
+    for (Matricula m :matriculas){
+        String curso =m.getCodigoCurso();
+        if (curso != null && !curso.trim().isEmpty()) {
+            indicePorCurso
+                .computeIfAbsent(curso, k -> new LinkedList<>())
+                .add(m.getDniEstudiante());
+            matriculasIndexadas++;
+        }
+    }
+    
+    System.out.println("Listas invertidas inicializadas:");
+    System.out.println("Palabras indexadas en nombres: " + indicePorNombre.size());
+    System.out.println("Matrículas indexadas por curso: " + matriculasIndexadas);
+}
+public void menuMultilistas() {
+    int opcion;
+    do{
+        System.out.println("\n=== SISTEMA DE MULTILISTAS ===");
+        System.out.println("1. Buscar Estudiantes por Nivel de Estudios");
+        System.out.println("2. Buscar por Palabra en Nombre (Lista Invertida)");
+        System.out.println("3. Mostrar Estadísticas de Multilistas");
+        System.out.println("0. Volver");
+        System.out.print("Seleccione: ");
+        opcion=Integer.parseInt(scanner.nextLine());
+        
+        switch (opcion){
+            case 1: buscarPorNivelMultilista(); break;
+            case 2: buscarPorNombreInvertido(); break;
+            case 3: mostrarEstadisticasMultilistas(); break;
+        }
+    }while(opcion != 0);
+}
+
+private void buscarPorNivelMultilista() {
+    System.out.println("\n=== BUSCAR POR NIVEL (MULTILISTA) ===");
+    System.out.println("Niveles disponibles: " + estudiantesPorNivel.keySet());
+    System.out.print("Ingrese nivel: ");
+    String nivel =scanner.nextLine();
+    
+    LinkedList<Estudiante> lista =estudiantesPorNivel.get(nivel);
+    if (lista !=null && !lista.isEmpty()) {
+        System.out.println("Estudiantes en nivel '" + nivel + "': " + lista.size());
+        for (Estudiante e :lista){
+            System.out.println(e.mostrarInfo());
+        }
+    } else {
+        System.out.println("No hay estudiantes en ese nivel");
+    }
+}
+
+private void buscarPorNombreInvertido() {
+    System.out.println("\n=== BUSCAR POR NOMBRE (LISTA INVERTIDA) ===");
+    System.out.print("Ingrese palabra del nombre: ");
+    String palabra=scanner.nextLine().toLowerCase();
+    
+    long startTime=System.currentTimeMillis();
+    LinkedList<String> dnis = indicePorNombre.get(palabra);
+    
+    if(dnis != null){
+        System.out.println("Encontrados: " + dnis.size() + " estudiantes");
+        for (String dni :dnis){
+            Estudiante e = estudiantes.get(dni);
+            if (e != null){
+                System.out.println(e.mostrarInfo());
+            }
+        }
+    }else{
+        System.out.println("No se encontraron estudiantes con esa palabra");
+    }
+    
+    long endTime=System.currentTimeMillis();
+    System.out.println("Tiempo búsqueda invertida: " + (endTime - startTime) + " ms");
+}
+
+private void mostrarEstadisticasMultilistas() {
+    System.out.println("\n=== ESTADÍSTICAS MULTILISTAS ===");
+    
+    System.out.println("Estudiantes por Nivel:");
+    for (Map.Entry<String, LinkedList<Estudiante>> entry : estudiantesPorNivel.entrySet()) {
+        System.out.println(entry.getKey() + ": " + entry.getValue().size() + " estudiantes");
+    }
+    
+    System.out.println("\nÍndice Invertido por Nombre:");
+    System.out.println("Palabras indexadas: " + indicePorNombre.size());
+    int totalEntradas = indicePorNombre.values().stream().mapToInt(LinkedList::size).sum();
+    System.out.println("Total de entradas: " + totalEntradas);
+    
+    System.out.println("\nEficiencia del sistema:");
+    double factor = (double) totalEntradas / estudiantes.size();
+    System.out.println("Factor de indexación: " + String.format("%.2f", factor));
 }
 }
 
