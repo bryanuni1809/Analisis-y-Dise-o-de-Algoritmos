@@ -1978,7 +1978,7 @@ private void inicializarListasInvertidas(){
     
     int palabrasIndexadas= 0;
     int matriculasIndexadas=0;
-    for (Estudiante e:estudiantes.values()) {
+    for (Estudiante e:estudiantes.values()){
         String nombreCompleto=(e.getNombres() + " " + e.getApellidos()).toLowerCase();
         String[] palabras =nombreCompleto.split("\\s+"); // Dividir por espacios
         
@@ -2005,7 +2005,7 @@ private void inicializarListasInvertidas(){
     System.out.println("Palabras indexadas en nombres: " + indicePorNombre.size());
     System.out.println("Matrículas indexadas por curso: " + matriculasIndexadas);
 }
-public void menuMultilistas() {
+public void menuMultilistas(){
     int opcion;
     do{
         System.out.println("\n=== SISTEMA DE MULTILISTAS ===");
@@ -2016,24 +2016,24 @@ public void menuMultilistas() {
         System.out.print("Seleccione: ");
         opcion=Integer.parseInt(scanner.nextLine());
         
-        switch (opcion){
+        switch(opcion){
             case 1: buscarPorNivelMultilista(); break;
             case 2: buscarPorNombreInvertido(); break;
             case 3: mostrarEstadisticasMultilistas(); break;
         }
-    }while(opcion != 0);
+    }while(opcion !=0);
 }
 
-private void buscarPorNivelMultilista() {
+private void buscarPorNivelMultilista(){
     System.out.println("\n=== BUSCAR POR NIVEL (MULTILISTA) ===");
-    System.out.println("Niveles disponibles: " + estudiantesPorNivel.keySet());
+    System.out.println("Niveles disponibles: "+estudiantesPorNivel.keySet());
     System.out.print("Ingrese nivel: ");
-    String nivel =scanner.nextLine();
+    String nivel=scanner.nextLine();
     
-    LinkedList<Estudiante> lista =estudiantesPorNivel.get(nivel);
+    LinkedList<Estudiante> lista=estudiantesPorNivel.get(nivel);
     if (lista !=null && !lista.isEmpty()) {
-        System.out.println("Estudiantes en nivel '" + nivel + "': " + lista.size());
-        for (Estudiante e :lista){
+        System.out.println("Estudiantes en nivel '"+nivel +"': "+lista.size());
+        for (Estudiante e:lista){
             System.out.println(e.mostrarInfo());
         }
     } else {
@@ -2041,19 +2041,19 @@ private void buscarPorNivelMultilista() {
     }
 }
 
-private void buscarPorNombreInvertido() {
+private void buscarPorNombreInvertido(){
     System.out.println("\n=== BUSCAR POR NOMBRE (LISTA INVERTIDA) ===");
     System.out.print("Ingrese palabra del nombre: ");
     String palabra=scanner.nextLine().toLowerCase();
     
     long startTime=System.currentTimeMillis();
-    LinkedList<String> dnis = indicePorNombre.get(palabra);
+    LinkedList<String> dnis=indicePorNombre.get(palabra);
     
     if(dnis != null){
         System.out.println("Encontrados: " + dnis.size() + " estudiantes");
-        for (String dni :dnis){
+        for (String dni:dnis){
             Estudiante e = estudiantes.get(dni);
-            if (e != null){
+            if (e !=null){
                 System.out.println(e.mostrarInfo());
             }
         }
@@ -2065,12 +2065,12 @@ private void buscarPorNombreInvertido() {
     System.out.println("Tiempo búsqueda invertida: " + (endTime - startTime) + " ms");
 }
 
-private void mostrarEstadisticasMultilistas() {
+private void mostrarEstadisticasMultilistas(){
     System.out.println("\n=== ESTADÍSTICAS MULTILISTAS ===");
     
     System.out.println("Estudiantes por Nivel:");
-    for (Map.Entry<String, LinkedList<Estudiante>> entry : estudiantesPorNivel.entrySet()) {
-        System.out.println(entry.getKey() + ": " + entry.getValue().size() + " estudiantes");
+    for (Map.Entry<String, LinkedList<Estudiante>> entry:estudiantesPorNivel.entrySet()) {
+        System.out.println(entry.getKey() + ": " +entry.getValue().size() +" estudiantes");
     }
     
     System.out.println("\nÍndice Invertido por Nombre:");
