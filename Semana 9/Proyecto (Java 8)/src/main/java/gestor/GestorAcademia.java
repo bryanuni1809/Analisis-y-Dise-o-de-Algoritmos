@@ -1932,15 +1932,15 @@ private void buscarEnTodosLosArchivos(){
         System.out.println("Verifica que existan los archivos: estudiantes.txt, profesores.txt, cursos.txt");
     }
 }
-private void inicializarMultilistas() {
+private void inicializarMultilistas(){
     System.out.println("Inicializando sistema de multilistas...");
-    estudiantesPorNivel = new HashMap<>();
-    estudiantesPorEdad = new HashMap<>();
-    int contador = 0;
-    for (Estudiante e : estudiantes.values()) {
+    estudiantesPorNivel=new HashMap<>();
+    estudiantesPorEdad=new HashMap<>();
+    int contador=0;
+    for(Estudiante e:estudiantes.values()){
         // Multilista por nivel de estudios
         String nivel = e.getNivelEstudios();
-        if (nivel != null && !nivel.trim().isEmpty()) {
+        if (nivel!= null && !nivel.trim().isEmpty()) {
             estudiantesPorNivel
                 .computeIfAbsent(nivel, k -> new LinkedList<>())
                 .add(e);
@@ -1962,19 +1962,19 @@ private void inicializarMultilistas() {
     System.out.println("Rangos de edad: " + estudiantesPorEdad.size());
 }
 
-private String obtenerRangoEdad(int edad) {
-    if (edad <=18) return "18 o menos";
-    else if (edad <=25) return "19-25";
-    else if (edad <=35) return "26-35";
-    else if (edad <=50) return "36-50";
+private String obtenerRangoEdad(int edad){
+    if (edad<=18)return "18 o menos";
+    else if (edad<=25)return "19-25";
+    else if (edad<=35)return "26-35";
+    else if (edad<=50)return "36-50";
     else return "51 o más";
 }
 
-private void inicializarListasInvertidas() {
+private void inicializarListasInvertidas(){
     System.out.println("Inicializando listas invertidas...");
     
-    indicePorNombre = new HashMap<>();
-    indicePorCurso = new HashMap<>();
+    indicePorNombre=new HashMap<>();
+    indicePorCurso=new HashMap<>();
     
     int palabrasIndexadas= 0;
     int matriculasIndexadas=0;
@@ -1982,7 +1982,7 @@ private void inicializarListasInvertidas() {
         String nombreCompleto=(e.getNombres() + " " + e.getApellidos()).toLowerCase();
         String[] palabras =nombreCompleto.split("\\s+"); // Dividir por espacios
         
-        for (String palabra :palabras){
+        for (String palabra:palabras){
             if (palabra.length()>2 && !palabra.equals("de") && !palabra.equals("la")) {
                 indicePorNombre
                     .computeIfAbsent(palabra,k -> new LinkedList<>())
