@@ -1654,7 +1654,7 @@ private void busquedaAvanzada(){
     int resultados =0;
     System.out.println("\n--- ESTUDIANTES ---");
     for (Estudiante e : estudiantes.values()) {
-        String info = (e.getDni() + " " + e.getNombres() + " " + e.getApellidos() + " " + e.getNivelEstudios()).toLowerCase();
+        String info = (e.getDni() + " " +e.getNombres()+ " " +e.getApellidos() + " " + e.getNivelEstudios()).toLowerCase();
         if (info.contains(termino)) {
             System.out.println(e.mostrarInfo());
             resultados++;
@@ -1662,7 +1662,7 @@ private void busquedaAvanzada(){
     }
     System.out.println("\n--- PROFESORES ---");
     for (Profesor p : profesores.values()) {
-        String info = (p.getDni() + " " + p.getNombres() + " " + p.getApellidos() + " " + p.getEspecialidad()).toLowerCase();
+        String info = (p.getDni() + " "+p.getNombres()+ " " + p.getApellidos() + " " + p.getEspecialidad()).toLowerCase();
         if (info.contains(termino)) {
             System.out.println( p.mostrarInfo());
             resultados++;
@@ -1692,7 +1692,7 @@ private void menuBusquedaExterna(){
         System.out.print("Seleccione una opción: ");
         opcion=Integer.parseInt(scanner.nextLine());
 
-        switch (opcion) {
+        switch(opcion){
             case 1:
                 buscarEnArchivoEstudiantes();
                 break;
@@ -1711,7 +1711,7 @@ private void menuBusquedaExterna(){
             default:
                 System.out.println("Opción inválida.");
         }
-    } while (opcion != 0);
+    }while(opcion != 0);
 }
 private void buscarEnArchivoEstudiantes(){
     try{
@@ -1727,22 +1727,22 @@ private void buscarEnArchivoEstudiantes(){
         System.out.println("0 = DNI | 1 = Nombres | 2 = Apellidos | 3 = Dirección");
         System.out.println("4 = Teléfono | 5 = Correo | 6 = Fecha Nacimiento | 7 = Nivel Estudios");
         
-        long startTime =System.currentTimeMillis();
+        long startTime=System.currentTimeMillis();
         List<String> resultados;
         
         if(opcionBusqueda == 1){
             resultados = BusquedaExterna.buscarEnArchivoMultiple("estudiantes.txt", termino);
         }else{
             System.out.print("Número de columna: ");
-            int columna = Integer.parseInt(scanner.nextLine());
-            resultados = BusquedaExterna.buscarEnArchivo("estudiantes.txt", termino, columna);
+            int columna=Integer.parseInt(scanner.nextLine());
+            resultados=BusquedaExterna.buscarEnArchivo("estudiantes.txt", termino, columna);
         }
-        long endTime = System.currentTimeMillis();
+        long endTime=System.currentTimeMillis();
         System.out.println("\nRESULTADOS ENCONTRADOS EN ESTUDIANTES:");
-        if(resultados.isEmpty()) {
+        if(resultados.isEmpty()){
             System.out.println("No se encontraron estudiantes que coincidan con: '" + termino + "'");
         }else{
-            for (int i = 0; i < resultados.size(); i++) {
+            for (int i=0;i < resultados.size();i++){
                 String[] datos = resultados.get(i).split(",");
                 System.out.println("\nESTUDIANTE #" + (i + 1) + ":");
                 System.out.println("   DNI: " + (datos.length > 0 ? datos[0] : "N/A"));
@@ -1767,7 +1767,7 @@ private void buscarEnArchivoEstudiantes(){
         
     }catch(IOException e){
         System.out.println("Error al buscar en archivo de estudiantes: " + e.getMessage());
-    } catch(NumberFormatException e) {
+    } catch(NumberFormatException e){
         System.out.println("Error: Debe ingresar un número válido para la columna");
     }
 }
