@@ -1788,20 +1788,20 @@ private void buscarEnArchivoProfesores(){
         long startTime =System.currentTimeMillis();
         List<String> resultados;
         
-        if (opcionBusqueda== 1){
+        if(opcionBusqueda== 1){
             resultados = BusquedaExterna.buscarEnArchivoMultiple("profesores.txt", termino);
-        } else {
+        }else{
             System.out.print("Número de columna: ");
             int columna =Integer.parseInt(scanner.nextLine());
             resultados =BusquedaExterna.buscarEnArchivo("profesores.txt", termino, columna);
         }
         long endTime=System.currentTimeMillis();
         System.out.println("\nRESULTADOS ENCONTRADOS EN PROFESORES:");
-        if (resultados.isEmpty()) {
+        if(resultados.isEmpty()){
             System.out.println("No se encontraron profesores que coincidan con: '" + termino + "'");
-        } else {
+        }else{
             for (int i = 0; i<resultados.size(); i++){
-                String[] datos = resultados.get(i).split(",");
+                String[] datos=resultados.get(i).split(",");
                 System.out.println("\nPROFESOR #" + (i + 1) + ":");
                 System.out.println("   DNI: " + (datos.length > 0 ? datos[0] : "N/A"));
                 System.out.println("   Nombres: " + (datos.length > 1 ? datos[1] : "N/A"));
@@ -1837,7 +1837,7 @@ private void buscarEnArchivoCursos(){
         long startTime = System.currentTimeMillis();
         List<String> resultados;
         
-        if (opcionBusqueda ==1){
+        if(opcionBusqueda ==1){
             resultados = BusquedaExterna.buscarEnArchivoMultiple("cursos.txt", termino);
         }else{
             System.out.print("Número de columna: ");
@@ -1848,9 +1848,9 @@ private void buscarEnArchivoCursos(){
         System.out.println("\nRESULTADOS ENCONTRADOS EN CURSOS:");
         if (resultados.isEmpty()){
             System.out.println("No se encontraron cursos que coincidan con: '" + termino + "'");
-        } else {
-            for (int i = 0; i < resultados.size(); i++) {
-                String[] datos = resultados.get(i).split(",");
+        }else{
+            for(int i=0;i < resultados.size(); i++){
+                String[] datos=resultados.get(i).split(",");
                 System.out.println("\nCURSO #" + (i + 1) + ":");
                 System.out.println("   Código: " + (datos.length > 0 ? datos[0] : "N/A"));
                 System.out.println("   Nombre: " + (datos.length > 1 ? datos[1] : "N/A"));
@@ -1861,7 +1861,7 @@ private void buscarEnArchivoCursos(){
                 System.out.println("   Duración: " + (datos.length > 6 ? datos[6] : "N/A") + " semanas");
                 System.out.println("   Capacidad: " + (datos.length > 7 ? datos[7] : "N/A") + " estudiantes");
                 System.out.println("   Precio: S/" + (datos.length > 8 ? datos[8] : "N/A"));
-                if (datos.length > 9) {
+                if(datos.length > 9){
                     System.out.println("   Observaciones: " + datos[9]);
                 }
             }
@@ -1872,12 +1872,12 @@ private void buscarEnArchivoCursos(){
     }catch (IOException e){
         System.out.println("Error al buscar en archivo de cursos: " + e.getMessage());
         System.out.println("Asegúrate de que el archivo 'cursos.txt' exista y tenga datos");
-    } catch (NumberFormatException e) {
+    }catch (NumberFormatException e){
         System.out.println("Error: Debe ingresar un número válido para la columna");
     }
 }
 private void buscarEnTodosLosArchivos(){
-    try {
+    try{
         System.out.print("Ingrese término de búsqueda global: ");
         String termino=scanner.nextLine();
         
