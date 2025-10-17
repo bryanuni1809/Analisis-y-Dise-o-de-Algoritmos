@@ -1505,15 +1505,15 @@ private void buscarProfesoresInterna() {
     int criterio = Integer.parseInt(scanner.nextLine());
     
     System.out.print("Ingrese término de búsqueda: ");
-    String termino = scanner.nextLine().toLowerCase();
+    String termino=scanner.nextLine().toLowerCase();
     
-    long startTime = System.currentTimeMillis();
-    int resultados = 0;
+    long startTime=System.currentTimeMillis();
+    int resultados=0;
     
-    switch (criterio) {
+    switch(criterio){
         case 1:
             Profesor profesor = profesores.get(termino);
-            if (profesor != null) {
+            if(profesor !=null){
                 System.out.println("ENCONTRADO: " +profesor.mostrarInfo());
                 resultados++;
             }
@@ -1521,7 +1521,7 @@ private void buscarProfesoresInterna() {
             
         case 2:
             for (Profesor p : profesores.values()) {
-                String infoCompleta = (p.getNombres() + " " +p.getApellidos() + " " + p.getEspecialidad()).toLowerCase();
+                String infoCompleta = (p.getNombres() +" " +p.getApellidos()+ " " + p.getEspecialidad()).toLowerCase();
                 if (infoCompleta.contains(termino)) {
                     System.out.println(p.mostrarInfo());
                     resultados++;
@@ -1540,7 +1540,7 @@ private void buscarProfesoresInterna() {
             break;
         case 4:
             System.out.print("Ingrese años de experiencia (mínimo): ");
-            try {
+            try{
                 int experienciaMin = Integer.parseInt(scanner.nextLine());
                 for (Profesor p : profesores.values()) {
                     if (p.getExperiencia() >= experienciaMin) {
@@ -1548,7 +1548,7 @@ private void buscarProfesoresInterna() {
                         resultados++;
                     }
                 }
-            }catch (NumberFormatException e) {
+            }catch(NumberFormatException e){
                 System.out.println("Error: Debe ingresar un número válido");
             }
             break;
@@ -1558,8 +1558,8 @@ private void buscarProfesoresInterna() {
             return;
     }
     long endTime = System.currentTimeMillis();
-    System.out.println("\nBúsqueda completada en " + (endTime - startTime) + " ms");
-    System.out.println("Resultados encontrados: " + resultados);
+    System.out.println("\nBúsqueda completada en " +(endTime - startTime) + " ms");
+    System.out.println("Resultados encontrados: " +resultados);
 }
     private void buscarCursosInterna() {
     System.out.println("\n=== BÚSQUEDA DE CURSOS ===");
@@ -1569,29 +1569,26 @@ private void buscarProfesoresInterna() {
     System.out.println("4. Por Nivel");
     System.out.println("5. Por Profesor");
     System.out.print("Seleccione criterio: ");
-    int criterio = Integer.parseInt(scanner.nextLine());
-    
+    int criterio=Integer.parseInt(scanner.nextLine());
     System.out.print("Ingrese término de búsqueda: ");
-    String termino = scanner.nextLine().toLowerCase();
-    
-    long startTime = System.currentTimeMillis();
-    int resultados = 0;
-    
-    switch (criterio) {
+    String termino=scanner.nextLine().toLowerCase();  
+    long startTime=System.currentTimeMillis();
+    int resultados=0;
+    switch(criterio){
         case 1:
             // Búsqueda exacta por código
-            Curso curso = cursos.get(termino.toUpperCase());
+            Curso curso=cursos.get(termino.toUpperCase());
             if(curso != null) {
-                System.out.println("ENCONTRADO: " + curso.mostrarInfo());
+                System.out.println("ENCONTRADO: "+curso.mostrarInfo());
                 resultados++;
-            } else{
-                System.out.println("No se encontró ningún curso con el código: " + termino);
+            }else{
+                System.out.println("No se encontró ningún curso con el código: "+termino);
             }
             break;
         case 2:
             // Búsqueda parcial por nombre
-            for(Curso c : cursos.values()) {
-                if(c.getNombre().toLowerCase().contains(termino)) {
+            for(Curso c : cursos.values()){
+                if(c.getNombre().toLowerCase().contains(termino)){
                     System.out.println(c.mostrarInfo());
                     resultados++;
                 }
@@ -1599,8 +1596,8 @@ private void buscarProfesoresInterna() {
             break;
         case 3:
             // Búsqueda por idioma
-            for (Curso c : cursos.values()) {
-                if (c.getIdioma().toLowerCase().contains(termino)) {
+            for (Curso c:cursos.values()){
+                if (c.getIdioma().toLowerCase().contains(termino)){
                     System.out.println(c.mostrarInfo());
                     resultados++;
                 }
@@ -1608,8 +1605,8 @@ private void buscarProfesoresInterna() {
             break;
         case 4:
             // Búsqueda por nivel
-            for(Curso c : cursos.values()) {
-                if(c.getNivel().toLowerCase().contains(termino)) {
+            for(Curso c:cursos.values()){
+                if(c.getNivel().toLowerCase().contains(termino)){
                     System.out.println(c.mostrarInfo());
                     resultados++;
                 }
@@ -1617,15 +1614,15 @@ private void buscarProfesoresInterna() {
             break;
         case 5:
             // Búsqueda por profesor (DNI o nombre)
-            for(Curso c : cursos.values()) {
+            for(Curso c : cursos.values()){
                 // Buscar por DNI del profesor
                 if(c.getProfesorDni().toLowerCase().contains(termino)){
                     System.out.println(c.mostrarInfo());
                     resultados++;
                 }else{
                     // Buscar por nombre del profesor si está disponible
-                    Profesor profesor = profesores.get(c.getProfesorDni());
-                    if (profesor != null) {
+                    Profesor profesor=profesores.get(c.getProfesorDni());
+                    if (profesor !=null){
                         String nombreProfesor = (profesor.getNombres() + " " + profesor.getApellidos()).toLowerCase();
                         if (nombreProfesor.contains(termino)) {
                             System.out.println(c.mostrarInfo());
@@ -1639,22 +1636,22 @@ private void buscarProfesoresInterna() {
             System.out.println("Criterio inválido.");
             return;
     }
-    long endTime = System.currentTimeMillis();
-    System.out.println("\nBúsqueda completada en " + (endTime - startTime) + " ms");
-    System.out.println("Resultados encontrados: " + resultados);
-    if(resultados == 0 && criterio != 1){
+    long endTime=System.currentTimeMillis();
+    System.out.println("\nBúsqueda completada en "+(endTime-startTime)+" ms");
+    System.out.println("Resultados encontrados: "+resultados);
+    if(resultados==0 && criterio != 1){
         System.out.println("Sugerencia: Intente con términos más generales o verifique la ortografía");
     }
 }
 private void busquedaAvanzada(){
     System.out.println("\n=== BÚSQUEDA AVANZADA ===");
     System.out.print("Ingrese término de búsqueda (buscará en todas las entidades): ");
-    String termino = scanner.nextLine().toLowerCase();
+    String termino=scanner.nextLine().toLowerCase();
     long startTime=System.currentTimeMillis();
-    int resultados =0;
+    int resultados=0;
     System.out.println("\n--- ESTUDIANTES ---");
-    for (Estudiante e : estudiantes.values()) {
-        String info = (e.getDni() + " " +e.getNombres()+ " " +e.getApellidos() + " " + e.getNivelEstudios()).toLowerCase();
+    for (Estudiante e : estudiantes.values()){
+        String info = (e.getDni() + " "+e.getNombres()+" " +e.getApellidos() + " " + e.getNivelEstudios()).toLowerCase();
         if (info.contains(termino)) {
             System.out.println(e.mostrarInfo());
             resultados++;
