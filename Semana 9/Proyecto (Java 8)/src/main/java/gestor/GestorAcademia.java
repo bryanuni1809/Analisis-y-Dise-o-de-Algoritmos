@@ -1461,48 +1461,45 @@ private void buscarEstudiantesInterna() {
     switch (criterio){
         case 1:
             // Búsqueda exacta por DNI
-            Estudiante estudiante = estudiantes.get(termino);
-            if (estudiante != null) {
-                System.out.println("ENCONTRADO: " + estudiante.mostrarInfo());
+            Estudiante estudiante=estudiantes.get(termino);
+            if (estudiante != null){
+                System.out.println("ENCONTRADO: "+estudiante.mostrarInfo());
                 resultados++;
             }
             break;
-            
         case 2:
             // Búsqueda parcial por nombre/apellido
-            for (Estudiante e : estudiantes.values()) {
-                String nombreCompleto = (e.getNombres() + " " + e.getApellidos()).toLowerCase();
-                if (nombreCompleto.contains(termino)) {
+            for (Estudiante e:estudiantes.values()){
+                String nombreCompleto=(e.getNombres()+" " + e.getApellidos()).toLowerCase();
+                if (nombreCompleto.contains(termino)){
                     System.out.println( e.mostrarInfo());
                     resultados++;
                 }
             }
-            break;
-            
+            break; 
         case 3:
             // Búsqueda por nivel de estudios
-            for (Estudiante e : estudiantes.values()) {
-                if (e.getNivelEstudios().toLowerCase().contains(termino)) {
+            for (Estudiante e : estudiantes.values()){
+                if (e.getNivelEstudios().toLowerCase().contains(termino)){
                     System.out.println( e.mostrarInfo());
                     resultados++;
                 }
             }
             break;
     }
-    
-    long endTime = System.currentTimeMillis();
-    System.out.println("\nBúsqueda completada en " + (endTime - startTime) + " ms");
-    System.out.println("Resultados encontrados: " + resultados);
+    long endTime=System.currentTimeMillis();
+    System.out.println("\nBúsqueda completada en "+(endTime - startTime)+" ms");
+    System.out.println("Resultados encontrados: "+resultados);
 }
 
-private void buscarProfesoresInterna() {
+private void buscarProfesoresInterna(){
     System.out.println("\n=== BÚSQUEDA DE PROFESORES ===");
     System.out.println("1. Por DNI");
     System.out.println("2. Por Nombre/Especialidad");
     System.out.println("3. Por Especialidad");
     System.out.println("4. Por Experiencia (años)");
     System.out.print("Seleccione criterio: ");
-    int criterio = Integer.parseInt(scanner.nextLine());
+    int criterio=Integer.parseInt(scanner.nextLine());
     
     System.out.print("Ingrese término de búsqueda: ");
     String termino=scanner.nextLine().toLowerCase();
