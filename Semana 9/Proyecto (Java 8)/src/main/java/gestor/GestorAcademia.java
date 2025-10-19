@@ -1354,25 +1354,25 @@ private double leerDoubleValidado(String mensaje,double min,double max) {
 //polimorfismo
 private void validarTodasLasEntidades(){
     System.out.println("\n=== VALIDACIÓN GENERAL DE ENTIDADES ===");
-    List<IValidable> todasLasEntidades = new ArrayList<>();
+    List<IValidable> todasLasEntidades=new ArrayList<>();
     todasLasEntidades.addAll(estudiantes.values());
     todasLasEntidades.addAll(profesores.values());
     todasLasEntidades.addAll(cursos.values());
     todasLasEntidades.addAll(nivelesIdioma.values());
     todasLasEntidades.addAll(matriculas);
     todasLasEntidades.addAll(calificaciones);
-    int validas=0, invalidas=0;
-    Map<String, Integer> invalidosPorTipo = new HashMap<>();
-    for(IValidable entidad : todasLasEntidades) {
-        if (entidad.validar()) {
+    int validas=0,invalidas=0;
+    Map<String,Integer>invalidosPorTipo=new HashMap<>();
+    for(IValidable entidad:todasLasEntidades){
+        if(entidad.validar()){
             validas++;
-        } else {
+        }else{
             invalidas++;
-            if (entidad instanceof IEntidad) {
-                IEntidad entidadConTipo = (IEntidad) entidad;
+            if (entidad instanceof IEntidad){
+                IEntidad entidadConTipo=(IEntidad) entidad;
                 String tipo = entidadConTipo.getTipo();
-                System.out.println("" + tipo + " inválido: " + entidad.getMensajeError());
-                invalidosPorTipo.put(tipo, invalidosPorTipo.getOrDefault(tipo, 0) + 1);
+                System.out.println("" +tipo+" inválido: "+entidad.getMensajeError());
+                invalidosPorTipo.put(tipo,invalidosPorTipo.getOrDefault(tipo,0)+ 1);
             }
         }
     }
@@ -1380,25 +1380,25 @@ private void validarTodasLasEntidades(){
     System.out.println("\nResumen de validación:");
     System.out.println("Entidades válidas: "+validas);
     System.out.println("Entidades inválidas: " +invalidas);
-    System.out.println("Total: " +todasLasEntidades.size());
-    if (!invalidosPorTipo.isEmpty()) {
+    System.out.println("Total: "+todasLasEntidades.size());
+    if (!invalidosPorTipo.isEmpty()){
         System.out.println("\nDetalle de entidades inválidas por tipo:");
-        for (Map.Entry<String, Integer> entry : invalidosPorTipo.entrySet()) {
-            System.out.println("   • " + entry.getKey()+ ": " + entry.getValue() + " inválidos");
+        for (Map.Entry<String, Integer> entry:invalidosPorTipo.entrySet()){
+            System.out.println("   • "+entry.getKey()+ ": "+entry.getValue()+" inválidos");
         }
     }
     System.out.println("\n?ESTADÍSTICAS POR TIPO:");
-    System.out.println("Estudiantes: " +estudiantes.size());
-    System.out.println("Profesores: " +profesores.size());
-    System.out.println("Cursos: " +cursos.size());
-    System.out.println("Niveles de Idioma: " + nivelesIdioma.size());
-    System.out.println("Matrículas: " + matriculas.size());
-    System.out.println("Calificaciones: " +calificaciones.size());
+    System.out.println("Estudiantes: "+estudiantes.size());
+    System.out.println("Profesores: "+profesores.size());
+    System.out.println("Cursos: "+cursos.size());
+    System.out.println("Niveles de Idioma: "+nivelesIdioma.size());
+    System.out.println("Matrículas: "+matriculas.size());
+    System.out.println("Calificaciones: "+calificaciones.size());
 }
 private void mostrarTodasLasEntidades(){
     System.out.println("\n=== INFORMACIÓN GENERAL DEL SISTEMA ===");
     
-    List<IEntidad> todasLasEntidades = new ArrayList<>();
+    List<IEntidad> todasLasEntidades=new ArrayList<>();
     todasLasEntidades.addAll(estudiantes.values());
     todasLasEntidades.addAll(profesores.values());
     todasLasEntidades.addAll(cursos.values());
@@ -1406,12 +1406,11 @@ private void mostrarTodasLasEntidades(){
     todasLasEntidades.addAll(matriculas);
     todasLasEntidades.addAll(calificaciones);
     
-    for (IEntidad entidad : todasLasEntidades) {
-        System.out.println("[" + entidad.getTipo() + "] " + entidad.mostrarInfo());
+    for (IEntidad entidad:todasLasEntidades){
+        System.out.println("["+entidad.getTipo()+"] "+entidad.mostrarInfo());
         System.out.println("------------------------------------------------------");
     }
-    
-    System.out.println("Total de entidades en el sistema: " + todasLasEntidades.size());
+    System.out.println("Total de entidades en el sistema: "+todasLasEntidades.size());
 }
 private void menuBusquedaInterna(){
     int opcion;
@@ -1444,10 +1443,10 @@ private void menuBusquedaInterna(){
             default:
                 System.out.println("Opción inválida.");
         }
-    } while (opcion != 0);
+    } while (opcion!=0);
 }
 
-private void buscarEstudiantesInterna() {
+private void buscarEstudiantesInterna(){
     System.out.println("\n=== BÚSQUEDA DE ESTUDIANTES ===");
     System.out.println("1. Por DNI (Búsqueda Exacta)");
     System.out.println("2. Por Nombre/Apellido (Búsqueda Parcial)");
@@ -1455,7 +1454,7 @@ private void buscarEstudiantesInterna() {
     System.out.print("Seleccione criterio: ");
     int criterio=Integer.parseInt(scanner.nextLine());
     System.out.print("Ingrese término de búsqueda: ");
-    String termino = scanner.nextLine().toLowerCase();
+    String termino=scanner.nextLine().toLowerCase();
     long startTime=System.currentTimeMillis();
     int resultados=0;
     switch (criterio){
