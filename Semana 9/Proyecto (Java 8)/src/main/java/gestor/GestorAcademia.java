@@ -1296,57 +1296,56 @@ private String leerEmail() {
     }
 }
 
-private String leerTelefono() {
-    while (true) {
-        try {
+private String leerTelefono(){
+    while(true){
+        try{
             System.out.print("Teléfono: ");
-            String telefono = scanner.nextLine().trim();
+            String telefono=scanner.nextLine().trim();
             Validador.validarTelefono(telefono);
             return telefono;
-        } catch (IllegalArgumentException e) {
+        }catch (IllegalArgumentException e){
             System.out.println(e.getMessage());
         }
     }
 }
 
 private String leerFecha(String mensaje){
-    while (true) {
-        try {
+    while(true){
+        try{
             System.out.print(mensaje);
-            String fecha = scanner.nextLine().trim();
+            String fecha=scanner.nextLine().trim();
             Validador.validarFecha(fecha, "fecha");
             return fecha;
-        } catch (IllegalArgumentException e) {
+        }catch(IllegalArgumentException e){
             System.out.println(e.getMessage());
         }
     }
 }
 
-private int leerEnteroValidado(String mensaje, int min, int max){
-    while (true) {
-        try {
+private int leerEnteroValidado(String mensaje,int min,int max){
+    while(true){
+        try{
             System.out.print(mensaje);
-            int valor = Integer.parseInt(scanner.nextLine().trim());
+            int valor=Integer.parseInt(scanner.nextLine().trim());
             Validador.validarRangoEntero(valor, min, max, "valor");
             return valor;
-        } catch (NumberFormatException e) {
+        }catch(NumberFormatException e){
             System.out.println("Error: Debe ingresar un número entero válido.");
-        } catch (IllegalArgumentException e) {
+        }catch(IllegalArgumentException e){
             System.out.println(e.getMessage());
         }
     }
 }
-
-private double leerDoubleValidado(String mensaje,double min,double max) {
-    while (true) {
-        try {
+private double leerDoubleValidado(String mensaje,double min,double max){
+    while(true){
+        try{
             System.out.print(mensaje);
-            double valor = Double.parseDouble(scanner.nextLine().trim());
+            double valor=Double.parseDouble(scanner.nextLine().trim());
             Validador.validarRangoDouble(valor,min,max,"valor");
             return valor;
-        } catch (NumberFormatException e) {
+        }catch(NumberFormatException e){
             System.out.println("Error: Debe ingresar un número válido.");
-        } catch (IllegalArgumentException e) {
+        }catch(IllegalArgumentException e){
             System.out.println(e.getMessage());
         }
     }
