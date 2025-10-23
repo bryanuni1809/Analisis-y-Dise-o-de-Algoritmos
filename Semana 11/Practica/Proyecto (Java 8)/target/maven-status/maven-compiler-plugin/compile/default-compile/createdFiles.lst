@@ -11,6 +11,7 @@ entidades\IdiomaNivel.class
 entidades\Matricula.class
 interfaces\IValidable.class
 entidades\Persona.class
+entidades\QuickSortUtil.class
 gestor\IGestorAcademia.class
 entidades\Estudiante.class
 util\BusquedaExterna.class

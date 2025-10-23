@@ -21,6 +21,7 @@ import java.util.Comparator;
 import java.util.Scanner;
 import util.ArchivoUtil;
 import entidades.Ordenaciones;
+import entidades.QuickSortUtil;
 import interfaces.IEntidad;
 import interfaces.IValidable;
 import java.io.File;
@@ -177,6 +178,7 @@ public class GestorAcademia{
         System.out.println("10. Validar Todas las Entidades");
         System.out.println("11. Mostrar Todas las Entidades");
         System.out.println("12. Sistema de Multilistas");
+        System.out.println("13. Ordenamiento con Quicksort");
         System.out.println("0. Salir");
         System.out.print("Seleccione una opcion: ");
         opcion = Integer.parseInt(scanner.nextLine());
@@ -218,6 +220,9 @@ public class GestorAcademia{
             case 12:
                 menuMultilistas();
                 break;
+            case 13:
+                menuOrdenamientosConQuicksort();
+            break;
             case 0:
                 System.out.println("Cerrando sesion...");
                 break;
@@ -2074,5 +2079,162 @@ private void mostrarEstadisticasMultilistas(){
     double factor=(double) totalEntradas / estudiantes.size();
     System.out.println("Factor de indexación: " + String.format("%.2f", factor));
 }
+ private void menuOrdenamientosConQuicksort(){
+        int opcion;
+        do{
+            System.out.println("\n=== SISTEMA DE ORDENAMIENTO - QUICKSORT ===");
+            System.out.println("1. Ordenar Estudiantes con Quicksort");
+            System.out.println("2. Ordenar Profesores con Quicksort");
+            System.out.println("3. Ordenar Cursos con Quicksort");
+            System.out.println("0. Volver al menú principal");
+            System.out.print("Seleccione una opción: ");
+             opcion=Integer.parseInt(scanner.nextLine());
+            switch (opcion) {
+                case 1:
+                    ordenarEstudiantesQuicksort();
+                    break;
+                case 2:
+                    ordenarProfesoresQuicksort();
+                    break;
+                case 3:
+                    ordenarCursosQuicksort();
+                    break;
+                 case 0:
+                    System.out.println("Volviendo al menú principal...");
+                    break;
+                default:
+                    System.out.println("Opción inválida.");
+            }
+        } while (opcion != 0);
+    }
+    
+    private void ordenarEstudiantesQuicksort(){
+        if (estudiantes.isEmpty()){
+            System.out.println("No hay estudiantes registrados.");
+            return;
+        }
+        List<Estudiante> listaEstudiantes=new ArrayList<>(estudiantes.values());
+        System.out.println("\n=== ORDENAR ESTUDIANTES - QUICKSORT ===");
+        System.out.println("1. Por Apellidos (A-Z)");
+        System.out.println("2. Por Nombres (A-Z)");
+        System.out.println("3. Por DNI (Ascendente)");
+        System.out.print("Seleccione criterio: ");
+        int criterio = Integer.parseInt(scanner.nextLine());
+        
+        long startTime = System.currentTimeMillis();
+        
+        switch (criterio) {
+            case 1:
+                QuickSortUtil.quickSort(listaEstudiantes, Comparator.comparing(Estudiante::getApellidos));
+                System.out.println("Estudiantes ordenados por APELLIDOS (Quicksort)");
+                break;
+            case 2:
+                QuickSortUtil.quickSort(listaEstudiantes, Comparator.comparing(Estudiante::getNombres));
+                System.out.println("Estudiantes ordenados por NOMBRES (Quicksort)");
+                break;
+            case 3:
+                QuickSortUtil.quickSort(listaEstudiantes, Comparator.comparing(Estudiante::getDni));
+                System.out.println("Estudiantes ordenados por DNI (Quicksort)");
+                break;
+            default:
+                System.out.println("Criterio inválido.");
+                return;
+        }
+        long endTime=System.currentTimeMillis();
+        
+        System.out.println("Tiempo de ordenamiento (Quicksort): " + (endTime - startTime) + " ms");
+        System.out.println("Total de elementos ordenados: " + listaEstudiantes.size());
+        System.out.println("\n=== PRIMEROS 10 RESULTADOS ===");
+        for (int i = 0; i < Math.min(10, listaEstudiantes.size()); i++) {
+            System.out.println((i + 1) + ". " + listaEstudiantes.get(i).mostrarInfo());
+        }
+    }
+    private void ordenarProfesoresQuicksort() {
+    if (profesores.isEmpty()) {
+        System.out.println("No hay profesores registrados.");
+        return;
+    }
+    
+    List<Profesor> listaProfesores = new ArrayList<>(profesores.values());
+    
+    System.out.println("\n=== ORDENAR PROFESORES - QUICKSORT ===");
+    System.out.println("1. Por Apellidos (A-Z)");
+    System.out.println("2. Por Especialidad (A-Z)");
+    System.out.println("3. Por Experiencia (Mayor a menor)");
+    System.out.print("Seleccione criterio: ");
+    int criterio = Integer.parseInt(scanner.nextLine());
+    
+    long startTime = System.currentTimeMillis();
+    
+    switch (criterio) {
+        case 1:
+            QuickSortUtil.quickSort(listaProfesores, Comparator.comparing(Profesor::getApellidos));
+            System.out.println("Profesores ordenados por APELLIDOS (Quicksort)");
+            break;
+        case 2:
+            QuickSortUtil.quickSort(listaProfesores, Comparator.comparing(Profesor::getEspecialidad));
+            System.out.println("Profesores ordenados por ESPECIALIDAD (Quicksort)");
+            break;
+        case 3:
+            QuickSortUtil.quickSort(listaProfesores, 
+                Comparator.comparingInt(Profesor::getExperiencia).reversed());
+            System.out.println("Profesores ordenados por EXPERIENCIA (Quicksort)");
+            break;
+        default:
+            System.out.println("Criterio inválido.");
+            return;
+    }
+    
+    long endTime = System.currentTimeMillis();
+    System.out.println("Tiempo de ordenamiento (Quicksort): " + (endTime - startTime) + " ms");
+    
+    System.out.println("\n=== PRIMEROS 10 RESULTADOS ===");
+    for (int i = 0; i < Math.min(10, listaProfesores.size()); i++) {
+        System.out.println((i + 1) + ". " + listaProfesores.get(i).mostrarInfo());
+    }
+}
+
+    private void ordenarCursosQuicksort() {
+    if (cursos.isEmpty()) {
+        System.out.println("No hay cursos registrados.");
+        return;
+    }
+    List<Curso> listaCursos = new ArrayList<>(cursos.values());
+    
+    System.out.println("\n=== ORDENAR CURSOS - QUICKSORT ===");
+    System.out.println("1. Por Nombre (A-Z)");
+    System.out.println("2. Por Idioma (A-Z)");
+    System.out.println("3. Por Precio (Menor a mayor)");
+    System.out.print("Seleccione criterio: ");
+    int criterio = Integer.parseInt(scanner.nextLine());
+    
+    long startTime = System.currentTimeMillis();
+    
+    switch (criterio) {
+        case 1:
+            QuickSortUtil.quickSort(listaCursos, Comparator.comparing(Curso::getNombre));
+            System.out.println("Cursos ordenados por NOMBRE (Quicksort)");
+            break;
+        case 2:
+            QuickSortUtil.quickSort(listaCursos, Comparator.comparing(Curso::getIdioma));
+            System.out.println("Cursos ordenados por IDIOMA (Quicksort)");
+            break;
+        case 3:
+            QuickSortUtil.quickSort(listaCursos, Comparator.comparingDouble(Curso::getPrecio));
+            System.out.println("Cursos ordenados por PRECIO (Quicksort)");
+            break;
+        default:
+            System.out.println("Criterio inválido.");
+            return;
+    }
+    
+    long endTime = System.currentTimeMillis();
+    System.out.println("Tiempo de ordenamiento (Quicksort): " + (endTime - startTime) + " ms");
+    
+    System.out.println("\n=== PRIMEROS 10 RESULTADOS ===");
+    for (int i = 0; i < Math.min(10, listaCursos.size()); i++) {
+        System.out.println((i + 1) + ". " + listaCursos.get(i).mostrarInfo());
+    }
+    }
 }
 
