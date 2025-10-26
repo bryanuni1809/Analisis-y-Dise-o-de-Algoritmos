@@ -1836,28 +1836,28 @@ private void buscarEnArchivoCursos(){
         }else{
             for(int i=0;i<resultados.size();i++){
                 String[] datos=resultados.get(i).split(",");
-                System.out.println("\nCURSO #" + (i + 1) + ":");
-                System.out.println("   Código: " +(datos.length > 0 ? datos[0] : "N/A"));
-                System.out.println("   Nombre: " +(datos.length > 1 ? datos[1] : "N/A"));
-                System.out.println("   Idioma: " +(datos.length > 2 ? datos[2] : "N/A"));
-                System.out.println("   Nivel: " +(datos.length > 3 ? datos[3] : "N/A"));
-                System.out.println("   Profesor (DNI): " +(datos.length > 4 ? datos[4] : "N/A"));
-                System.out.println("   Horario: " + (datos.length > 5 ? datos[5] : "N/A"));
-                System.out.println("   Duración: " + (datos.length > 6 ? datos[6] : "N/A") + " semanas");
-                System.out.println("   Capacidad: " + (datos.length > 7 ? datos[7] : "N/A") + " estudiantes");
-                System.out.println("   Precio: S/" + (datos.length > 8 ? datos[8] : "N/A"));
-                if(datos.length > 9){
-                    System.out.println("   Observaciones: " + datos[9]);
+                System.out.println("\nCURSO #"+(i + 1)+":");
+                System.out.println("   Código: " +(datos.length>0?datos[0]:"N/A"));
+                System.out.println("   Nombre: " +(datos.length>1?datos[1]:"N/A"));
+                System.out.println("   Idioma: " +(datos.length>2?datos[2]:"N/A"));
+                System.out.println("   Nivel: " +(datos.length>3?datos[3]:"N/A"));
+                System.out.println("   Profesor (DNI): "+(datos.length >4?datos[4]:"N/A"));
+                System.out.println("   Horario: " +(datos.length>5?datos[5]:"N/A"));
+                System.out.println("   Duración: " +(datos.length>6?datos[6]:"N/A")+" semanas");
+                System.out.println("   Capacidad: " +(datos.length>7?datos[7]:"N/A")+" estudiantes");
+                System.out.println("   Precio: S/" +(datos.length>8?datos[8]:"N/A"));
+                if(datos.length> 9){
+                    System.out.println("   Observaciones: "+datos[9]);
                 }
             }
         }
-        System.out.println("\nTiempo de búsqueda: " + (endTime - startTime) + " ms");
-        System.out.println("Total de cursos encontrados: " + resultados.size());
+        System.out.println("\nTiempo de búsqueda: " +(endTime-startTime)+ " ms");
+        System.out.println("Total de cursos encontrados: "+resultados.size());
         
-    }catch (IOException e){
+    }catch(IOException e){
         System.out.println("Error al buscar en archivo de cursos: " + e.getMessage());
         System.out.println("Asegúrate de que el archivo 'cursos.txt' exista y tenga datos");
-    }catch (NumberFormatException e){
+    }catch(NumberFormatException e){
         System.out.println("Error: Debe ingresar un número válido para la columna");
     }
 }
@@ -1866,7 +1866,7 @@ private void buscarEnTodosLosArchivos(){
         System.out.print("Ingrese término de búsqueda global: ");
         String termino=scanner.nextLine();
         
-        long startTime =System.currentTimeMillis();
+        long startTime=System.currentTimeMillis();
         int totalResultados=0;
         System.out.println("\nREALIZANDO BÚSQUEDA GLOBAL...");
         // Buscar en estudiantes
