@@ -1936,22 +1936,22 @@ private void inicializarMultilistas(){
             int edad=Validador.calcularEdad(e.getFechaNacimiento());
             String rangoEdad=obtenerRangoEdad(edad);
             estudiantesPorEdad
-                .computeIfAbsent(rangoEdad, k -> new LinkedList<>())
+                .computeIfAbsent(rangoEdad,k -> new LinkedList<>())
                 .add(e);
         }catch(Exception ex){
             System.out.println("Error calculando edad para: " + e.getDni());
         }
     }
-    System.out.println("Multilistas inicializadas: " + contador + " estudiantes procesados");
-    System.out.println("Niveles distintos: " + estudiantesPorNivel.size());
-    System.out.println("Rangos de edad: " + estudiantesPorEdad.size());
+    System.out.println("Multilistas inicializadas: "+ contador + " estudiantes procesados");
+    System.out.println("Niveles distintos: " +estudiantesPorNivel.size());
+    System.out.println("Rangos de edad: " +estudiantesPorEdad.size());
 }
 
 private String obtenerRangoEdad(int edad){
     if(edad<=18)return "18 o menos";
-    else if (edad<=25)return "19-25";
-    else if (edad<=35)return "26-35";
-    else if (edad<=50)return "36-50";
+    else if(edad<=25)return "19-25";
+    else if(edad<=35)return "26-35";
+    else if(edad<=50)return "36-50";
     else return "51 o más";
 }
 
@@ -1967,8 +1967,8 @@ private void inicializarListasInvertidas(){
         String nombreCompleto=(e.getNombres() + " " + e.getApellidos()).toLowerCase();
         String[] palabras =nombreCompleto.split("\\s+"); // Dividir por espacios
         
-        for (String palabra:palabras){
-            if (palabra.length()>2 && !palabra.equals("de") && !palabra.equals("la")) {
+        for(String palabra:palabras){
+            if(palabra.length()>2 && !palabra.equals("de") && !palabra.equals("la")){
                 indicePorNombre
                     .computeIfAbsent(palabra,k -> new LinkedList<>())
                     .add(e.getDni());
@@ -1976,11 +1976,11 @@ private void inicializarListasInvertidas(){
             }
         }
     }
-    for (Matricula m :matriculas){
+    for (Matricula m:matriculas){
         String curso =m.getCodigoCurso();
-        if (curso != null && !curso.trim().isEmpty()) {
+        if (curso !=null && !curso.trim().isEmpty()){
             indicePorCurso
-                .computeIfAbsent(curso, k -> new LinkedList<>())
+                .computeIfAbsent(curso,k ->new LinkedList<>())
                 .add(m.getDniEstudiante());
             matriculasIndexadas++;
         }
@@ -2016,12 +2016,12 @@ private void buscarPorNivelMultilista(){
     String nivel=scanner.nextLine();
     
     LinkedList<Estudiante> lista=estudiantesPorNivel.get(nivel);
-    if (lista !=null && !lista.isEmpty()) {
+    if(lista !=null && !lista.isEmpty()){
         System.out.println("Estudiantes en nivel '"+nivel +"': "+lista.size());
-        for (Estudiante e:lista){
+        for(Estudiante e:lista){
             System.out.println(e.mostrarInfo());
         }
-    } else {
+    }else{
         System.out.println("No hay estudiantes en ese nivel");
     }
 }
@@ -2030,15 +2030,13 @@ private void buscarPorNombreInvertido(){
     System.out.println("\n=== BUSCAR POR NOMBRE (LISTA INVERTIDA) ===");
     System.out.print("Ingrese palabra del nombre: ");
     String palabra=scanner.nextLine().toLowerCase();
-    
     long startTime=System.currentTimeMillis();
     LinkedList<String> dnis=indicePorNombre.get(palabra);
-    
     if(dnis != null){
-        System.out.println("Encontrados: " + dnis.size() + " estudiantes");
-        for (String dni:dnis){
+        System.out.println("Encontrados: "+dnis.size()+" estudiantes");
+        for(String dni:dnis){
             Estudiante e = estudiantes.get(dni);
-            if (e !=null){
+            if(e !=null){
                 System.out.println(e.mostrarInfo());
             }
         }
@@ -2047,7 +2045,7 @@ private void buscarPorNombreInvertido(){
     }
     
     long endTime=System.currentTimeMillis();
-    System.out.println("Tiempo búsqueda invertida: " + (endTime - startTime) + " ms");
+    System.out.println("Tiempo búsqueda invertida: " +(endTime -startTime)+ " ms");
 }
 
 private void mostrarEstadisticasMultilistas(){
