@@ -1875,9 +1875,9 @@ private void buscarEnTodosLosArchivos(){
         if (resultadosEstudiantes.isEmpty()) {
             System.out.println("No se encontraron estudiantes");
         }else{
-            for (String resultado : resultadosEstudiantes) {
+            for (String resultado:resultadosEstudiantes){
                 String[] datos = resultado.split(",");
-                System.out.println(datos[1] + " " + datos[2] + " (DNI: " + datos[0] + ")");
+                System.out.println(datos[1]+ " "+datos[2]+ " (DNI: " +datos[0]+ ")");
             }
         }
         totalResultados+=resultadosEstudiantes.size();
@@ -1886,27 +1886,27 @@ private void buscarEnTodosLosArchivos(){
         if(resultadosProfesores.isEmpty()){
             System.out.println("No se encontraron profesores");
         }else{
-            for (String resultado : resultadosProfesores){
-                String[] datos = resultado.split(",");
-                System.out.println(datos[1] + " " + datos[2] + " - " + datos[6] + " (DNI: " + datos[0] + ")");
+            for(String resultado : resultadosProfesores){
+                String[]datos=resultado.split(",");
+                System.out.println(datos[1]+ " " +datos[2]+" - " +datos[6]+ " (DNI: " +datos[0] + ")");
             }
         }
-        totalResultados += resultadosProfesores.size();
+        totalResultados +=resultadosProfesores.size();
         System.out.println("\n--- CURSOS.TXT ---");
-        List<String> resultadosCursos=BusquedaExterna.buscarEnArchivoMultiple("cursos.txt", termino);
-        if (resultadosCursos.isEmpty()){
+        List<String> resultadosCursos=BusquedaExterna.buscarEnArchivoMultiple("cursos.txt",termino);
+        if(resultadosCursos.isEmpty()){
             System.out.println("No se encontraron cursos");
         }else{
-            for (String resultado : resultadosCursos) {
-                String[] datos = resultado.split(",");
-                System.out.println(datos[1] + " (" + datos[0] + ") - " + datos[2] + " " + datos[3]);
+            for(String resultado : resultadosCursos){
+                String[] datos=resultado.split(",");
+                System.out.println(datos[1]+ " (" + datos[0] + ") - "+datos[2]+ " "+datos[3]);
             }
         }
         totalResultados+=resultadosCursos.size();
-        long endTime= System.currentTimeMillis();
+        long endTime=System.currentTimeMillis();
         
         System.out.println("\nRESUMEN DE BÚSQUEDA GLOBAL:");
-        System.out.println("Tiempo total de búsqueda: "+ (endTime - startTime) + " ms");
+        System.out.println("Tiempo total de búsqueda: "+(endTime - startTime) + " ms");
         System.out.println("Estudiantes encontrados: "+resultadosEstudiantes.size());
         System.out.println("Profesores encontrados: "+resultadosProfesores.size());
         System.out.println("Cursos encontrados: " + resultadosCursos.size());
@@ -1924,21 +1924,21 @@ private void inicializarMultilistas(){
     int contador=0;
     for(Estudiante e:estudiantes.values()){
         // Multilista por nivel de estudios
-        String nivel = e.getNivelEstudios();
-        if (nivel!= null && !nivel.trim().isEmpty()) {
+        String nivel=e.getNivelEstudios();
+        if(nivel!=null && !nivel.trim().isEmpty()){
             estudiantesPorNivel
                 .computeIfAbsent(nivel, k -> new LinkedList<>())
                 .add(e);
             contador++;
         }
         // Multilista por rango de edad
-        try {
-            int edad = Validador.calcularEdad(e.getFechaNacimiento());
-            String rangoEdad = obtenerRangoEdad(edad);
+        try{
+            int edad=Validador.calcularEdad(e.getFechaNacimiento());
+            String rangoEdad=obtenerRangoEdad(edad);
             estudiantesPorEdad
                 .computeIfAbsent(rangoEdad, k -> new LinkedList<>())
                 .add(e);
-        } catch(Exception ex){
+        }catch(Exception ex){
             System.out.println("Error calculando edad para: " + e.getDni());
         }
     }
