@@ -8,7 +8,7 @@ package gestor;
  *
  * @author BRYAN
  */
-public interface IGestorAcademia {
+public interface IGestorAcademia{
     void mostrarMenu();
     void menuEstudiantes();
     void menuProfesores();
