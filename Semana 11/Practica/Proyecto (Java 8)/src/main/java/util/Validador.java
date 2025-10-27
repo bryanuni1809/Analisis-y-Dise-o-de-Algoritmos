@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
  *
  * @author BRYAN
  */
-public class Validador {
+public class Validador{
     // Patrones de validación
     private static final Pattern EMAIL_REGEX= 
         Pattern.compile("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$");
@@ -39,16 +39,16 @@ public class Validador {
     // ========== VALIDACIONES BÁSICAS ==========
     
     public static void validarNoVacio(String texto,String nombreCampo){
-        if (texto==null || texto.trim().isEmpty()){
-            throw new IllegalArgumentException("El campo '" + nombreCampo + "' no puede estar vacío");
+        if(texto==null||texto.trim().isEmpty()){
+            throw new IllegalArgumentException("El campo '"+nombreCampo+"' no puede estar vacío");
         }
     }
     
-    public static void validarLongitud(String texto, String nombreCampo, int min, int max){
-        validarNoVacio(texto, nombreCampo);
-        if (texto.length()<min || texto.length()>max){
+    public static void validarLongitud(String texto, String nombreCampo,int min,int max){
+        validarNoVacio(texto,nombreCampo);
+        if(texto.length()<min || texto.length()>max){
             throw new IllegalArgumentException(
-                "El campo '" + nombreCampo + "' debe tener entre " + min + " y " + max + " caracteres"
+                "El campo '"+nombreCampo+"' debe tener entre "+min+" y "+max+" caracteres"
             );
         }
     }
@@ -56,9 +56,9 @@ public class Validador {
     // ========== VALIDACIONES ESPECÍFICAS ==========
     
     public static void validarDNI(String dni){
-        validarNoVacio(dni, "DNI");
+        validarNoVacio(dni,"DNI");
         
-        if (!DNI_REGEX.matcher(dni).matches()){
+        if(!DNI_REGEX.matcher(dni).matches()){
             throw new IllegalArgumentException("El DNI debe tener exactamente 8 dígitos numéricos");
         }
     }
@@ -66,7 +66,7 @@ public class Validador {
     public static void validarEmail(String email){
         validarNoVacio(email,"correo electrónico");
         
-        if (!EMAIL_REGEX.matcher(email).matches()){
+        if(!EMAIL_REGEX.matcher(email).matches()){
             throw new IllegalArgumentException("Formato de correo electrónico inválido");
         }
     }
@@ -74,7 +74,7 @@ public class Validador {
     public static void validarTelefono(String telefono){
         validarNoVacio(telefono, "teléfono");
         
-        if (!TELEFONO_REGEX.matcher(telefono).matches()){
+        if(!TELEFONO_REGEX.matcher(telefono).matches()){
             throw new IllegalArgumentException("El teléfono debe tener 9 dígitos y comenzar con 9");
         }
     }
@@ -82,7 +82,7 @@ public class Validador {
     public static void validarSoloLetras(String texto,String nombreCampo){
         validarNoVacio(texto,nombreCampo);
         
-        if (!SOLO_LETRAS_REGEX.matcher(texto).matches()){
+        if(!SOLO_LETRAS_REGEX.matcher(texto).matches()){
             throw new IllegalArgumentException("El campo '"+nombreCampo+"' solo puede contener letras y espacios");
         }
     }
@@ -90,7 +90,7 @@ public class Validador {
     public static void validarSoloNumeros(String texto,String nombreCampo){
         validarNoVacio(texto,nombreCampo);
         
-        if (!SOLO_NUMEROS_REGEX.matcher(texto).matches()){
+        if(!SOLO_NUMEROS_REGEX.matcher(texto).matches()){
             throw new IllegalArgumentException("El campo '"+ nombreCampo+"' solo puede contener números");
         }
     }
@@ -98,7 +98,7 @@ public class Validador {
     public static void validarCodigoCurso(String codigo){
         validarNoVacio(codigo,"código de curso");
         
-        if (!CODIGO_CURSO_REGEX.matcher(codigo).matches()){
+        if(!CODIGO_CURSO_REGEX.matcher(codigo).matches()){
             throw new IllegalArgumentException("Formato de código de curso inválido. Use: XXX-999 (ej: ENG-101)");
         }
     }
@@ -119,20 +119,20 @@ public class Validador {
         LocalDate hoy=LocalDate.now();
         
         if(fechaDate.isAfter(hoy)){
-            throw new IllegalArgumentException("La fecha '" +nombreCampo + "' no puede ser futura");
+            throw new IllegalArgumentException("La fecha '"+nombreCampo+"' no puede ser futura");
         }
     }
     
     public static void validarRangoEntero(int valor,int min,int max,String nombreCampo){
         if(valor < min || valor > max){
             throw new IllegalArgumentException(
-                "El campo '" + nombreCampo + "' debe estar entre "+min+ " y " + max
+                "El campo '" + nombreCampo + "' debe estar entre "+min+" y "+ max
             );
         }
     }
     
-    public static void validarRangoDouble(double valor,double min,double max, String nombreCampo){
-        if (valor< min || valor>max){
+    public static void validarRangoDouble(double valor,double min,double max,String nombreCampo){
+        if(valor< min || valor>max){
             throw new IllegalArgumentException(
                 "El campo '" +nombreCampo +"' debe estar entre "+min +" y " + max
             );
@@ -144,7 +144,7 @@ public class Validador {
     }
     
     public static void validarPrecio(double precio){
-        if (precio<0){
+        if(precio<0){
             throw new IllegalArgumentException("El precio no puede ser negativo");
         }
     }
@@ -154,10 +154,10 @@ public class Validador {
     }
     
     public static void validarExperiencia(int experiencia){
-        if (experiencia<0){
+        if(experiencia<0){
             throw new IllegalArgumentException("Los años de experiencia no pueden ser negativos");
         }
-        if (experiencia>50){
+        if(experiencia>50){
             throw new IllegalArgumentException("Los años de experiencia no pueden ser mayores a 50");
         }
     }
@@ -175,17 +175,17 @@ public class Validador {
     public static void validarNivelIdioma(String nivel){
         validarNoVacio(nivel,"nivel de idioma");
         
-        String[] nivelesValidos = {"A1","A2","B1","B2","C1","C2","Principiante","Intermedio","Avanzado"};
+        String[] nivelesValidos={"A1","A2","B1","B2","C1","C2","Principiante","Intermedio","Avanzado"};
         boolean valido=false;
         
-        for(String n :nivelesValidos){
+        for(String n:nivelesValidos){
             if(n.equalsIgnoreCase(nivel)){
                 valido=true;
                 break;
             }
         }
         
-        if (!valido){
+        if(!valido){
             throw new IllegalArgumentException(
                 "Nivel de idioma inválido. Use: A1, A2, B1, B2, C1, C2, Principiante, Intermedio o Avanzado"
             );
@@ -199,7 +199,7 @@ public class Validador {
         boolean valido=false;
         
         for(String i :idiomasValidos){
-            if (i.equalsIgnoreCase(idioma)){
+            if(i.equalsIgnoreCase(idioma)){
                 valido=true;
                 break;
             }
@@ -288,9 +288,9 @@ public class Validador {
     
     // ========== VALIDACIÓN DE DATOS COMPLETOS ==========
     
-    public static void validarDatosEstudiante(String dni, String nombres, String apellidos, 
-                                            String direccion, String telefono, String correo,
-                                            String fechaNacimiento, String nivelEstudios) {
+    public static void validarDatosEstudiante(String dni,String nombres,String apellidos, 
+                                            String direccion,String telefono,String correo,
+                                            String fechaNacimiento,String nivelEstudios) {
         
         validarDNI(dni);
         validarSoloLetras(nombres,"nombres");
@@ -317,8 +317,8 @@ public class Validador {
     }
     
     public static void validarDatosCurso(String codigo,String nombre,String idioma,String nivel,
-                                       String profesorDni,String horario, int duracion,
-                                       int capacidad, double precio, String observaciones) {
+                                       String profesorDni,String horario,int duracion,
+                                       int capacidad,double precio,String observaciones) {
         
         validarCodigoCurso(codigo);
         validarNoVacio(nombre,"nombre del curso");
