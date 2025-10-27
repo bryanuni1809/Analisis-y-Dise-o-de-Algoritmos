@@ -12,7 +12,7 @@ import util.Validador;
  *
  * @author BRYAN
  */
-public class Calificacion implements IEntidad, IValidable{
+public class Calificacion implements IEntidad,IValidable{
     private String codigoCurso;
     private String dniEstudiante;
     private String fecha;
@@ -20,13 +20,13 @@ public class Calificacion implements IEntidad, IValidable{
     private String observaciones;
     private String mensajeError;
 
-    public Calificacion(String codigoCurso,String dniEstudiante,String fecha,double nota,String observaciones) {
+    public Calificacion(String codigoCurso,String dniEstudiante,String fecha,double nota,String observaciones){
         this.codigoCurso=codigoCurso;
         this.dniEstudiante=dniEstudiante;
         this.fecha=fecha;
         this.nota=nota;
         this.observaciones=observaciones;
-        this.mensajeError = "";
+        this.mensajeError="";
     }
 
     public String getCodigoCurso(){return codigoCurso;}
@@ -41,35 +41,35 @@ public class Calificacion implements IEntidad, IValidable{
     public double getNota(){return nota;}
     public void setNota(double nota){this.nota=nota;}
 
-    public String getObservaciones(){ return observaciones; }
-    public void setObservaciones(String observaciones) { this.observaciones = observaciones; }
+    public String getObservaciones(){return observaciones;}
+    public void setObservaciones(String observaciones){this.observaciones=observaciones; }
 
     @Override
-    public String mostrarInfo() {
-        return "Curso: " + codigoCurso + " | Estudiante: " + dniEstudiante + " | Nota: " + nota + "\nObservaciones: " + observaciones;
+    public String mostrarInfo(){
+        return "Curso: "+codigoCurso+" | Estudiante: "+dniEstudiante+" | Nota: "+nota+"\nObservaciones: "+observaciones;
     }
     @Override
-    public String getTipo() {
+    public String getTipo(){
         return "Calificación";
     }
     @Override
-    public boolean validar() {
-        try {
+    public boolean validar(){
+        try{
             Validador.validarCodigoCurso(codigoCurso);
             Validador.validarDNI(dniEstudiante);
-            Validador.validarFecha(fecha, "fecha de calificación");
+            Validador.validarFecha(fecha,"fecha de calificación");
             Validador.validarNota(nota);
-            Validador.validarNoVacio(observaciones, "observaciones");
+            Validador.validarNoVacio(observaciones,"observaciones");
             mensajeError = "";
             return true;
-        } catch (IllegalArgumentException e) {
-            mensajeError = e.getMessage();
+        }catch(IllegalArgumentException e){
+            mensajeError=e.getMessage();
             return false;
         }
     }
 
     @Override
-    public String getMensajeError() {
+    public String getMensajeError(){
         return mensajeError;
     }
 }
