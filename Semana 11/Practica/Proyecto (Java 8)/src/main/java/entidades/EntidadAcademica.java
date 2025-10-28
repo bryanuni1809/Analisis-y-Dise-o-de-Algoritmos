@@ -11,25 +11,25 @@ import interfaces.IValidable;
  *
  * @author BRYAN
  */
-public abstract class EntidadAcademica implements IEntidad, IValidable {
+public abstract class EntidadAcademica implements IEntidad,IValidable{
     protected String codigo;
     protected String mensajeError;
 
-    public EntidadAcademica(String codigo) {
-        this.codigo = codigo;
-        this.mensajeError = "";
+    public EntidadAcademica(String codigo){
+        this.codigo=codigo;
+        this.mensajeError="";
     }
 
-    public String getCodigo() { 
+    public String getCodigo(){ 
         return codigo; 
     }
     
-    public void setCodigo(String codigo) { 
-        this.codigo = codigo; 
+    public void setCodigo(String codigo){ 
+        this.codigo=codigo; 
     }
 
     @Override
-    public String getMensajeError() {
+    public String getMensajeError(){
         return mensajeError;
     }
 
