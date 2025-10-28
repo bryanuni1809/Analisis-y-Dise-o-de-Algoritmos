@@ -19,10 +19,10 @@ import java.util.ArrayList;
  *
  * @author BRYAN
  */
-public class ArchivoUtil {
+public class ArchivoUtil{
 
-    private static void escribirLinea(String ruta,String linea,boolean append) {
-        try (BufferedWriter writer=new BufferedWriter(new FileWriter(ruta, append))) {
+    private static void escribirLinea(String ruta,String linea,boolean append){
+        try (BufferedWriter writer=new BufferedWriter(new FileWriter(ruta,append))){
             writer.write(linea);
             writer.newLine();
         } catch(IOException ex){
@@ -105,32 +105,32 @@ public class ArchivoUtil {
     }
 }
     public static void sobrescribirCursos(ArrayList<Curso> lista, String ruta) {
-    try (BufferedWriter writer = new BufferedWriter(new FileWriter(ruta))) {
-        for (Curso c : lista) {
-            writer.write(c.getCodigo() + "," + c.getNombre() + "," + c.getIdioma() + "," + c.getNivel() + "," +
-                         c.getProfesorDni() + "," + c.getHorario() + "," + c.getDuracion() + "," +
-                         c.getCapacidadMaxima() + "," + c.getPrecio() + "," + c.getObservaciones());
+    try(BufferedWriter writer = new BufferedWriter(new FileWriter(ruta))) {
+        for(Curso c : lista) {
+            writer.write(c.getCodigo()+"," + c.getNombre() + "," + c.getIdioma() + "," + c.getNivel() + "," +
+                         c.getProfesorDni()+"," + c.getHorario() + "," + c.getDuracion() + "," +
+                         c.getCapacidadMaxima()+"," + c.getPrecio() + "," + c.getObservaciones());
             writer.newLine();
         }
-    } catch (IOException ex) {
-        System.out.println("Error al sobrescribir cursos: " + ex.getMessage());
+    }catch(IOException ex){
+        System.out.println("Error al sobrescribir cursos: " +ex.getMessage());
     }
 }
     public static void guardarNivelIdioma(IdiomaNivel in, String ruta) {
-    try (BufferedWriter writer = new BufferedWriter(new FileWriter(ruta, true))) {
+    try(BufferedWriter writer=new BufferedWriter(new FileWriter(ruta,true))){
         writer.write(in.getCodigo() + "," + in.getIdioma() + "," + in.getNivel() + "," + in.getDescripcion());
         writer.newLine();
-    } catch (IOException ex) {
+    }catch(IOException ex){
         System.out.println("Error al guardar nivel de idioma: " + ex.getMessage());
     }
 }
-    public static void sobrescribirNivelesIdioma(ArrayList<IdiomaNivel> lista, String ruta) {
-    try (BufferedWriter writer = new BufferedWriter(new FileWriter(ruta))) {
+    public static void sobrescribirNivelesIdioma(ArrayList<IdiomaNivel> lista, String ruta){
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter(ruta))){
         for (IdiomaNivel in : lista) {
             writer.write(in.getCodigo() + "," + in.getIdioma() + "," + in.getNivel() + "," + in.getDescripcion());
             writer.newLine();
         }
-    } catch (IOException ex) {
+    }catch (IOException ex){
         System.out.println("Error al sobrescribir niveles de idioma: " + ex.getMessage());
     }
 }
