@@ -41,25 +41,25 @@ public class Curso extends EntidadAcademica{
     public void setIdioma(String idioma){this.idioma=idioma;}
 
     public String getNivel(){return nivel;}
-    public void setNivel(String nivel) { this.nivel = nivel; }
+    public void setNivel(String nivel){this.nivel=nivel;}
 
-    public String getProfesorDni() { return profesorDni; }
-    public void setProfesorDni(String profesorDni) { this.profesorDni = profesorDni; }
+    public String getProfesorDni(){return profesorDni;}
+    public void setProfesorDni(String profesorDni){this.profesorDni=profesorDni;}
 
-    public String getHorario() { return horario; }
-    public void setHorario(String horario) { this.horario = horario; }
+    public String getHorario(){return horario;}
+    public void setHorario(String horario){this.horario=horario;}
 
-    public int getDuracion() { return duracion; }
-    public void setDuracion(int duracion) { this.duracion = duracion; }
+    public int getDuracion(){return duracion;}
+    public void setDuracion(int duracion){this.duracion=duracion; }
 
-    public int getCapacidadMaxima() { return capacidadMaxima; }
-    public void setCapacidadMaxima(int capacidadMaxima) { this.capacidadMaxima = capacidadMaxima; }
+    public int getCapacidadMaxima(){return capacidadMaxima;}
+    public void setCapacidadMaxima(int capacidadMaxima){this.capacidadMaxima=capacidadMaxima;}
 
     public double getPrecio(){return precio;}
     public void setPrecio(double precio){this.precio=precio;}
 
-    public String getObservaciones(){ return observaciones;}
-    public void setObservaciones(String observaciones) { this.observaciones = observaciones; }
+    public String getObservaciones(){return observaciones;}
+    public void setObservaciones(String observaciones){this.observaciones=observaciones;}
     
     @Override
     public String mostrarInfo(){
