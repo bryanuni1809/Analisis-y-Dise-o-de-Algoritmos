@@ -44,26 +44,26 @@ public class IdiomaNivel implements IEntidad,IValidable{
                "\nDescripcion: "+descripcion;
     }
     @Override
-    public String getTipo() {
+    public String getTipo(){
         return "Nivel de Idioma";
     }
-     @Override
-    public boolean validar() {
-        try {
-            Validador.validarNoVacio(codigo, "código");
+    @Override
+    public boolean validar(){
+        try{
+            Validador.validarNoVacio(codigo,"código");
             Validador.validarIdioma(idioma);
             Validador.validarNivelIdioma(nivel);
             Validador.validarNoVacio(descripcion, "descripción");
-            mensajeError = "";
+            mensajeError="";
             return true;
-        } catch (IllegalArgumentException e) {
-            mensajeError = e.getMessage();
+        }catch(IllegalArgumentException e){
+            mensajeError=e.getMessage();
             return false;
         }
     }
 
     @Override
-    public String getMensajeError() {
+    public String getMensajeError(){
         return mensajeError;
     }
 }
