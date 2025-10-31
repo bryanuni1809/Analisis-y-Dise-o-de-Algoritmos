@@ -14,7 +14,7 @@ public class Estudiante extends Persona{
     private String fechaNacimiento;
     private String nivelEstudios;
     public Estudiante(String dni,String nombres,String apellidos,String direccion,
-                      String telefono,String correo,String fechaNacimiento,String nivelEstudios) {
+                      String telefono,String correo,String fechaNacimiento,String nivelEstudios){
         super(dni,nombres,apellidos,direccion,telefono,correo);
         this.fechaNacimiento=fechaNacimiento;
         this.nivelEstudios=nivelEstudios;

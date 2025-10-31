@@ -12,7 +12,7 @@ import util.Validador;
  *
  * @author BRYAN
  */
-public class IdiomaNivel implements IEntidad, IValidable{
+public class IdiomaNivel implements IEntidad,IValidable{
     private String codigo;
     private String idioma;
     private String nivel;
@@ -20,14 +20,14 @@ public class IdiomaNivel implements IEntidad, IValidable{
     private String mensajeError;
 
     public IdiomaNivel(String codigo,String idioma,String nivel,String descripcion){
-        this.codigo = codigo;
+        this.codigo=codigo;
         this.idioma=idioma;
         this.nivel=nivel;
         this.descripcion=descripcion;
         this.mensajeError = "";
     }
-    public String getCodigo() { return codigo; }
-    public void setCodigo(String codigo) { this.codigo = codigo; }
+    public String getCodigo(){return codigo;}
+    public void setCodigo(String codigo){this.codigo=codigo;}
     
     public String getIdioma(){return idioma;}
     public void setIdioma(String idioma){this.idioma=idioma;}

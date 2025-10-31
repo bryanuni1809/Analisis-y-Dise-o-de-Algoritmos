@@ -25,7 +25,7 @@ public class ExternalSort{
         try(BufferedReader br=new BufferedReader(new FileReader(archivoEntrada))){
             List<String> buffer=new ArrayList<>();
             String linea;
-            while((linea=br.readLine())!= null){
+            while((linea=br.readLine())!=null){
                 buffer.add(linea);
                 if (buffer.size()>=tamanoBloque){
                     archivosTemporales.add(guardarOrdenado(buffer));
