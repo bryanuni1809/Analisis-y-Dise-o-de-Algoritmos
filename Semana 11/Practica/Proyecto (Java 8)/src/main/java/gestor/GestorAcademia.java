@@ -37,19 +37,19 @@ import util.Validador;
  * @author BRYAN
  */
 public class GestorAcademia{
-    private final Scanner scanner = new Scanner(System.in);
-    private final Map<String, Estudiante> estudiantes = new HashMap<>();
-    private final Map<String, Profesor> profesores = new HashMap<>(); 
-    private final Map<String, Curso> cursos = new HashMap<>(); 
-    private final ArrayList<Matricula> matriculas = new ArrayList<>();
-    private final ArrayList<Calificacion> calificaciones = new ArrayList<>();
-    private final Map<String, IdiomaNivel> nivelesIdioma = new HashMap<>();
-    private Map<String, LinkedList<Estudiante>> estudiantesPorNivel;
-    private Map<String, LinkedList<Estudiante>> estudiantesPorEdad;
-    private Map<String, LinkedList<String>> indicePorNombre; // nombre -> lista de DNI's
-    private Map<String, LinkedList<String>> indicePorCurso;
+    private final Scanner scanner=new Scanner(System.in);
+    private final Map<String,Estudiante>estudiantes =new HashMap<>();
+    private final Map<String,Profesor>profesores =new HashMap<>(); 
+    private final Map<String,Curso>cursos =new HashMap<>(); 
+    private final ArrayList<Matricula>matriculas=new ArrayList<>();
+    private final ArrayList<Calificacion>calificaciones=new ArrayList<>();
+    private final Map<String,IdiomaNivel>nivelesIdioma=new HashMap<>();
+    private Map<String,LinkedList<Estudiante>>estudiantesPorNivel;
+    private Map<String,LinkedList<Estudiante>> estudiantesPorEdad;
+    private Map<String,LinkedList<String>> indicePorNombre; // nombre -> lista de DNI's
+    private Map<String,LinkedList<String>> indicePorCurso;
     
-    public GestorAcademia() {
+    public GestorAcademia(){
     cargarEstudiantes();
     cargarProfesores();
     cargarCursos();
@@ -59,8 +59,8 @@ public class GestorAcademia{
     inicializarMultilistas();
     inicializarListasInvertidas();
     }
-    private void cargarCursos() {
-    try (BufferedReader br = new BufferedReader(new FileReader("cursos.txt"))) {
+    private void cargarCursos(){
+    try (BufferedReader br=new BufferedReader(new FileReader("cursos.txt"))) {
         String linea;
         while ((linea = br.readLine()) != null) {
             String[] partes = linea.split(",");
