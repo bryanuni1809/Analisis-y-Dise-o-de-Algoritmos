@@ -128,43 +128,43 @@ public class GestorAcademia{
         System.out.println("Error al cargar estudiantes: "+e.getMessage());
     }
 }
-    private void cargarMatriculas() {
-    try (BufferedReader br = new BufferedReader(new FileReader("matriculas.txt"))) {
+    private void cargarMatriculas(){
+    try (BufferedReader br=new BufferedReader(new FileReader("matriculas.txt"))){
         String linea;
-        while ((linea = br.readLine()) != null) {
-            String[] partes = linea.split(",");
-            if (partes.length >= 4) {
-                Matricula m = new Matricula(
-                    partes[0], partes[1], partes[2],
+        while((linea=br.readLine())!=null){
+            String[]partes=linea.split(",");
+            if(partes.length>=4){
+                Matricula m=new Matricula(
+                    partes[0],partes[1],partes[2],
                     Double.parseDouble(partes[3])
                 );
                 matriculas.add(m);
             }
         }
-    } catch (IOException e) {
-        System.out.println("Error al cargar matrículas: " + e.getMessage());
+    }catch(IOException e){
+        System.out.println("Error al cargar matrículas: "+e.getMessage());
     }
 }
     private void cargarCalificaciones(){
-    try (BufferedReader br = new BufferedReader(new FileReader("calificaciones.txt"))) {
+    try (BufferedReader br=new BufferedReader(new FileReader("calificaciones.txt"))){
         String linea;
-        while ((linea = br.readLine()) != null) {
-            String[] partes = linea.split(",");
-            if (partes.length >= 5) {
-                Calificacion c = new Calificacion(
-                    partes[0], partes[1], partes[2],
-                    Double.parseDouble(partes[3]), partes[4]
+        while((linea=br.readLine())!=null){
+            String[]partes=linea.split(",");
+            if(partes.length>=5){
+                Calificacion c=new Calificacion(
+                    partes[0],partes[1],partes[2],
+                    Double.parseDouble(partes[3]),partes[4]
                 );
                 calificaciones.add(c);
             }
         }
-    } catch(IOException e){
-        System.out.println("Error al cargar calificaciones: " + e.getMessage());
+    }catch(IOException e){
+        System.out.println("Error al cargar calificaciones: "+e.getMessage());
     }
 }
     public void mostrarMenu(){
     int opcion;
-    do {
+    do{
         System.out.println("\n===== MENU PRINCIPAL =====");
         System.out.println("1. Gestion de Estudiantes");
         System.out.println("2. Gestion de Profesores");
@@ -181,7 +181,7 @@ public class GestorAcademia{
         System.out.println("13. Ordenamiento con Quicksort");
         System.out.println("0. Salir");
         System.out.print("Seleccione una opcion: ");
-        opcion = Integer.parseInt(scanner.nextLine());
+        opcion=Integer.parseInt(scanner.nextLine());
 
         switch(opcion){
             case 1:
@@ -230,12 +230,12 @@ public class GestorAcademia{
                 System.out.println("Opcion invalida.");
                 break;
         }
-    } while (opcion !=0);
+    }while (opcion !=0);
 }
 
-private void menuEstudiantes() {
+private void menuEstudiantes(){
     int opcion;
-    do {
+    do{
         System.out.println("\n--- GESTION DE ESTUDIANTES ---");
         System.out.println("1. Registrar Estudiante");
         System.out.println("2. Buscar Estudiante");
@@ -243,9 +243,9 @@ private void menuEstudiantes() {
         System.out.println("4. Eliminar Estudiante");
         System.out.println("0. Volver al menu principal");
         System.out.print("Seleccione una opcion: ");
-        opcion = Integer.parseInt(scanner.nextLine());
+        opcion=Integer.parseInt(scanner.nextLine());
 
-        switch (opcion) {
+        switch(opcion){
             case 1:
                 registrarEstudiante();
                 break;
@@ -265,12 +265,12 @@ private void menuEstudiantes() {
                 System.out.println("Opcion invalida.");
                 break;
         }
-    } while (opcion != 0);
+    }while(opcion!= 0);
 }
 
-private void menuProfesores() {
+private void menuProfesores(){
     int opcion;
-    do {
+    do{
         System.out.println("\n--- GESTION DE PROFESORES ---");
         System.out.println("1. Registrar Profesor");
         System.out.println("2. Buscar Profesor");
@@ -278,9 +278,9 @@ private void menuProfesores() {
         System.out.println("4. Eliminar Profesor");
         System.out.println("0. Volver al menu principal");
         System.out.print("Seleccione una opcion: ");
-        opcion = Integer.parseInt(scanner.nextLine());
+        opcion=Integer.parseInt(scanner.nextLine());
 
-        switch (opcion){
+        switch(opcion){
             case 1:
                 registrarProfesor();
                 break;
@@ -300,11 +300,11 @@ private void menuProfesores() {
                 System.out.println("Opcion invalida.");
                 break;
         }
-    } while (opcion != 0);
+    }while(opcion!= 0);
 }
     private void menuCursos(){
     int opcion;
-    do {
+    do{
         System.out.println("\n--- GESTION DE CURSOS ---");
         System.out.println("1. Registrar Curso");
         System.out.println("2. Buscar Curso");
@@ -312,9 +312,9 @@ private void menuProfesores() {
         System.out.println("4. Eliminar Curso");
         System.out.println("0. Volver al menu principal");
         System.out.print("Seleccione una opcion: ");
-        opcion = Integer.parseInt(scanner.nextLine());
+        opcion=Integer.parseInt(scanner.nextLine());
 
-        switch (opcion) {
+        switch(opcion){
             case 1:
                 registrarCurso();
                 break;
