@@ -333,20 +333,20 @@ private void menuProfesores(){
             default:
                 System.out.println("Opcion invalida.");
         }
-    } while (opcion !=0);
+    }while(opcion!=0);
 }
 
-private void menuMatriculasNotas() {
+private void menuMatriculasNotas(){
     int opcion;
-    do {
+    do{
         System.out.println("\n--- MATRICULAS Y CALIFICACIONES ---");
         System.out.println("1. Registrar Matricula");
         System.out.println("2. Registrar Calificaciones");
         System.out.println("0. Volver al menu principal");
         System.out.print("Seleccione una opcion: ");
-        opcion = Integer.parseInt(scanner.nextLine());
+        opcion=Integer.parseInt(scanner.nextLine());
 
-        switch (opcion) {
+        switch(opcion){
             case 1:
                 registrarMatricula();
                 break;
@@ -359,12 +359,12 @@ private void menuMatriculasNotas() {
             default:
                 System.out.println("Opcion invalida.");
         }
-    } while (opcion !=0);
+    }while(opcion!=0);
 }
 
 private void menuNivelesIdioma(){
     int opcion;
-    do {
+    do{
         System.out.println("\n--- GESTION DE NIVELES DE IDIOMA ---");
         System.out.println("1. Registrar Nivel de Idioma");
         System.out.println("2. Buscar Nivel de Idioma");
@@ -372,9 +372,9 @@ private void menuNivelesIdioma(){
         System.out.println("4. Eliminar Nivel de Idioma");
         System.out.println("0. Volver al menu principal");
         System.out.print("Seleccione una opcion: ");
-        opcion = Integer.parseInt(scanner.nextLine());
+        opcion=Integer.parseInt(scanner.nextLine());
 
-        switch (opcion) {
+        switch(opcion){
             case 1:
                 registrarNivelIdioma();
                 break;
@@ -393,12 +393,12 @@ private void menuNivelesIdioma(){
             default:
                 System.out.println("Opcion invalida.");
         }
-    } while(opcion != 0);
+    }while(opcion!=0);
 }
 
 private void mostrarMenuReportesHTML(){
     int opcion;
-    do {
+    do{
         System.out.println("\n--- GENERACION DE REPORTES HTML ---");
         System.out.println("1. Reporte de Estudiantes");
         System.out.println("2. Reporte de Profesores");
@@ -408,7 +408,7 @@ private void mostrarMenuReportesHTML(){
         System.out.println("6. Reporte de Niveles de Idioma");
         System.out.println("0. Volver al Menu Principal");
         System.out.print("Seleccione una opcion: ");
-        opcion = Integer.parseInt(scanner.nextLine());
+        opcion=Integer.parseInt(scanner.nextLine());
 
         switch(opcion){
             case 1:
@@ -436,7 +436,7 @@ private void mostrarMenuReportesHTML(){
                 System.out.println("Opcion invalida.");
         }
 
-    } while (opcion != 0);
+    }while(opcion!=0);
 }
  private void registrarEstudiante(){
         try{
@@ -464,7 +464,7 @@ private void mostrarMenuReportesHTML(){
         Validador.validarNoVacio(nivelEstudios,"nivel de estudios");
         Validador.validarDatosEstudiante(dni, nombres, apellidos, direccion, telefono, correo, fechaNacimiento, nivelEstudios);
         Estudiante e=new Estudiante(dni, nombres, apellidos, direccion, telefono, correo, fechaNacimiento, nivelEstudios);
-            if (!e.validar()) {
+            if(!e.validar()){
             System.out.println("Error de validación: " + e.getMensajeError());
             return;
         }
@@ -477,7 +477,7 @@ private void mostrarMenuReportesHTML(){
         System.out.println("Error inesperado: " + e.getMessage());
     }
 }
-    private void buscarEstudiante() {
+    private void buscarEstudiante(){
         System.out.print("Ingrese DNI del estudiante: ");
         String dni=scanner.nextLine();
         Estudiante e=estudiantes.get(dni);
@@ -490,63 +490,63 @@ private void mostrarMenuReportesHTML(){
     private void registrarProfesor(){
         try{
         System.out.println("\nREGISTRO DE NUEVO PROFESOR");
-        String dni = leerDNI();
+        String dni=leerDNI();
         System.out.print("Nombres: ");
-        String nombres = Validador.formatearTexto(scanner.nextLine());
+        String nombres=Validador.formatearTexto(scanner.nextLine());
         Validador.validarSoloLetras(nombres, "nombres");
         
         System.out.print("Apellidos: ");
-        String apellidos = Validador.formatearTexto(scanner.nextLine());
+        String apellidos=Validador.formatearTexto(scanner.nextLine());
         Validador.validarSoloLetras(apellidos, "apellidos");
         
         System.out.print("Dirección: ");
-        String direccion = scanner.nextLine().trim();
+        String direccion=scanner.nextLine().trim();
         Validador.validarNoVacio(direccion, "dirección");
         
-        String telefono = leerTelefono();
-        String correo = leerEmail();
+        String telefono=leerTelefono();
+        String correo=leerEmail();
         
         System.out.print("Especialidad: ");
-        String especialidad = Validador.formatearTexto(scanner.nextLine());
+        String especialidad=Validador.formatearTexto(scanner.nextLine());
         Validador.validarSoloLetras(especialidad, "especialidad");
         
-        int experiencia = leerEnteroValidado("Años de experiencia: ",0,50);
+        int experiencia=leerEnteroValidado("Años de experiencia: ",0,50);
         
         // Validación completa
-        Validador.validarDatosProfesor(dni, nombres, apellidos, direccion, telefono, correo, especialidad, experiencia);
+        Validador.validarDatosProfesor(dni,nombres,apellidos,direccion,telefono,correo,especialidad,experiencia);
         
-        Profesor p = new Profesor(dni, nombres, apellidos, direccion, telefono, correo, especialidad, experiencia);
-            if (!p.validar()) {
-            System.out.println("Error de validación: " + p.getMensajeError());
+        Profesor p=new Profesor(dni,nombres,apellidos,direccion,telefono,correo,especialidad,experiencia);
+            if(!p.validar()){
+            System.out.println("Error de validación: "+p.getMensajeError());
             return;
         }
         profesores.put(dni, p);
-        ArchivoUtil.guardarProfesor(p, "profesores.txt");
+        ArchivoUtil.guardarProfesor(p,"profesores.txt");
         
         System.out.println("Profesor registrado y validado exitosamente!");
         
-    } catch (IllegalArgumentException e) {
-        System.out.println("Error de validación: " + e.getMessage());
+    }catch(IllegalArgumentException e){
+        System.out.println("Error de validación: "+e.getMessage());
     }
 }
-    private void registrarCurso() {
-        try {
+    private void registrarCurso(){
+        try{
         System.out.println("\nREGISTRO DE NUEVO CURSO");
         
         System.out.print("Código del curso (Formato: XXX-999): ");
-        String codigo = Validador.formatearCodigoCurso(scanner.nextLine());
+        String codigo =Validador.formatearCodigoCurso(scanner.nextLine());
         Validador.validarCodigoCurso(codigo);
         
         System.out.print("Nombre del curso: ");
-        String nombre = scanner.nextLine().trim();
+        String nombre =scanner.nextLine().trim();
         Validador.validarNoVacio(nombre, "nombre del curso");
         
         System.out.print("Idioma: ");
-        String idioma = Validador.formatearTexto(scanner.nextLine());
+        String idioma =Validador.formatearTexto(scanner.nextLine());
         Validador.validarIdioma(idioma);
         
         System.out.print("Nivel: ");
-        String nivel = scanner.nextLine().trim();
+        String nivel =scanner.nextLine().trim();
         Validador.validarNivelIdioma(nivel);
         
         System.out.print("DNI del profesor: ");
@@ -557,9 +557,9 @@ private void mostrarMenuReportesHTML(){
         String horario = scanner.nextLine().trim();
         Validador.validarNoVacio(horario, "horario");
         
-        int duracion = leerEnteroValidado("Duración (en semanas): ", 1, 52);
-        int capacidad = leerEnteroValidado("Capacidad máxima: ", 1, 50);
-        double precio = leerDoubleValidado("Precio: S/", 0, 10000);
+        int duracion =leerEnteroValidado("Duración (en semanas): ", 1, 52);
+        int capacidad =leerEnteroValidado("Capacidad máxima: ", 1, 50);
+        double precio =leerDoubleValidado("Precio: S/", 0, 10000);
         
         System.out.print("Observaciones: ");
         String obs = scanner.nextLine().trim();
