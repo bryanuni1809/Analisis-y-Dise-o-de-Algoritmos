@@ -97,35 +97,35 @@ public class GestorAcademia{
         System.out.println("Error al cargar profesores: "+e.getMessage());
     }
 }
-    private void cargarNivelesIdioma() {
-    try (BufferedReader br = new BufferedReader(new FileReader("idiomas.txt"))) {
+    private void cargarNivelesIdioma(){
+    try (BufferedReader br=new BufferedReader(new FileReader("idiomas.txt"))){
         String linea;
-        while ((linea = br.readLine()) != null) {
-            String[] partes = linea.split(",");
-            if (partes.length >= 4) {
-                IdiomaNivel in = new IdiomaNivel(partes[0], partes[1], partes[2], partes[3]);
-                nivelesIdioma.put(in.getCodigo(), in);
+        while((linea=br.readLine())!= null){
+            String[] partes=linea.split(",");
+            if(partes.length>= 4){
+                IdiomaNivel in=new IdiomaNivel(partes[0],partes[1],partes[2], partes[3]);
+                nivelesIdioma.put(in.getCodigo(),in);
             }
         }
-    } catch (IOException e) {
+    }catch(IOException e){
         System.out.println("Error al cargar niveles de idioma: " + e.getMessage());
     }
 }
-    private void cargarEstudiantes() {
-    try (BufferedReader br = new BufferedReader(new FileReader("estudiantes.txt"))) {
+    private void cargarEstudiantes(){
+    try(BufferedReader br=new BufferedReader(new FileReader("estudiantes.txt"))){
         String linea;
-        while ((linea = br.readLine()) != null) {
-            String[] partes = linea.split(",");
-            if (partes.length >= 8) {
-                Estudiante e = new Estudiante(
-                    partes[0], partes[1], partes[2], partes[3],
-                    partes[4], partes[5], partes[6], partes[7]
+        while((linea=br.readLine())!= null){
+            String[] partes=linea.split(",");
+            if(partes.length>=8){
+                Estudiante e=new Estudiante(
+                    partes[0],partes[1],partes[2],partes[3],
+                    partes[4],partes[5],partes[6],partes[7]
                 );
-            estudiantes.put(e.getDni(), e);
+            estudiantes.put(e.getDni(),e);
             }
         }
-    } catch (IOException e) {
-        System.out.println("Error al cargar estudiantes: " + e.getMessage());
+    }catch(IOException e){
+        System.out.println("Error al cargar estudiantes: "+e.getMessage());
     }
 }
     private void cargarMatriculas() {
