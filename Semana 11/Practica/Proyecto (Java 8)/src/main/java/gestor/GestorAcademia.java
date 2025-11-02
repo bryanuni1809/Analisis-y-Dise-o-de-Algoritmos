@@ -648,50 +648,50 @@ private void mostrarMenuReportesHTML(){
         String fecha=leerFecha("Fecha del registro de calificación (dd/MM/yyyy): ");
 
         boolean encontrado=false;
-        for (Matricula m : matriculas) {
-            if (m.getCodigoCurso().equals(codigoCurso)) {
-                String dniEst = m.getDniEstudiante();
-                Estudiante est = estudiantes.get(dniEst);   
+        for(Matricula m:matriculas){
+            if(m.getCodigoCurso().equals(codigoCurso)){
+                String dniEst=m.getDniEstudiante();
+                Estudiante est=estudiantes.get(dniEst);   
 
-                if (est != null) {
-                    System.out.println("Estudiante: " + est.getNombres() + " " + est.getApellidos());
+                if(est!=null){
+                    System.out.println("Estudiante: "+est.getNombres()+" "+est.getApellidos());
                     
-                    double nota = leerDoubleValidado("Nota (0-20): ", 0, 20);
+                    double nota=leerDoubleValidado("Nota (0-20): ",0,20);
                     Validador.validarNota(nota);
                     
                     System.out.print("Observaciones: ");
                     
-                    String obs = scanner.nextLine().trim();
-                    Validador.validarNoVacio(obs, "observaciones");
+                    String obs=scanner.nextLine().trim();
+                    Validador.validarNoVacio(obs,"observaciones");
 
-                    Calificacion c = new Calificacion(codigoCurso, dniEst, fecha, nota, obs);
-                    if (!c.validar()) {
-                        System.out.println("Error de validación para " + est.getNombres() + ": " + c.getMensajeError());
+                    Calificacion c=new Calificacion(codigoCurso,dniEst,fecha,nota,obs);
+                    if(!c.validar()){
+                        System.out.println("Error de validación para "+est.getNombres()+": "+c.getMensajeError());
                         continue;
                     }
                     calificaciones.add(c);
-                    ArchivoUtil.guardarCalificacion(c, "calificaciones.txt");
+                    ArchivoUtil.guardarCalificacion(c,"calificaciones.txt");
 
                     System.out.println("Calificación registrada y validada.");
-                    encontrado = true;
+                    encontrado=true;
                 }
             }
         }
 
-        if (!encontrado) {
+        if(!encontrado){
             System.out.println("No hay estudiantes matriculados en este curso.");
         }
 
-    } catch (IllegalArgumentException e) {
-        System.out.println("Error de validación: " + e.getMessage());
+    }catch(IllegalArgumentException e){
+        System.out.println("Error de validación: "+e.getMessage());
     }
 }
-    private void modificarEstudiante() {
+    private void modificarEstudiante(){
     System.out.print("Ingrese DNI del estudiante a modificar: ");
-    String dni = scanner.nextLine();
+    String dni=scanner.nextLine();
 
-    Estudiante e = estudiantes.get(dni);
-        if (e != null){
+    Estudiante e=estudiantes.get(dni);
+        if(e != null){
             System.out.println("Estudiante encontrado:");
             System.out.println(e.mostrarInfo());
 
@@ -722,11 +722,11 @@ private void mostrarMenuReportesHTML(){
                     System.out.println("Opcion invalida.");
                     break;
             }
-            if (!e.validar()) {
+            if(!e.validar()){
             System.out.println("Error: Los datos modificados no son válidos: " + e.getMensajeError());
             return;
             }
-            ArchivoUtil.sobrescribirEstudiantes(new ArrayList<>(estudiantes.values()), "estudiantes.txt");
+            ArchivoUtil.sobrescribirEstudiantes(new ArrayList<>(estudiantes.values()),"estudiantes.txt");
             System.out.println("Datos actualizados (solo en memoria).");
         }else{
         System.out.println("Estudiante no encontrado.");
@@ -737,7 +737,7 @@ private void modificarProfesor(){
     System.out.print("Ingrese DNI del profesor a modificar: ");
     String dni=scanner.nextLine();
     Profesor p=profesores.get(dni);
-        if (p.getDni().equals(dni)){
+        if(p.getDni().equals(dni)){
             System.out.println("Profesor encontrado:");
             System.out.println(p.mostrarInfo());
 
@@ -747,26 +747,26 @@ private void modificarProfesor(){
             System.out.print("Opcion: ");
             int opcion=Integer.parseInt(scanner.nextLine());
 
-            switch (opcion){
+            switch(opcion){
                 case 1:
                     System.out.print("Nueva especialidad: ");
-                    String nuevaEsp = scanner.nextLine();
+                    String nuevaEsp=scanner.nextLine();
                     p.setEspecialidad(nuevaEsp);
                     break;
                 case 2:
                     System.out.print("Nuevo numero de años de experiencia: ");
-                    int nuevaExp = Integer.parseInt(scanner.nextLine());
+                    int nuevaExp=Integer.parseInt(scanner.nextLine());
                     p.setExperiencia(nuevaExp);
                     break;
                 default:
                     System.out.println("Opcion invalida.");
                     break;
             }
-            if (!p.validar()) {
-            System.out.println("Error: Los datos modificados no son válidos: " + p.getMensajeError());
+            if(!p.validar()){
+            System.out.println("Error: Los datos modificados no son válidos: "+p.getMensajeError());
             return;
             }
-            ArchivoUtil.sobrescribirProfesores(new ArrayList<>(profesores.values()), "profesores.txt");
+            ArchivoUtil.sobrescribirProfesores(new ArrayList<>(profesores.values()),"profesores.txt");
             System.out.println("Datos actualizados.");
         }else{
         System.out.println("Profesor no encontrado.");
@@ -774,7 +774,7 @@ private void modificarProfesor(){
 }
 private void modificarCurso(){
     System.out.print("Ingrese codigo del curso a modificar: ");
-    String codigo =scanner.nextLine();
+    String codigo=scanner.nextLine();
     Curso c=cursos.get(codigo);
         if(c.getCodigo().equals(codigo)){
             System.out.println("Curso encontrado:");
@@ -806,11 +806,11 @@ private void modificarCurso(){
                     System.out.println("Opcion invalida.");
                     break;
             }
-            if (!c.validar()) {
-            System.out.println("Error: Los datos modificados no son válidos: " + c.getMensajeError());
+            if(!c.validar()){
+            System.out.println("Error: Los datos modificados no son válidos: "+c.getMensajeError());
             return;
             }
-            ArchivoUtil.sobrescribirCursos(new ArrayList<>(cursos.values()), "cursos.txt");
+            ArchivoUtil.sobrescribirCursos(new ArrayList<>(cursos.values()),"cursos.txt");
             System.out.println("Datos del curso actualizados.");
         }else{
             System.out.println("Curso no encontrado.");
@@ -820,7 +820,7 @@ private void registrarNivelIdioma(){
     System.out.println("Registro de Nivel de Idioma:");
     System.out.print("Codigo: ");
     String codigo=scanner.nextLine();
-    if (nivelesIdioma.containsKey(codigo)) {
+    if(nivelesIdioma.containsKey(codigo)){
             System.out.println("Ya existe un nivel de idioma con este código.");
             return;
         }
