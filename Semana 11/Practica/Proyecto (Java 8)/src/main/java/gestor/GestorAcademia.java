@@ -829,14 +829,14 @@ private void registrarNivelIdioma(){
     System.out.print("Nivel: ");
     String nivel=scanner.nextLine();
     System.out.print("Descripcion: ");
-    String descripcion =scanner.nextLine();
+    String descripcion=scanner.nextLine();
 
-    IdiomaNivel in =new IdiomaNivel(codigo, idioma, nivel, descripcion);
-    if (!in.validar()) {
-            System.out.println("Error de validación: " + in.getMensajeError());
+    IdiomaNivel in =new IdiomaNivel(codigo,idioma,nivel,descripcion);
+    if(!in.validar()){
+            System.out.println("Error de validación: "+in.getMensajeError());
             return;
         }
-    nivelesIdioma.put(codigo, in);
+    nivelesIdioma.put(codigo,in);
     ArchivoUtil.guardarNivelIdioma(in,"idiomas.txt");
 
     System.out.println("Nivel de idioma registrado.");
@@ -854,28 +854,28 @@ private void modificarNivelIdioma(){
             System.out.println("1. Nivel");
             System.out.println("2. Descripcion");
             System.out.print("Opcion: ");
-            int opcion = Integer.parseInt(scanner.nextLine());
+            int opcion=Integer.parseInt(scanner.nextLine());
 
-            switch (opcion) {
+            switch(opcion){
                 case 1:
                     System.out.print("Nuevo nivel: ");
-                    String nuevoNivel = scanner.nextLine();
+                    String nuevoNivel=scanner.nextLine();
                     in.setNivel(nuevoNivel);
                     break;
                 case 2:
                     System.out.print("Nueva descripcion: ");
-                    String nuevaDesc = scanner.nextLine();
+                    String nuevaDesc=scanner.nextLine();
                     in.setDescripcion(nuevaDesc);
                     break;
                 default:
                     System.out.println("Opcion invalida.");
                     break;
             }
-            if (!in.validar()) {
-            System.out.println("Error: Los datos modificados no son válidos: " + in.getMensajeError());
+            if(!in.validar()){
+            System.out.println("Error: Los datos modificados no son válidos: "+in.getMensajeError());
             return;
             }
-            ArchivoUtil.sobrescribirNivelesIdioma(new ArrayList<>(nivelesIdioma.values()), "idiomas.txt");
+            ArchivoUtil.sobrescribirNivelesIdioma(new ArrayList<>(nivelesIdioma.values()),"idiomas.txt");
             System.out.println("Nivel actualizado.");
         }else{
         System.out.println("Nivel no encontrado.");    
@@ -885,7 +885,7 @@ private void buscarProfesor(){
     System.out.print("Ingrese DNI del profesor: ");
     String dni=scanner.nextLine();
     Profesor p=profesores.get(dni);
-        if (p !=null){
+        if(p!=null){
             System.out.println("Profesor encontrado:");
             System.out.println(p.mostrarInfo());
         }else{
@@ -896,7 +896,7 @@ private void buscarCurso(){
     System.out.print("Ingrese codigo del curso: ");
     String codigo=scanner.nextLine();
     Curso c=cursos.get(codigo);
-        if(c !=null){
+        if(c!=null){
             System.out.println("Curso encontrado:");
             System.out.println(c.mostrarInfo());
         }else{
@@ -906,9 +906,9 @@ private void buscarCurso(){
         
 private void buscarNivelIdioma(){
     System.out.print("Ingrese codigo del nivel de idioma: ");
-    String codigo = scanner.nextLine();
+    String codigo=scanner.nextLine();
     IdiomaNivel in=nivelesIdioma.get(codigo);
-        if(in !=null){
+        if(in!=null){
             System.out.println("Nivel encontrado:");
             System.out.println(in.mostrarInfo());
         }else{
@@ -918,7 +918,7 @@ private void buscarNivelIdioma(){
 private void eliminarProfesor(){
     System.out.print("Ingrese DNI del profesor a eliminar: ");
     String dni=scanner.nextLine();
-    if(profesores.remove(dni) != null){
+    if(profesores.remove(dni)!= null){
             ArchivoUtil.sobrescribirProfesores(new ArrayList<>(profesores.values()),"profesores.txt");
             System.out.println("Profesor eliminado.");
         }else{
@@ -928,7 +928,7 @@ private void eliminarProfesor(){
 private void eliminarCurso(){
     System.out.print("Ingrese codigo del curso a eliminar: ");
     String codigo=scanner.nextLine();
-        if(cursos.remove(codigo) !=null){
+        if(cursos.remove(codigo)!=null){
             ArchivoUtil.sobrescribirCursos(new ArrayList<>(cursos.values()),"cursos.txt");
             System.out.println("Curso eliminado.");
         }else{
@@ -994,19 +994,19 @@ private void generarReporteProfesoresHTML(){
     }
 }
 private void generarReporteCursosHTML(){
-    try (BufferedWriter bw=new BufferedWriter(new FileWriter("reporte_cursos.html"))) {
+    try(BufferedWriter bw=new BufferedWriter(new FileWriter("reporte_cursos.html"))) {
         bw.write("<html><head><title>Reporte de Cursos</title><style>");
         bw.write("table { width: 100%; border-collapse: collapse; } th, td { border: 1px solid black; padding: 8px; }");
         bw.write("</style></head><body><h1>Cursos Registrados</h1><table>");
         bw.write("<tr><th>Código</th><th>Nombre</th><th>Idioma</th><th>Nivel</th><th>Profesor</th><th>Horario</th><th>Duración</th><th>Capacidad</th><th>Precio</th><th>Observaciones</th></tr>");
-        for (Curso c : cursos.values()) {
-            bw.write("<tr><td>" + c.getCodigo() + "</td><td>" + c.getNombre() + "</td><td>" + c.getIdioma() + "</td><td>" + c.getNivel() + "</td><td>" +
+        for(Curso c : cursos.values()){
+            bw.write("<tr><td>"+c.getCodigo()+"</td><td>" + c.getNombre() + "</td><td>" + c.getIdioma() + "</td><td>" + c.getNivel() + "</td><td>" +
                      c.getProfesorDni() + "</td><td>" + c.getHorario() + "</td><td>" + c.getDuracion() + "</td><td>" + c.getCapacidadMaxima() +
-                     "</td><td>" + c.getPrecio() + "</td><td>" + c.getObservaciones() + "</td></tr>");
+                     "</td><td>"+c.getPrecio() + "</td><td>" + c.getObservaciones() + "</td></tr>");
         }
         bw.write("</table></body></html>");
         System.out.println("Reporte generado: reporte_cursos.html");
-    } catch (IOException e) {
+    }catch(IOException e){
         System.out.println("Error al generar reporte de cursos: " + e.getMessage());
     }
 }
