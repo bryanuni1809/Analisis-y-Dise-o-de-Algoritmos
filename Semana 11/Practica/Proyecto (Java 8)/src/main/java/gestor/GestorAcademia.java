@@ -534,32 +534,32 @@ private void mostrarMenuReportesHTML(){
         System.out.println("\nREGISTRO DE NUEVO CURSO");
         
         System.out.print("Código del curso (Formato: XXX-999): ");
-        String codigo =Validador.formatearCodigoCurso(scanner.nextLine());
+        String codigo=Validador.formatearCodigoCurso(scanner.nextLine());
         Validador.validarCodigoCurso(codigo);
         
         System.out.print("Nombre del curso: ");
-        String nombre =scanner.nextLine().trim();
+        String nombre=scanner.nextLine().trim();
         Validador.validarNoVacio(nombre, "nombre del curso");
         
         System.out.print("Idioma: ");
-        String idioma =Validador.formatearTexto(scanner.nextLine());
+        String idioma=Validador.formatearTexto(scanner.nextLine());
         Validador.validarIdioma(idioma);
         
         System.out.print("Nivel: ");
-        String nivel =scanner.nextLine().trim();
+        String nivel=scanner.nextLine().trim();
         Validador.validarNivelIdioma(nivel);
         
         System.out.print("DNI del profesor: ");
-        String dniProfesor = scanner.nextLine().trim();
+        String dniProfesor=scanner.nextLine().trim();
         Validador.validarDNI(dniProfesor);
         
         System.out.print("Horario: ");
-        String horario = scanner.nextLine().trim();
-        Validador.validarNoVacio(horario, "horario");
+        String horario=scanner.nextLine().trim();
+        Validador.validarNoVacio(horario,"horario");
         
-        int duracion =leerEnteroValidado("Duración (en semanas): ", 1, 52);
-        int capacidad =leerEnteroValidado("Capacidad máxima: ", 1, 50);
-        double precio =leerDoubleValidado("Precio: S/", 0, 10000);
+        int duracion =leerEnteroValidado("Duración (en semanas): ",1,52);
+        int capacidad =leerEnteroValidado("Capacidad máxima: ",1,50);
+        double precio =leerDoubleValidado("Precio: S/",0,10000);
         
         System.out.print("Observaciones: ");
         String obs = scanner.nextLine().trim();
@@ -576,38 +576,38 @@ private void mostrarMenuReportesHTML(){
         
         System.out.println("Curso registrado y validado exitosamente!");
         
-    } catch (IllegalArgumentException e) {
-        System.out.println("Error de validación: " + e.getMessage());
+    }catch(IllegalArgumentException e){
+        System.out.println("Error de validación: "+e.getMessage());
     }
 }
    private void registrarMatricula(){
         System.out.println("Registro de Matricula:");
         System.out.print("DNI del estudiante: ");
-        String dni =scanner.nextLine();
+        String dni=scanner.nextLine();
         Estudiante estudiante =estudiantes.get(dni);
-        if (estudiante == null){
+        if(estudiante==null){
             System.out.println("Estudiante no encontrado. Primero debe registrarlo.");
         return;
         }
-        if (cursos.isEmpty()){
+        if(cursos.isEmpty()){
             System.out.println("No hay cursos disponibles. Primero registre cursos.");
             return;
         }
         System.out.println("Cursos disponibles:");
-        for (Curso c : cursos.values()) {
-            System.out.println("- " +c.getCodigo()+ ": " +c.getNombre());
+        for(Curso c : cursos.values()){
+            System.out.println("- "+c.getCodigo()+ ": "+c.getNombre());
         }
         System.out.print("Ingrese el codigo del curso: ");
         String codigoCurso =scanner.nextLine();
         Curso cursoSeleccionado=null;
-        for (Curso c:cursos.values()){
-            if (c.getCodigo().equals(codigoCurso)) {
+        for(Curso c:cursos.values()){
+            if(c.getCodigo().equals(codigoCurso)){
                 cursoSeleccionado=c;
                 break;
             }
         }
 
-        if (cursoSeleccionado==null){
+        if(cursoSeleccionado==null){
             System.out.println("Curso no encontrado.");
             return;
         }
@@ -615,9 +615,9 @@ private void mostrarMenuReportesHTML(){
         System.out.print("Fecha de matricula (ej. 25/06/2025): ");
         String fecha=scanner.nextLine();
         double monto=cursoSeleccionado.getPrecio();
-        Matricula m=new Matricula(codigoCurso, dni, fecha, monto);
-        if (!m.validar()) {
-            System.out.println("Error de validación: " + m.getMensajeError());
+        Matricula m=new Matricula(codigoCurso,dni,fecha,monto);
+        if(!m.validar()){
+            System.out.println("Error de validación: "+m.getMensajeError());
             return;
         }
         matriculas.add(m);
@@ -626,28 +626,28 @@ private void mostrarMenuReportesHTML(){
     }
 
     private void registrarCalificacion(){
-        try {
+        try{
         System.out.println("Registro de Calificaciones:");
         System.out.print("Ingrese el código del curso: ");
         String codigoCurso = scanner.nextLine().trim();
         Validador.validarCodigoCurso(codigoCurso);
 
-        Curso cursoSeleccionado = null;
-        for (Curso c : cursos.values()) {
-            if (c.getCodigo().equals(codigoCurso)) {
-                cursoSeleccionado = c;
+        Curso cursoSeleccionado=null;
+        for(Curso c : cursos.values()){
+            if (c.getCodigo().equals(codigoCurso)){
+                cursoSeleccionado=c;
                 break;
             }
         }
         
-        if (cursoSeleccionado == null) {
+        if(cursoSeleccionado==null){
             System.out.println("Curso no encontrado.");
             return;
         }
 
-        String fecha = leerFecha("Fecha del registro de calificación (dd/MM/yyyy): ");
+        String fecha=leerFecha("Fecha del registro de calificación (dd/MM/yyyy): ");
 
-        boolean encontrado = false;
+        boolean encontrado=false;
         for (Matricula m : matriculas) {
             if (m.getCodigoCurso().equals(codigoCurso)) {
                 String dniEst = m.getDniEstudiante();
