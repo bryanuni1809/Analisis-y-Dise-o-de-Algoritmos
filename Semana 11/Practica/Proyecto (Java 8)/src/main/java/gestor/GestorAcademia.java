@@ -999,49 +999,49 @@ private void generarReporteCursosHTML(){
         bw.write("table { width: 100%; border-collapse: collapse; } th, td { border: 1px solid black; padding: 8px; }");
         bw.write("</style></head><body><h1>Cursos Registrados</h1><table>");
         bw.write("<tr><th>Código</th><th>Nombre</th><th>Idioma</th><th>Nivel</th><th>Profesor</th><th>Horario</th><th>Duración</th><th>Capacidad</th><th>Precio</th><th>Observaciones</th></tr>");
-        for(Curso c : cursos.values()){
-            bw.write("<tr><td>"+c.getCodigo()+"</td><td>" + c.getNombre() + "</td><td>" + c.getIdioma() + "</td><td>" + c.getNivel() + "</td><td>" +
-                     c.getProfesorDni() + "</td><td>" + c.getHorario() + "</td><td>" + c.getDuracion() + "</td><td>" + c.getCapacidadMaxima() +
-                     "</td><td>"+c.getPrecio() + "</td><td>" + c.getObservaciones() + "</td></tr>");
+        for(Curso c:cursos.values()){
+            bw.write("<tr><td>"+c.getCodigo()+"</td><td>" + c.getNombre()+"</td><td>"+c.getIdioma()+"</td><td>"+c.getNivel()+"</td><td>"+
+                     c.getProfesorDni()+"</td><td>" + c.getHorario() +"</td><td>"+c.getDuracion()+"</td><td>"+c.getCapacidadMaxima()+
+                     "</td><td>"+c.getPrecio() + "</td><td>" + c.getObservaciones()+"</td></tr>");
         }
         bw.write("</table></body></html>");
         System.out.println("Reporte generado: reporte_cursos.html");
     }catch(IOException e){
-        System.out.println("Error al generar reporte de cursos: " + e.getMessage());
+        System.out.println("Error al generar reporte de cursos: "+e.getMessage());
     }
 }
-private void generarReporteMatriculasHTML() {
-    try (BufferedWriter bw = new BufferedWriter(new FileWriter("reporte_matriculas.html"))) {
+private void generarReporteMatriculasHTML(){
+    try (BufferedWriter bw=new BufferedWriter(new FileWriter("reporte_matriculas.html"))){
         bw.write("<html><head><title>Reporte de Matriculas</title><style>");
         bw.write("table { width: 100%; border-collapse: collapse; } th, td { border: 1px solid black; padding: 8px; }");
         bw.write("</style></head><body><h1>Matrículas Registradas</h1><table>");
         bw.write("<tr><th>DNI Estudiante</th><th>Código Curso</th><th>Fecha</th><th>Monto Pagado</th></tr>");
-        for (Matricula m :matriculas) {
-            bw.write("<tr><td>" + m.getDniEstudiante() + "</td><td>" + m.getCodigoCurso() + "</td><td>" + m.getFechaMatricula()+ "</td><td>" + m.getMonto() + "</td></tr>");
+        for(Matricula m:matriculas){
+            bw.write("<tr><td>"+m.getDniEstudiante()+"</td><td>"+m.getCodigoCurso()+"</td><td>"+m.getFechaMatricula()+"</td><td>"+m.getMonto()+"</td></tr>");
         }
         bw.write("</table></body></html>");
         System.out.println("Reporte generado: reporte_matriculas.html");
-    } catch (IOException e) {
-        System.out.println("Error al generar reporte de matrículas: " + e.getMessage());
+    }catch(IOException e){
+        System.out.println("Error al generar reporte de matrículas: "+e.getMessage());
     }
 }
-private void generarReporteCalificacionesHTML() {
-    try (BufferedWriter bw = new BufferedWriter(new FileWriter("reporte_calificaciones.html"))) {
+private void generarReporteCalificacionesHTML(){
+    try(BufferedWriter bw=new BufferedWriter(new FileWriter("reporte_calificaciones.html"))){
         bw.write("<html><head><title>Reporte de Calificaciones</title><style>");
         bw.write("table { width: 100%; border-collapse: collapse; } th, td { border: 1px solid black; padding: 8px; }");
         bw.write("</style></head><body><h1>Calificaciones Registradas</h1><table>");
         bw.write("<tr><th>Código Curso</th><th>DNI Estudiante</th><th>Fecha</th><th>Nota</th><th>Observaciones</th></tr>");
-        for (Calificacion c :calificaciones) {
-            bw.write("<tr><td>" + c.getCodigoCurso() + "</td><td>" + c.getDniEstudiante() + "</td><td>" + c.getFecha() + "</td><td>" + c.getNota() + "</td><td>" + c.getObservaciones() + "</td></tr>");
+        for(Calificacion c:calificaciones){
+            bw.write("<tr><td>"+c.getCodigoCurso()+"</td><td>"+c.getDniEstudiante()+"</td><td>"+c.getFecha()+"</td><td>"+c.getNota()+"</td><td>"+c.getObservaciones()+"</td></tr>");
         }
         bw.write("</table></body></html>");
         System.out.println("Reporte generado: reporte_calificaciones.html");
-    } catch (IOException e) {
-        System.out.println("Error al generar reporte de calificaciones: " + e.getMessage());
+    }catch(IOException e){
+        System.out.println("Error al generar reporte de calificaciones: "+e.getMessage());
     }
 }
-private void generarReporteNivelesIdiomaHTML() {
-    try (BufferedWriter bw = new BufferedWriter(new FileWriter("reporte_niveles_idioma.html"))) {
+private void generarReporteNivelesIdiomaHTML(){
+    try(BufferedWriter bw = new BufferedWriter(new FileWriter("reporte_niveles_idioma.html"))) {
         bw.write("<html><head><title>Reporte de Niveles de Idioma</title><style>");
         bw.write("table { width: 100%; border-collapse: collapse; } th, td { border: 1px solid black; padding: 8px; }");
         bw.write("</style></head><body><h1>Niveles de Idioma Registrados</h1><table>");
