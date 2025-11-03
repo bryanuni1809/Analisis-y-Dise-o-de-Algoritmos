@@ -1046,16 +1046,16 @@ private void generarReporteNivelesIdiomaHTML(){
         bw.write("table { width: 100%; border-collapse: collapse; } th, td { border: 1px solid black; padding: 8px; }");
         bw.write("</style></head><body><h1>Niveles de Idioma Registrados</h1><table>");
         bw.write("<tr><th>Idioma</th><th>Nivel</th><th>Descripción</th></tr>");
-        for (IdiomaNivel n :nivelesIdioma.values()) {
-            bw.write("<tr><td>" + n.getIdioma() + "</td><td>" + n.getNivel() + "</td><td>" + n.getDescripcion() + "</td></tr>");
+        for(IdiomaNivel n:nivelesIdioma.values()){
+            bw.write("<tr><td>"+n.getIdioma()+"</td><td>"+n.getNivel()+"</td><td>"+n.getDescripcion()+"</td></tr>");
         }
         bw.write("</table></body></html>");
         System.out.println("Reporte generado: reporte_niveles_idioma.html");
-    } catch (IOException e) {
-        System.out.println("Error al generar reporte de niveles de idioma: " + e.getMessage());
+    }catch(IOException e){
+        System.out.println("Error al generar reporte de niveles de idioma: "+e.getMessage());
     }
 }
-private void menuOrdenamientos() {
+private void menuOrdenamientos(){
     int opcion;
     do{
         System.out.println("\n=== SISTEMA DE ORDENAMIENTO - MERGE SORT ===");
@@ -1065,9 +1065,9 @@ private void menuOrdenamientos() {
         System.out.println("4. Ordenación Externa (Archivos Grandes)");
         System.out.println("0. Volver al menú principal");
         System.out.print("Seleccione una opción: ");
-        opcion =Integer.parseInt(scanner.nextLine());
+        opcion=Integer.parseInt(scanner.nextLine());
 
-        switch (opcion){
+        switch(opcion){
             case 1:
                 ordenarEstudiantes();
                 break;
@@ -1086,37 +1086,37 @@ private void menuOrdenamientos() {
             default:
                 System.out.println("Opción inválida.");
         }
-    } while (opcion != 0);
+    } while (opcion!=0);
 }
 
-private void ordenarEstudiantes() {
-    if (estudiantes.isEmpty()) {
+private void ordenarEstudiantes(){
+    if(estudiantes.isEmpty()){
         System.out.println("No hay estudiantes registrados.");
         return;
     }
     
-    List<Estudiante> listaEstudiantes = new ArrayList<>(estudiantes.values());
+    List<Estudiante>listaEstudiantes=new ArrayList<>(estudiantes.values());
     
     System.out.println("\n=== ORDENAR ESTUDIANTES - MERGE SORT ===");
     System.out.println("1. Por Apellidos (A-Z)");
     System.out.println("2. Por Nombres (A-Z)");
     System.out.println("3. Por DNI (Ascendente)");
     System.out.print("Seleccione criterio: ");
-    int criterio = Integer.parseInt(scanner.nextLine());
+    int criterio=Integer.parseInt(scanner.nextLine());
     
-    long startTime = System.currentTimeMillis();
+    long startTime=System.currentTimeMillis();
     
-    switch (criterio) {
+    switch(criterio){
         case 1:
-            Ordenaciones.ordenar(listaEstudiantes, Comparator.comparing(Estudiante::getApellidos));
+            Ordenaciones.ordenar(listaEstudiantes,Comparator.comparing(Estudiante::getApellidos));
             System.out.println("Estudiantes ordenados por APELLIDOS");
             break;
         case 2:
-            Ordenaciones.ordenar(listaEstudiantes, Comparator.comparing(Estudiante::getNombres));
+            Ordenaciones.ordenar(listaEstudiantes,Comparator.comparing(Estudiante::getNombres));
             System.out.println("Estudiantes ordenados por NOMBRES");
             break;
         case 3:
-            Ordenaciones.ordenar(listaEstudiantes, Comparator.comparing(Estudiante::getDni));
+            Ordenaciones.ordenar(listaEstudiantes,Comparator.comparing(Estudiante::getDni));
             System.out.println("Estudiantes ordenados por DNI");
             break;
         default:
@@ -1124,7 +1124,7 @@ private void ordenarEstudiantes() {
             return;
     }
     
-    long endTime = System.currentTimeMillis();
+    long endTime=System.currentTimeMillis();
     
     System.out.println("Tiempo de ordenamiento: " + (endTime - startTime) + " ms");
     System.out.println("Total de elementos ordenados: " + listaEstudiantes.size());
