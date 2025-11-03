@@ -1179,31 +1179,31 @@ private void ordenarProfesores(){
 }
 
 private void ordenarCursos(){
-    if (cursos.isEmpty()) {
+    if(cursos.isEmpty()){
         System.out.println("No hay cursos registrados.");
         return;
     }
-    List<Curso> listaCursos = new ArrayList<>(cursos.values());
+    List<Curso>listaCursos=new ArrayList<>(cursos.values());
     System.out.println("\n=== ORDENAR CURSOS - MERGE SORT ===");
     System.out.println("1. Por Nombre (A-Z)");
     System.out.println("2. Por Idioma (A-Z)");
     System.out.println("3. Por Precio (Menor a mayor)");
     System.out.print("Seleccione criterio: ");
-    int criterio =Integer.parseInt(scanner.nextLine());
+    int criterio=Integer.parseInt(scanner.nextLine());
     
-    long startTime =System.currentTimeMillis();
+    long startTime=System.currentTimeMillis();
     
-    switch (criterio){
+    switch(criterio){
         case 1:
-            Ordenaciones.ordenar(listaCursos, Comparator.comparing(Curso::getNombre));
+            Ordenaciones.ordenar(listaCursos,Comparator.comparing(Curso::getNombre));
             System.out.println("Cursos ordenados por NOMBRE");
             break;
         case 2:
-            Ordenaciones.ordenar(listaCursos, Comparator.comparing(Curso::getIdioma));
+            Ordenaciones.ordenar(listaCursos,Comparator.comparing(Curso::getIdioma));
             System.out.println("Cursos ordenados por IDIOMA");
             break;
         case 3:
-            Ordenaciones.ordenar(listaCursos, Comparator.comparingDouble(Curso::getPrecio));
+            Ordenaciones.ordenar(listaCursos,Comparator.comparingDouble(Curso::getPrecio));
             System.out.println("Cursos ordenados por PRECIO (Menor a mayor)");
             break;
         default:
@@ -1211,11 +1211,11 @@ private void ordenarCursos(){
             return;
     }
     
-    long endTime = System.currentTimeMillis();
-    System.out.println("Tiempo de ordenamiento: " + (endTime - startTime) + " ms");
+    long endTime=System.currentTimeMillis();
+    System.out.println("Tiempo de ordenamiento: "+(endTime-startTime)+" ms");
     System.out.println("\n=== RESULTADOS ORDENADOS ===");
-    for (int i = 0; i < listaCursos.size(); i++) {
-        System.out.println((i + 1) + ". " + listaCursos.get(i).mostrarInfo());
+    for(int i=0;i<listaCursos.size();i++){
+        System.out.println((i + 1)+". "+listaCursos.get(i).mostrarInfo());
     }
 }
 
@@ -1224,43 +1224,43 @@ private void ordenacionExterna(){
     System.out.println("1. Ordenar archivo de Estudiantes");
     System.out.println("2. Ordenar archivo de Profesores");
     System.out.print("Seleccione archivo: ");
-    int archivo = Integer.parseInt(scanner.nextLine());
+    int archivo=Integer.parseInt(scanner.nextLine());
     
     try{
         File entrada,salida;
-        switch (archivo){
+        switch(archivo){
             case 1:
-                entrada =new File("estudiantes.txt");
-                salida =new File("estudiantes_ordenados.txt");
+                entrada=new File("estudiantes.txt");
+                salida=new File("estudiantes_ordenados.txt");
                 break;
             case 2:
-                entrada =new File("profesores.txt");
-                salida =new File("profesores_ordenados.txt");
+                entrada=new File("profesores.txt");
+                salida=new File("profesores_ordenados.txt");
                 break;
             default:
                 System.out.println("Opción inválida.");
                 return;
         }
-        if (!entrada.exists()) {
+        if(!entrada.exists()){
             System.out.println("El archivo " + entrada.getName() + " no existe.");
             return;
         }
         System.out.print("Ingrese tamaño de bloque (recomendado 100-1000): ");
-        int tamanoBloque = Integer.parseInt(scanner.nextLine());
+        int tamanoBloque=Integer.parseInt(scanner.nextLine());
         
-        long startTime = System.currentTimeMillis();
-        ExternalSort.externalSort(entrada, salida, tamanoBloque);
-        long endTime = System.currentTimeMillis();
+        long startTime=System.currentTimeMillis();
+        ExternalSort.externalSort(entrada, salida,tamanoBloque);
+        long endTime=System.currentTimeMillis();
         
-        System.out.println("Archivo ordenado generado: " + salida.getName());
-        System.out.println("Tiempo total: " + (endTime - startTime) + " ms");
+        System.out.println("Archivo ordenado generado: " +salida.getName());
+        System.out.println("Tiempo total: " +(endTime-startTime)+ " ms");
         
     }catch(IOException e){
-        System.out.println("Error de E/S: " + e.getMessage());
+        System.out.println("Error de E/S: "+e.getMessage());
     }catch(NumberFormatException e){
-        System.out.println("Error en formato numérico: " + e.getMessage());
+        System.out.println("Error en formato numérico: "+e.getMessage());
     }catch(IllegalArgumentException e){
-        System.out.println("Error en parámetros: " + e.getMessage());
+        System.out.println("Error en parámetros: "+e.getMessage());
     }
 }
 private String leerDNI() {
