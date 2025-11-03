@@ -1126,32 +1126,32 @@ private void ordenarEstudiantes(){
     
     long endTime=System.currentTimeMillis();
     
-    System.out.println("Tiempo de ordenamiento: " + (endTime - startTime) + " ms");
-    System.out.println("Total de elementos ordenados: " + listaEstudiantes.size());
+    System.out.println("Tiempo de ordenamiento: "+(endTime-startTime)+" ms");
+    System.out.println("Total de elementos ordenados: "+listaEstudiantes.size());
     System.out.println("\n=== RESULTADOS ORDENADOS ===");
-    for (int i = 0; i < listaEstudiantes.size(); i++) {
-        System.out.println((i + 1) + ". " + listaEstudiantes.get(i).mostrarInfo());
+    for(int i=0;i<listaEstudiantes.size();i++){
+        System.out.println((i+1)+". "+listaEstudiantes.get(i).mostrarInfo());
     }
 }
 
-private void ordenarProfesores() {
-    if (profesores.isEmpty()) {
+private void ordenarProfesores(){
+    if(profesores.isEmpty()){
         System.out.println("No hay profesores registrados.");
         return;
     }
     
-    List<Profesor> listaProfesores = new ArrayList<>(profesores.values());
+    List<Profesor>listaProfesores=new ArrayList<>(profesores.values());
     
     System.out.println("\n=== ORDENAR PROFESORES - MERGE SORT ===");
     System.out.println("1. Por Apellidos (A-Z)");
     System.out.println("2. Por Especialidad (A-Z)");
     System.out.println("3. Por Experiencia (Mayor a menor)");
     System.out.print("Seleccione criterio: ");
-    int criterio =Integer.parseInt(scanner.nextLine());
+    int criterio=Integer.parseInt(scanner.nextLine());
     
-    long startTime =System.currentTimeMillis();
+    long startTime=System.currentTimeMillis();
     
-    switch (criterio){
+    switch(criterio){
         case 1:
             Ordenaciones.ordenar(listaProfesores, Comparator.comparing(Profesor::getApellidos));
             System.out.println("Profesores ordenados por APELLIDOS");
@@ -1169,11 +1169,11 @@ private void ordenarProfesores() {
             return;
     }
     
-    long endTime = System.currentTimeMillis();
-    System.out.println("Tiempo de ordenamiento: " + (endTime - startTime) + " ms");
+    long endTime=System.currentTimeMillis();
+    System.out.println("Tiempo de ordenamiento: "+(endTime-startTime)+" ms");
     
     System.out.println("\n=== RESULTADOS ORDENADOS ===");
-    for (int i = 0; i < listaProfesores.size(); i++) {
+    for (int i=0; i<listaProfesores.size();i++){
         System.out.println((i + 1) + ". " + listaProfesores.get(i).mostrarInfo());
     }
 }
