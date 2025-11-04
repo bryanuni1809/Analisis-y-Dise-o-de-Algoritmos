@@ -1655,16 +1655,16 @@ private void busquedaAvanzada(){
         }
     }
     System.out.println("\n--- CURSOS ---");
-    for (Curso c : cursos.values()) {
-        String info = (c.getCodigo() + " " + c.getNombre() + " " + c.getIdioma() + " " + c.getNivel()).toLowerCase();
-        if (info.contains(termino)) {
+    for(Curso c:cursos.values()){
+        String info=(c.getCodigo()+" "+c.getNombre()+" "+c.getIdioma()+" "+c.getNivel()).toLowerCase();
+        if(info.contains(termino)){
             System.out.println(c.mostrarInfo());
             resultados++;
         }
     }
-    long endTime = System.currentTimeMillis();
-    System.out.println("\nBúsqueda avanzada completada en " + (endTime - startTime) + " ms");
-    System.out.println("Total de resultados: " + resultados);
+    long endTime=System.currentTimeMillis();
+    System.out.println("\nBúsqueda avanzada completada en "+(endTime-startTime)+" ms");
+    System.out.println("Total de resultados: "+resultados);
 }
 private void menuBusquedaExterna(){
     int opcion;
@@ -1697,7 +1697,7 @@ private void menuBusquedaExterna(){
             default:
                 System.out.println("Opción inválida.");
         }
-    }while(opcion != 0);
+    }while(opcion!=0);
 }
 private void buscarEnArchivoEstudiantes(){
     try{
@@ -1714,7 +1714,7 @@ private void buscarEnArchivoEstudiantes(){
         System.out.println("4 = Teléfono | 5 = Correo | 6 = Fecha Nacimiento | 7 = Nivel Estudios");
         
         long startTime=System.currentTimeMillis();
-        List<String> resultados;
+        List<String>resultados;
         
         if(opcionBusqueda == 1){
             resultados = BusquedaExterna.buscarEnArchivoMultiple("estudiantes.txt", termino);
@@ -1728,22 +1728,22 @@ private void buscarEnArchivoEstudiantes(){
         if(resultados.isEmpty()){
             System.out.println("No se encontraron estudiantes que coincidan con: '" + termino + "'");
         }else{
-            for (int i=0;i < resultados.size();i++){
-                String[] datos = resultados.get(i).split(",");
-                System.out.println("\nESTUDIANTE #" + (i + 1) + ":");
-                System.out.println("   DNI: " + (datos.length > 0 ? datos[0] : "N/A"));
-                System.out.println("   Nombres: " + (datos.length > 1 ? datos[1] : "N/A"));
-                System.out.println("   Apellidos: " + (datos.length > 2 ? datos[2] : "N/A"));
-                System.out.println("   Dirección: " + (datos.length > 3 ? datos[3] : "N/A"));
-                System.out.println("   Teléfono: " + (datos.length > 4 ? datos[4] : "N/A"));
-                System.out.println("   Correo: " + (datos.length > 5 ? datos[5] : "N/A"));
-                System.out.println("   Fecha Nacimiento: " + (datos.length > 6 ? datos[6] : "N/A"));
-                System.out.println("   Nivel Estudios: " + (datos.length > 7 ? datos[7] : "N/A"));
+            for(int i=0;i<resultados.size();i++){
+                String[] datos=resultados.get(i).split(",");
+                System.out.println("\nESTUDIANTE #" +(i + 1) + ":");
+                System.out.println("   DNI: " +(datos.length >0 ?datos[0]: "N/A"));
+                System.out.println("   Nombres: " +(datos.length>1 ? datos[1]: "N/A"));
+                System.out.println("   Apellidos: " +(datos.length>2 ? datos[2]: "N/A"));
+                System.out.println("   Dirección: " +(datos.length> 3 ? datos[3]: "N/A"));
+                System.out.println("   Teléfono: " +(datos.length> 4 ? datos[4]: "N/A"));
+                System.out.println("   Correo: " +(datos.length >5 ? datos[5]: "N/A"));
+                System.out.println("   Fecha Nacimiento: " + (datos.length > 6? datos[6] : "N/A"));
+                System.out.println("   Nivel Estudios: " + (datos.length > 7?datos[7] : "N/A"));
                 if(datos.length >6 && !datos[6].isEmpty()) {
                     try{
-                        int edad = Validador.calcularEdad(datos[6]);
-                        System.out.println("   Edad: " + edad + " años");
-                    } catch (Exception e) {
+                        int edad=Validador.calcularEdad(datos[6]);
+                        System.out.println("   Edad: "+edad+" años");
+                    }catch(Exception e){
                     }
                 }
             }
@@ -1771,10 +1771,10 @@ private void buscarEnArchivoProfesores(){
         System.out.println("0 = DNI | 1 = Nombres | 2 = Apellidos | 3 = Dirección");
         System.out.println("4 = Teléfono | 5 = Correo | 6 = Especialidad | 7 = Experiencia");
         
-        long startTime =System.currentTimeMillis();
+        long startTime=System.currentTimeMillis();
         List<String>resultados;
         
-        if(opcionBusqueda== 1){
+        if(opcionBusqueda==1){
             resultados=BusquedaExterna.buscarEnArchivoMultiple("profesores.txt", termino);
         }else{
             System.out.print("Número de columna: ");
@@ -1788,13 +1788,13 @@ private void buscarEnArchivoProfesores(){
         }else{
             for(int i = 0; i<resultados.size(); i++){
                 String[] datos=resultados.get(i).split(",");
-                System.out.println("\nPROFESOR #"+ (i + 1) + ":");
-                System.out.println("   DNI: " +(datos.length > 0? datos[0] :"N/A"));
-                System.out.println("   Nombres: " +(datos.length > 1 ? datos[1] :"N/A"));
-                System.out.println("   Apellidos: " +(datos.length > 2 ? datos[2] :"N/A"));
-                System.out.println("   Dirección: " +(datos.length > 3 ? datos[3] :"N/A"));
-                System.out.println("   Teléfono: " +(datos.length > 4 ? datos[4] :"N/A"));
-                System.out.println("   Correo: " +(datos.length > 5 ? datos[5] :"N/A"));
+                System.out.println("\nPROFESOR #"+(i+1) + ":");
+                System.out.println("   DNI: "+(datos.length > 0? datos[0] :"N/A"));
+                System.out.println("   Nombres: "+(datos.length > 1 ? datos[1] :"N/A"));
+                System.out.println("   Apellidos: "+(datos.length > 2 ? datos[2] :"N/A"));
+                System.out.println("   Dirección: "+(datos.length > 3 ? datos[3] :"N/A"));
+                System.out.println("   Teléfono: "+(datos.length > 4 ? datos[4] :"N/A"));
+                System.out.println("   Correo: "+(datos.length > 5 ? datos[5] :"N/A"));
                 System.out.println("   Especialidad: "+(datos.length > 6 ? datos[6]:"N/A"));
                 System.out.println("   Experiencia: "+(datos.length > 7 ? datos[7] :"N/A")+" años");
             }
