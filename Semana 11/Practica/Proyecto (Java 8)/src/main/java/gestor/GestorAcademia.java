@@ -1550,7 +1550,7 @@ private void buscarProfesoresInterna(){
     System.out.println("\nBúsqueda completada en "+(endTime-startTime)+ " ms");
     System.out.println("Resultados encontrados: "+resultados);
 }
-    private void buscarCursosInterna() {
+    private void buscarCursosInterna(){
     System.out.println("\n=== BÚSQUEDA DE CURSOS ===");
     System.out.println("1. Por Código (Búsqueda Exacta)");
     System.out.println("2. Por Nombre (Búsqueda Parcial)");
@@ -1567,7 +1567,7 @@ private void buscarProfesoresInterna(){
         case 1:
             // Búsqueda exacta por código
             Curso curso=cursos.get(termino.toUpperCase());
-            if(curso != null) {
+            if(curso!=null){
                 System.out.println("ENCONTRADO: "+curso.mostrarInfo());
                 resultados++;
             }else{
@@ -1576,7 +1576,7 @@ private void buscarProfesoresInterna(){
             break;
         case 2:
             // Búsqueda parcial por nombre
-            for(Curso c : cursos.values()){
+            for(Curso c:cursos.values()){
                 if(c.getNombre().toLowerCase().contains(termino)){
                     System.out.println(c.mostrarInfo());
                     resultados++;
@@ -1585,8 +1585,8 @@ private void buscarProfesoresInterna(){
             break;
         case 3:
             // Búsqueda por idioma
-            for (Curso c:cursos.values()){
-                if (c.getIdioma().toLowerCase().contains(termino)){
+            for(Curso c:cursos.values()){
+                if(c.getIdioma().toLowerCase().contains(termino)){
                     System.out.println(c.mostrarInfo());
                     resultados++;
                 }
@@ -1603,7 +1603,7 @@ private void buscarProfesoresInterna(){
             break;
         case 5:
             // Búsqueda por profesor (DNI o nombre)
-            for(Curso c : cursos.values()){
+            for(Curso c:cursos.values()){
                 // Buscar por DNI del profesor
                 if(c.getProfesorDni().toLowerCase().contains(termino)){
                     System.out.println(c.mostrarInfo());
@@ -1611,9 +1611,9 @@ private void buscarProfesoresInterna(){
                 }else{
                     // Buscar por nombre del profesor si está disponible
                     Profesor profesor=profesores.get(c.getProfesorDni());
-                    if (profesor !=null){
-                        String nombreProfesor = (profesor.getNombres() + " " + profesor.getApellidos()).toLowerCase();
-                        if (nombreProfesor.contains(termino)) {
+                    if(profesor!=null){
+                        String nombreProfesor=(profesor.getNombres()+" "+profesor.getApellidos()).toLowerCase();
+                        if(nombreProfesor.contains(termino)){
                             System.out.println(c.mostrarInfo());
                             resultados++;
                         }
@@ -1628,7 +1628,7 @@ private void buscarProfesoresInterna(){
     long endTime=System.currentTimeMillis();
     System.out.println("\nBúsqueda completada en "+(endTime-startTime)+" ms");
     System.out.println("Resultados encontrados: "+resultados);
-    if(resultados==0 && criterio != 1){
+    if(resultados==0&&criterio!= 1){
         System.out.println("Sugerencia: Intente con términos más generales o verifique la ortografía");
     }
 }
@@ -1639,18 +1639,18 @@ private void busquedaAvanzada(){
     long startTime=System.currentTimeMillis();
     int resultados=0;
     System.out.println("\n--- ESTUDIANTES ---");
-    for (Estudiante e : estudiantes.values()){
-        String info = (e.getDni() + " "+e.getNombres()+" " +e.getApellidos() + " " + e.getNivelEstudios()).toLowerCase();
-        if (info.contains(termino)) {
+    for(Estudiante e:estudiantes.values()){
+        String info=(e.getDni() + " "+e.getNombres()+" " +e.getApellidos() + " " + e.getNivelEstudios()).toLowerCase();
+        if(info.contains(termino)){
             System.out.println(e.mostrarInfo());
             resultados++;
         }
     }
     System.out.println("\n--- PROFESORES ---");
-    for (Profesor p : profesores.values()) {
-        String info = (p.getDni() + " "+p.getNombres()+ " " + p.getApellidos() + " " + p.getEspecialidad()).toLowerCase();
-        if (info.contains(termino)) {
-            System.out.println( p.mostrarInfo());
+    for(Profesor p:profesores.values()){
+        String info=(p.getDni()+" "+p.getNombres()+ " "+p.getApellidos()+" "+p.getEspecialidad()).toLowerCase();
+        if(info.contains(termino)){
+            System.out.println(p.mostrarInfo());
             resultados++;
         }
     }
