@@ -1263,28 +1263,28 @@ private void ordenacionExterna(){
         System.out.println("Error en parámetros: "+e.getMessage());
     }
 }
-private String leerDNI() {
-    while (true) {
-        try {
+private String leerDNI(){
+    while(true){
+        try{
             System.out.print("DNI: ");
-            String dni = scanner.nextLine().trim();
+            String dni=scanner.nextLine().trim();
             Validador.validarDNI(dni);
             return dni;
-        } catch (IllegalArgumentException e) {
+        }catch(IllegalArgumentException e){
             System.out.println(e.getMessage());
             System.out.println("Por favor, ingrese un DNI válido (8 dígitos).");
         }
     }
 }
 
-private String leerEmail() {
-    while (true) {
-        try {
+private String leerEmail(){
+    while(true){
+        try{
             System.out.print("Correo electrónico: ");
-            String email = scanner.nextLine().trim();
+            String email=scanner.nextLine().trim();
             Validador.validarEmail(email);
             return email;
-        } catch (IllegalArgumentException e) {
+        }catch(IllegalArgumentException e){
             System.out.println(e.getMessage());
         }
     }
@@ -1297,7 +1297,7 @@ private String leerTelefono(){
             String telefono=scanner.nextLine().trim();
             Validador.validarTelefono(telefono);
             return telefono;
-        }catch (IllegalArgumentException e){
+        }catch(IllegalArgumentException e){
             System.out.println(e.getMessage());
         }
     }
@@ -1503,15 +1503,15 @@ private void buscarProfesoresInterna(){
         case 1:
             Profesor profesor = profesores.get(termino);
             if(profesor !=null){
-                System.out.println("ENCONTRADO: " +profesor.mostrarInfo());
+                System.out.println("ENCONTRADO: "+profesor.mostrarInfo());
                 resultados++;
             }
             break;
             
         case 2:
-            for (Profesor p : profesores.values()) {
-                String infoCompleta = (p.getNombres() +" " +p.getApellidos()+ " " + p.getEspecialidad()).toLowerCase();
-                if (infoCompleta.contains(termino)) {
+            for(Profesor p:profesores.values()){
+                String infoCompleta=(p.getNombres()+" "+p.getApellidos()+" "+p.getEspecialidad()).toLowerCase();
+                if(infoCompleta.contains(termino)){
                     System.out.println(p.mostrarInfo());
                     resultados++;
                 }
@@ -1519,9 +1519,9 @@ private void buscarProfesoresInterna(){
             break;
         case 3:
             System.out.print("Ingrese especialidad: ");
-            String especialidad = scanner.nextLine().toLowerCase();
-            for (Profesor p : profesores.values()) {
-                if (p.getEspecialidad().toLowerCase().contains(especialidad)) {
+            String especialidad=scanner.nextLine().toLowerCase();
+            for(Profesor p:profesores.values()){
+                if(p.getEspecialidad().toLowerCase().contains(especialidad)){
                     System.out.println(p.mostrarInfo());
                     resultados++;
                 }
@@ -1530,9 +1530,9 @@ private void buscarProfesoresInterna(){
         case 4:
             System.out.print("Ingrese años de experiencia (mínimo): ");
             try{
-                int experienciaMin = Integer.parseInt(scanner.nextLine());
-                for (Profesor p : profesores.values()) {
-                    if (p.getExperiencia() >= experienciaMin) {
+                int experienciaMin=Integer.parseInt(scanner.nextLine());
+                for(Profesor p:profesores.values()){
+                    if(p.getExperiencia()>=experienciaMin){
                         System.out.println(p.mostrarInfo());
                         resultados++;
                     }
@@ -1546,9 +1546,9 @@ private void buscarProfesoresInterna(){
             System.out.println("Criterio inválido.");
             return;
     }
-    long endTime = System.currentTimeMillis();
-    System.out.println("\nBúsqueda completada en " +(endTime - startTime) + " ms");
-    System.out.println("Resultados encontrados: " +resultados);
+    long endTime=System.currentTimeMillis();
+    System.out.println("\nBúsqueda completada en "+(endTime-startTime)+ " ms");
+    System.out.println("Resultados encontrados: "+resultados);
 }
     private void buscarCursosInterna() {
     System.out.println("\n=== BÚSQUEDA DE CURSOS ===");
