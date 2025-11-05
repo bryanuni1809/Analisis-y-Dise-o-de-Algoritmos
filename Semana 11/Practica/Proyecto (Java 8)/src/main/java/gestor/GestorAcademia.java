@@ -1888,7 +1888,7 @@ private void buscarEnTodosLosArchivos(){
         }else{
             for(String resultado:resultadosProfesores){
                 String[]datos=resultado.split(",");
-                System.out.println(datos[1]+" "+datos[2]+" - "+datos[6]+" (DNI: "+datos[0] + ")");
+                System.out.println(datos[1]+" "+datos[2]+" - "+datos[6]+" (DNI: "+datos[0]+")");
             }
         }
         totalResultados+=resultadosProfesores.size();
@@ -1897,20 +1897,20 @@ private void buscarEnTodosLosArchivos(){
         if(resultadosCursos.isEmpty()){
             System.out.println("No se encontraron cursos");
         }else{
-            for(String resultado : resultadosCursos){
+            for(String resultado:resultadosCursos){
                 String[] datos=resultado.split(",");
-                System.out.println(datos[1]+ " (" + datos[0] + ") - "+datos[2]+ " "+datos[3]);
+                System.out.println(datos[1]+ " (" +datos[0]+ ") - "+datos[2]+" "+datos[3]);
             }
         }
         totalResultados+=resultadosCursos.size();
         long endTime=System.currentTimeMillis();
         
         System.out.println("\nRESUMEN DE BÚSQUEDA GLOBAL:");
-        System.out.println("Tiempo total de búsqueda: "+(endTime - startTime) + " ms");
+        System.out.println("Tiempo total de búsqueda: "+(endTime-startTime)+ " ms");
         System.out.println("Estudiantes encontrados: "+resultadosEstudiantes.size());
         System.out.println("Profesores encontrados: "+resultadosProfesores.size());
-        System.out.println("Cursos encontrados: " + resultadosCursos.size());
-        System.out.println("Total general de resultados: " + totalResultados);
+        System.out.println("Cursos encontrados: "+resultadosCursos.size());
+        System.out.println("Total general de resultados: "+totalResultados);
         
     }catch(IOException e){
         System.out.println("Error en búsqueda global: " +e.getMessage());
@@ -1925,9 +1925,9 @@ private void inicializarMultilistas(){
     for(Estudiante e:estudiantes.values()){
         // Multilista por nivel de estudios
         String nivel=e.getNivelEstudios();
-        if(nivel!=null && !nivel.trim().isEmpty()){
+        if(nivel!=null&&!nivel.trim().isEmpty()){
             estudiantesPorNivel
-                .computeIfAbsent(nivel, k -> new LinkedList<>())
+                .computeIfAbsent(nivel,k ->new LinkedList<>())
                 .add(e);
             contador++;
         }
@@ -1936,15 +1936,15 @@ private void inicializarMultilistas(){
             int edad=Validador.calcularEdad(e.getFechaNacimiento());
             String rangoEdad=obtenerRangoEdad(edad);
             estudiantesPorEdad
-                .computeIfAbsent(rangoEdad,k -> new LinkedList<>())
+                .computeIfAbsent(rangoEdad,k->new LinkedList<>())
                 .add(e);
         }catch(Exception ex){
-            System.out.println("Error calculando edad para: " + e.getDni());
+            System.out.println("Error calculando edad para: "+e.getDni());
         }
     }
-    System.out.println("Multilistas inicializadas: "+ contador + " estudiantes procesados");
-    System.out.println("Niveles distintos: " +estudiantesPorNivel.size());
-    System.out.println("Rangos de edad: " +estudiantesPorEdad.size());
+    System.out.println("Multilistas inicializadas: "+contador+ " estudiantes procesados");
+    System.out.println("Niveles distintos: "+estudiantesPorNivel.size());
+    System.out.println("Rangos de edad: "+estudiantesPorEdad.size());
 }
 
 private String obtenerRangoEdad(int edad){
@@ -1963,32 +1963,32 @@ private void inicializarListasInvertidas(){
     
     int palabrasIndexadas= 0;
     int matriculasIndexadas=0;
-    for (Estudiante e:estudiantes.values()){
-        String nombreCompleto=(e.getNombres() + " " + e.getApellidos()).toLowerCase();
-        String[] palabras =nombreCompleto.split("\\s+"); // Dividir por espacios
+    for(Estudiante e:estudiantes.values()){
+        String nombreCompleto=(e.getNombres()+" "+e.getApellidos()).toLowerCase();
+        String[]palabras=nombreCompleto.split("\\s+"); // Dividir por espacios
         
         for(String palabra:palabras){
-            if(palabra.length()>2 && !palabra.equals("de") && !palabra.equals("la")){
+            if(palabra.length()>2&&!palabra.equals("de")&&!palabra.equals("la")){
                 indicePorNombre
-                    .computeIfAbsent(palabra,k -> new LinkedList<>())
+                    .computeIfAbsent(palabra,k->new LinkedList<>())
                     .add(e.getDni());
                 palabrasIndexadas++;
             }
         }
     }
-    for (Matricula m:matriculas){
-        String curso =m.getCodigoCurso();
-        if (curso !=null && !curso.trim().isEmpty()){
+    for(Matricula m:matriculas){
+        String curso=m.getCodigoCurso();
+        if(curso!=null&&!curso.trim().isEmpty()){
             indicePorCurso
-                .computeIfAbsent(curso,k ->new LinkedList<>())
+                .computeIfAbsent(curso,k->new LinkedList<>())
                 .add(m.getDniEstudiante());
             matriculasIndexadas++;
         }
     }
     
     System.out.println("Listas invertidas inicializadas:");
-    System.out.println("Palabras indexadas en nombres: " + indicePorNombre.size());
-    System.out.println("Matrículas indexadas por curso: " + matriculasIndexadas);
+    System.out.println("Palabras indexadas en nombres: "+indicePorNombre.size());
+    System.out.println("Matrículas indexadas por curso: "+matriculasIndexadas);
 }
 public void menuMultilistas(){
     int opcion;
@@ -2002,9 +2002,9 @@ public void menuMultilistas(){
         opcion=Integer.parseInt(scanner.nextLine());
         
         switch(opcion){
-            case 1: buscarPorNivelMultilista(); break;
-            case 2: buscarPorNombreInvertido(); break;
-            case 3: mostrarEstadisticasMultilistas(); break;
+            case 1:buscarPorNivelMultilista();break;
+            case 2:buscarPorNombreInvertido();break;
+            case 3:mostrarEstadisticasMultilistas();break;
         }
     }while(opcion !=0);
 }
