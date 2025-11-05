@@ -1788,21 +1788,21 @@ private void buscarEnArchivoProfesores(){
         }else{
             for(int i = 0; i<resultados.size(); i++){
                 String[] datos=resultados.get(i).split(",");
-                System.out.println("\nPROFESOR #"+(i+1) + ":");
-                System.out.println("   DNI: "+(datos.length > 0? datos[0] :"N/A"));
-                System.out.println("   Nombres: "+(datos.length > 1 ? datos[1] :"N/A"));
-                System.out.println("   Apellidos: "+(datos.length > 2 ? datos[2] :"N/A"));
-                System.out.println("   Dirección: "+(datos.length > 3 ? datos[3] :"N/A"));
-                System.out.println("   Teléfono: "+(datos.length > 4 ? datos[4] :"N/A"));
-                System.out.println("   Correo: "+(datos.length > 5 ? datos[5] :"N/A"));
-                System.out.println("   Especialidad: "+(datos.length > 6 ? datos[6]:"N/A"));
-                System.out.println("   Experiencia: "+(datos.length > 7 ? datos[7] :"N/A")+" años");
+                System.out.println("\nPROFESOR #"+(i+1)+ ":");
+                System.out.println("   DNI: "+(datos.length>0?datos[0]:"N/A"));
+                System.out.println("   Nombres: "+(datos.length>1?datos[1]:"N/A"));
+                System.out.println("   Apellidos: "+(datos.length>2?datos[2]:"N/A"));
+                System.out.println("   Dirección: "+(datos.length>3?datos[3]:"N/A"));
+                System.out.println("   Teléfono: "+(datos.length>4?datos[4]:"N/A"));
+                System.out.println("   Correo: "+(datos.length>5?datos[5]:"N/A"));
+                System.out.println("   Especialidad: "+(datos.length>6?datos[6]:"N/A"));
+                System.out.println("   Experiencia: "+(datos.length >7?datos[7] :"N/A")+" años");
             }
         }
         System.out.println("\nTiempo de búsqueda: " +(endTime-startTime)+" ms");
         System.out.println("Total de profesores encontrados: "+resultados.size());
     }catch(IOException e){
-        System.out.println("Error al buscar en archivo de profesores: "+ e.getMessage());
+        System.out.println("Error al buscar en archivo de profesores: "+e.getMessage());
     }catch (NumberFormatException e){
         System.out.println("Error: Debe ingresar un número válido para la columna");
     }
@@ -1871,27 +1871,27 @@ private void buscarEnTodosLosArchivos(){
         System.out.println("\nREALIZANDO BÚSQUEDA GLOBAL...");
         // Buscar en estudiantes
         System.out.println("\n--- ESTUDIANTES.TXT ---");
-        List<String> resultadosEstudiantes = BusquedaExterna.buscarEnArchivoMultiple("estudiantes.txt", termino);
-        if (resultadosEstudiantes.isEmpty()) {
+        List<String> resultadosEstudiantes=BusquedaExterna.buscarEnArchivoMultiple("estudiantes.txt", termino);
+        if (resultadosEstudiantes.isEmpty()){
             System.out.println("No se encontraron estudiantes");
         }else{
             for (String resultado:resultadosEstudiantes){
-                String[] datos = resultado.split(",");
+                String[] datos=resultado.split(",");
                 System.out.println(datos[1]+ " "+datos[2]+ " (DNI: " +datos[0]+ ")");
             }
         }
         totalResultados+=resultadosEstudiantes.size();
         System.out.println("\n--- PROFESORES.TXT ---");
-        List<String> resultadosProfesores =BusquedaExterna.buscarEnArchivoMultiple("profesores.txt", termino);
+        List<String>resultadosProfesores=BusquedaExterna.buscarEnArchivoMultiple("profesores.txt",termino);
         if(resultadosProfesores.isEmpty()){
             System.out.println("No se encontraron profesores");
         }else{
-            for(String resultado : resultadosProfesores){
+            for(String resultado:resultadosProfesores){
                 String[]datos=resultado.split(",");
-                System.out.println(datos[1]+ " " +datos[2]+" - " +datos[6]+ " (DNI: " +datos[0] + ")");
+                System.out.println(datos[1]+" "+datos[2]+" - "+datos[6]+" (DNI: "+datos[0] + ")");
             }
         }
-        totalResultados +=resultadosProfesores.size();
+        totalResultados+=resultadosProfesores.size();
         System.out.println("\n--- CURSOS.TXT ---");
         List<String> resultadosCursos=BusquedaExterna.buscarEnArchivoMultiple("cursos.txt",termino);
         if(resultadosCursos.isEmpty()){
