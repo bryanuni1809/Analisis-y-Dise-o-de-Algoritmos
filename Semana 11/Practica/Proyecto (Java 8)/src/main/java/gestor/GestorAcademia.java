@@ -2032,11 +2032,11 @@ private void buscarPorNombreInvertido(){
     String palabra=scanner.nextLine().toLowerCase();
     long startTime=System.currentTimeMillis();
     LinkedList<String> dnis=indicePorNombre.get(palabra);
-    if(dnis != null){
+    if(dnis!= null){
         System.out.println("Encontrados: "+dnis.size()+" estudiantes");
         for(String dni:dnis){
             Estudiante e = estudiantes.get(dni);
-            if(e !=null){
+            if(e!=null){
                 System.out.println(e.mostrarInfo());
             }
         }
@@ -2045,7 +2045,7 @@ private void buscarPorNombreInvertido(){
     }
     
     long endTime=System.currentTimeMillis();
-    System.out.println("Tiempo búsqueda invertida: " +(endTime -startTime)+ " ms");
+    System.out.println("Tiempo búsqueda invertida: "+(endTime -startTime)+ " ms");
 }
 
 private void mostrarEstadisticasMultilistas(){
@@ -2053,7 +2053,7 @@ private void mostrarEstadisticasMultilistas(){
     
     System.out.println("Estudiantes por Nivel:");
     for(Map.Entry<String,LinkedList<Estudiante>> entry:estudiantesPorNivel.entrySet()){
-        System.out.println(entry.getKey() + ": " +entry.getValue().size() +" estudiantes");
+        System.out.println(entry.getKey()+": " +entry.getValue().size()+" estudiantes");
     }
     
     System.out.println("\nÍndice Invertido por Nombre:");
@@ -2062,8 +2062,8 @@ private void mostrarEstadisticasMultilistas(){
     System.out.println("Total de entradas: "+totalEntradas);
     
     System.out.println("\nEficiencia del sistema:");
-    double factor=(double) totalEntradas / estudiantes.size();
-    System.out.println("Factor de indexación: " + String.format("%.2f", factor));
+    double factor=(double) totalEntradas/estudiantes.size();
+    System.out.println("Factor de indexación: "+String.format("%.2f",factor));
 }
  private void menuOrdenamientosConQuicksort(){
         int opcion;
@@ -2091,7 +2091,7 @@ private void mostrarEstadisticasMultilistas(){
                 default:
                     System.out.println("Opción inválida.");
             }
-        }while(opcion != 0);
+        }while(opcion!=0);
     }
     
     private void ordenarEstudiantesQuicksort(){
@@ -2131,8 +2131,8 @@ private void mostrarEstadisticasMultilistas(){
         System.out.println("Tiempo de ordenamiento (Quicksort): " +(endTime - startTime) + " ms");
         System.out.println("Total de elementos ordenados: " +listaEstudiantes.size());
         System.out.println("\n=== PRIMEROS 10 RESULTADOS ===");
-        for(int i=0; i<Math.min(10,listaEstudiantes.size());i++){
-            System.out.println((i+1) + ". " +listaEstudiantes.get(i).mostrarInfo());
+        for(int i=0;i<Math.min(10,listaEstudiantes.size());i++){
+            System.out.println((i+1)+ ". "+listaEstudiantes.get(i).mostrarInfo());
         }
     }
     private void ordenarProfesoresQuicksort(){
@@ -2154,11 +2154,11 @@ private void mostrarEstadisticasMultilistas(){
     
     switch(criterio){
         case 1:
-            QuickSortUtil.quickSort(listaProfesores, Comparator.comparing(Profesor::getApellidos));
+            QuickSortUtil.quickSort(listaProfesores,Comparator.comparing(Profesor::getApellidos));
             System.out.println("Profesores ordenados por APELLIDOS (Quicksort)");
             break;
         case 2:
-            QuickSortUtil.quickSort(listaProfesores, Comparator.comparing(Profesor::getEspecialidad));
+            QuickSortUtil.quickSort(listaProfesores,Comparator.comparing(Profesor::getEspecialidad));
             System.out.println("Profesores ordenados por ESPECIALIDAD (Quicksort)");
             break;
         case 3:
@@ -2172,11 +2172,11 @@ private void mostrarEstadisticasMultilistas(){
     }
     
     long endTime=System.currentTimeMillis();
-    System.out.println("Tiempo de ordenamiento (Quicksort): "+(endTime - startTime) + " ms");
+    System.out.println("Tiempo de ordenamiento (Quicksort): "+(endTime-startTime)+" ms");
     
     System.out.println("\n=== PRIMEROS 10 RESULTADOS ===");
-    for (int i=0; i< Math.min(10,listaProfesores.size());i++){
-        System.out.println((i + 1)+ ". " +listaProfesores.get(i).mostrarInfo());
+    for (int i=0;i< Math.min(10,listaProfesores.size());i++){
+        System.out.println((i+1)+". " +listaProfesores.get(i).mostrarInfo());
     }
 }
 
