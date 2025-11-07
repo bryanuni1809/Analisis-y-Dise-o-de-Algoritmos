@@ -30,39 +30,39 @@ public class ArchivoUtil{
         }
     }
     public static void guardarEstudiante(Estudiante e,String ruta){
-        try (BufferedWriter writer=new BufferedWriter(new FileWriter(ruta, true))) {
-            writer.write(e.getDni()+ ","+ e.getNombres() + "," + e.getApellidos() + "," +
-                         e.getDireccion()+ "," + e.getTelefono() + "," + e.getCorreo() + "," +
-                         e.getFechaNacimiento() + "," + e.getNivelEstudios());
+        try(BufferedWriter writer=new BufferedWriter(new FileWriter(ruta, true))) {
+            writer.write(e.getDni()+ ","+e.getNombres()+","+e.getApellidos()+","+
+                         e.getDireccion()+","+e.getTelefono()+","+e.getCorreo()+","+
+                         e.getFechaNacimiento()+","+e.getNivelEstudios());
             writer.newLine();
-        } catch (IOException ex){
-            System.out.println("Error al guardar estudiante: " + ex.getMessage());
+        }catch(IOException ex){
+            System.out.println("Error al guardar estudiante: "+ex.getMessage());
         }
     }
 
     public static void guardarProfesor(Profesor p,String ruta){
-        try (BufferedWriter writer=new BufferedWriter(new FileWriter(ruta,true))) {
-            writer.write(p.getDni() + "," + p.getNombres() + "," + p.getApellidos() + "," +
-                         p.getDireccion() + "," + p.getTelefono() + "," + p.getCorreo() + "," +
-                         p.getEspecialidad() + "," + p.getExperiencia());
+        try (BufferedWriter writer=new BufferedWriter(new FileWriter(ruta,true))){
+            writer.write(p.getDni()+","+p.getNombres()+","+p.getApellidos()+","+
+                         p.getDireccion()+","+p.getTelefono()+"," + p.getCorreo()+ ","+
+                         p.getEspecialidad()+","+p.getExperiencia());
             writer.newLine();
-        } catch (IOException ex) {
-            System.out.println("Error al guardar profesor: " + ex.getMessage());
+        }catch(IOException ex){
+            System.out.println("Error al guardar profesor: "+ex.getMessage());
         }
     }
 
-    public static void guardarCurso(Curso c, String ruta) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(ruta, true))) {
-            writer.write(c.getCodigo() + "," + c.getNombre() + "," + c.getIdioma() + "," + c.getNivel() + "," +
-                         c.getProfesorDni() + "," + c.getHorario() + "," + c.getDuracion() + "," +
-                         c.getCapacidadMaxima() + "," + c.getPrecio() + "," + c.getObservaciones());
+    public static void guardarCurso(Curso c,String ruta){
+        try(BufferedWriter writer=new BufferedWriter(new FileWriter(ruta,true))){
+            writer.write(c.getCodigo()+","+c.getNombre()+","+ c.getIdioma()+","+c.getNivel()+","+
+                         c.getProfesorDni()+","+c.getHorario()+","+c.getDuracion()+ ","+
+                         c.getCapacidadMaxima()+","+c.getPrecio()+","+c.getObservaciones());
             writer.newLine();
-        } catch (IOException ex) {
-            System.out.println("Error al guardar curso: " + ex.getMessage());
+        }catch(IOException ex){
+            System.out.println("Error al guardar curso: "+ex.getMessage());
         }
     }
 
-    public static void guardarMatricula(Matricula m, String ruta) {
+    public static void guardarMatricula(Matricula m,String ruta){
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(ruta, true))) {
             writer.write(m.getCodigoCurso() + "," + m.getDniEstudiante() + "," + m.getFechaMatricula() + "," + m.getMonto());
             writer.newLine();
