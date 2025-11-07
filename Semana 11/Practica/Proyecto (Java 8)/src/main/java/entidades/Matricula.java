@@ -23,48 +23,48 @@ public class Matricula implements IEntidad, IValidable{
         this.codigoCurso=codigoCurso;
         this.dniEstudiante=dniEstudiante;
         this.fechaMatricula=fechaMatricula;
-        this.monto = monto;
+        this.monto=monto;
     }
 
-    public String getCodigoCurso() { return codigoCurso; }
-    public void setCodigoCurso(String codigoCurso) { this.codigoCurso = codigoCurso; }
+    public String getCodigoCurso(){return codigoCurso;}
+    public void setCodigoCurso(String codigoCurso){this.codigoCurso=codigoCurso;}
 
-    public String getDniEstudiante() { return dniEstudiante; }
-    public void setDniEstudiante(String dniEstudiante) { this.dniEstudiante = dniEstudiante; }
+    public String getDniEstudiante(){return dniEstudiante;}
+    public void setDniEstudiante(String dniEstudiante){this.dniEstudiante=dniEstudiante;}
 
-    public String getFechaMatricula() { return fechaMatricula; }
-    public void setFechaMatricula(String fechaMatricula) { this.fechaMatricula = fechaMatricula; }
+    public String getFechaMatricula(){return fechaMatricula;}
+    public void setFechaMatricula(String fechaMatricula){this.fechaMatricula=fechaMatricula;}
 
-    public double getMonto() { return monto; }
-    public void setMonto(double monto) { this.monto = monto; }
+    public double getMonto(){return monto;}
+    public void setMonto(double monto){this.monto=monto;}
 
     @Override
-    public String mostrarInfo() {
-        return "Curso: " + codigoCurso + " | Estudiante: " + dniEstudiante + 
-               " | Fecha: " + fechaMatricula + " | Monto: S/" + monto;
+    public String mostrarInfo(){
+        return "Curso: "+codigoCurso+" | Estudiante: "+dniEstudiante+ 
+               " | Fecha: "+fechaMatricula+" | Monto: S/"+monto;
     }
      @Override
-    public String getTipo() {
+    public String getTipo(){
         return "Matrícula";
     }
 
     @Override
-    public boolean validar() {
-        try {
+    public boolean validar(){
+        try{
             Validador.validarCodigoCurso(codigoCurso);
             Validador.validarDNI(dniEstudiante);
-            Validador.validarFecha(fechaMatricula, "fecha de matrícula");
+            Validador.validarFecha(fechaMatricula,"fecha de matrícula");
             Validador.validarPrecio(monto);
-            mensajeError = "";
+            mensajeError="";
             return true;
-        } catch (IllegalArgumentException e) {
-            mensajeError = e.getMessage();
+        }catch(IllegalArgumentException e){
+            mensajeError=e.getMessage();
             return false;
         }
     }
 
     @Override
-    public String getMensajeError() {
+    public String getMensajeError(){
         return mensajeError;
     }
 }

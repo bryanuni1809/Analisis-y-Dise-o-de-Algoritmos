@@ -25,10 +25,10 @@ public class Main{
             System.out.println("0. Salir");
             System.out.print("Seleccione una opcion: ");
             try{
-                opcion = Integer.parseInt(scanner.nextLine());
-            }catch (NumberFormatException e){
+                opcion=Integer.parseInt(scanner.nextLine());
+            }catch(NumberFormatException e){
                 System.out.println("Debe ingresar un numero valido.");
-                opcion = -1;
+                opcion=-1;
             }
 
             switch(opcion){
@@ -70,11 +70,11 @@ public class Main{
                     System.out.println("Opcion invalida.");
                     break;
             }
-            if(opcion !=0){
+            if(opcion!=0){
                 System.out.println("\nPresione ENTER para continuar...");
                 scanner.nextLine();
             }
-        }while(opcion !=0);
+        }while(opcion!=0);
             scanner.close();
     }
 }
