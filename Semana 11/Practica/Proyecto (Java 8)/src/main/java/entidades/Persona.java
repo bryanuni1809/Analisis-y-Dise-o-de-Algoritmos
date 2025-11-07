@@ -50,18 +50,18 @@ public abstract class Persona implements IEntidad, IValidable{
 
    @Override
     public String mostrarInfo(){
-        return "DNI: " +dni+" | Nombre: "+nombres+" "+apellidos;
+        return "DNI: "+dni+" | Nombre: "+nombres+" "+apellidos;
     }
     @Override
-    public boolean validar() {
-        try {
+    public boolean validar(){
+        try{
             Validador.validarDNI(dni);
             Validador.validarSoloLetras(nombres,"nombres");
             Validador.validarSoloLetras(apellidos,"apellidos");
             Validador.validarNoVacio(direccion,"dirección");
             Validador.validarTelefono(telefono);
             Validador.validarEmail(correo);
-            mensajeError = "";
+            mensajeError="";
             return true;
         }catch(IllegalArgumentException e){
             mensajeError=e.getMessage();
@@ -69,7 +69,7 @@ public abstract class Persona implements IEntidad, IValidable{
         }
     }
      @Override
-    public String getMensajeError() {
+    public String getMensajeError(){
         return mensajeError;
     }
     public abstract String getTipo();

@@ -13,25 +13,25 @@ import java.util.List;
  *
  * @author BRYAN
  */
-public class QuickSortUtil {
+public class QuickSortUtil{
     // Método público principal
     public static <T> void quickSort(List<T>lista,Comparator<T>comp){
-        if (lista==null||lista.size()<=1)return;
+        if(lista==null||lista.size()<=1)return;
         quickSort(lista,0,lista.size()-1,comp);
     }
-    private static <T> void quickSort(List<T> lista,int low,int high,Comparator<T> comp){
+    private static <T> void quickSort(List<T>lista,int low,int high,Comparator<T>comp){
         if(low<high){
-            int pi = particionar(lista, low, high, comp);
-            quickSort(lista,low, pi-1,comp);
-            quickSort(lista,pi+1, high, comp);
+            int pi=particionar(lista,low,high,comp);
+            quickSort(lista,low,pi-1,comp);
+            quickSort(lista,pi+1,high,comp);
         }
     }
     // Partición usando pivote mediano (optimizado)
     private static<T>int particionar(List<T>lista,int low,int high,Comparator<T> comp){
         int medio=low+(high-low)/2;
         T pivote=elegirPivoteMediano(lista.get(low),lista.get(medio),lista.get(high),comp);
-        if(comp.compare(lista.get(medio), pivote)==0)Collections.swap(lista,medio,high);
-        else if(comp.compare(lista.get(low), pivote)==0)Collections.swap(lista,low,high);
+        if(comp.compare(lista.get(medio),pivote)==0)Collections.swap(lista,medio,high);
+        else if(comp.compare(lista.get(low),pivote)==0)Collections.swap(lista,low,high);
         int i=low-1;
         for(int j=low;j<high;j++){
             if(comp.compare(lista.get(j),pivote)<=0){

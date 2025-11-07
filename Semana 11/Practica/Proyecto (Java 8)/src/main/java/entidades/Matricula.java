@@ -12,17 +12,17 @@ import util.Validador;
  *
  * @author BRYAN
  */
-public class Matricula implements IEntidad, IValidable {
+public class Matricula implements IEntidad, IValidable{
     private String codigoCurso;
     private String dniEstudiante;
     private String fechaMatricula;
     private double monto;
     private String mensajeError;
 
-    public Matricula(String codigoCurso, String dniEstudiante, String fechaMatricula, double monto) {
-        this.codigoCurso = codigoCurso;
-        this.dniEstudiante = dniEstudiante;
-        this.fechaMatricula = fechaMatricula;
+    public Matricula(String codigoCurso, String dniEstudiante,String fechaMatricula,double monto){
+        this.codigoCurso=codigoCurso;
+        this.dniEstudiante=dniEstudiante;
+        this.fechaMatricula=fechaMatricula;
         this.monto = monto;
     }
 
