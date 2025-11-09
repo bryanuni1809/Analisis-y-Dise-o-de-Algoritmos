@@ -11,30 +11,30 @@ import interfaces.IValidable;
  *
  * @author BRYAN
  */
-public abstract class EntidadAcademica implements IEntidad,IValidable{
+public abstract class EntidadAcademica implements IEntidad, IValidable {
     protected String codigo;
     protected String mensajeError;
 
-    public EntidadAcademica(String codigo){
-        this.codigo=codigo;
-        this.mensajeError="";
+    public EntidadAcademica(String codigo) {
+        if (codigo == null || codigo.trim().isEmpty()) {
+            throw new IllegalArgumentException("El código no puede estar vacío o ser nulo.");
+        }
+        this.codigo = codigo.trim();
+        this.mensajeError = "";
     }
 
-    public String getCodigo(){ 
-        return codigo; 
-    }
-    
-    public void setCodigo(String codigo){ 
-        this.codigo=codigo; 
-    }
+    public String getCodigo() { return codigo; }
+    public void setCodigo(String codigo) { this.codigo = codigo.trim(); }
 
     @Override
-    public String getMensajeError(){
-        return mensajeError;
-    }
+    public String getMensajeError() { return mensajeError; }
 
-    // Métodos abstractos que deben implementar las clases hijas
     public abstract boolean validar();
     public abstract String mostrarInfo();
     public abstract String getTipo();
+
+    @Override
+    public String toString() {
+        return getTipo() + " [Código: " + codigo + "]";
+    }
 }
