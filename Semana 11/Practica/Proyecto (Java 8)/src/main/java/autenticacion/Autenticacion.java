@@ -4,65 +4,83 @@
  */
 package autenticacion;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
  * @author BRYAN
  */
-public class Autenticacion{
-private static final String ARCHIVO="usuarios.txt";
-    public boolean validarCredenciales(String usuario, String contrasena){
+public class Autenticacion {
+
+    private static final String ARCHIVO="usuarios.txt";
+
+    public Autenticacion(){
+        File archivo=new File(ARCHIVO);
+        try{
+            if(archivo.createNewFile()){
+                System.out.println("[AUTENTICACION] Archivo de usuarios creado.");
+            }
+        }catch(IOException e){
+            System.out.println("[AUTENTICACION] Error al crear archivo: "+e.getMessage());
+        }
+    }
+    private Map<String,String>cargarUsuarios(){
+        Map<String,String> usuarios=new HashMap<>();
         try(BufferedReader reader=new BufferedReader(new FileReader(ARCHIVO))){
             String linea;
-            while((linea=reader.readLine())!= null){
-                String[] partes=linea.split(",");
+            while((linea=reader.readLine())!=null){
+                String[]partes=linea.split(",");
                 if(partes.length==2){
-                    String u=partes[0].trim();
-                    String c=partes[1].trim();
-                    if(u.equals(usuario) && c.equals(contrasena)){
-                        return true;
-                    }
+                    usuarios.put(partes[0].trim(),partes[1].trim());
                 }
             }
-        }catch(IOException ex){
-            System.out.println("Error al leer usuarios: "+ex.getMessage());
+        }catch(IOException e){
+            System.out.println("[AUTENTICACION] Error al leer usuarios: " + e.getMessage());
         }
-        return false;
+        return usuarios;
+    }
+
+    public boolean validarCredenciales(String usuario,String contrasena){
+        Map<String,String>usuarios=cargarUsuarios();
+        String hashIngresado=hash(contrasena);
+        return hashIngresado.equals(usuarios.get(usuario));
     }
 
     private boolean usuarioExiste(String usuario){
-        try(BufferedReader reader=new BufferedReader(new FileReader(ARCHIVO))){
-            String linea;
-            while((linea=reader.readLine())!= null){
-                String[] partes=linea.split(",");
-                if(partes.length==2){
-                    String u = partes[0].trim();
-                    if(u.equals(usuario)){
-                        return true;
-                    }
-                }
-            }
-        }catch(IOException ex){
-            System.out.println("Error al verificar usuario: "+ex.getMessage());
-        }
-        return false;
+        return cargarUsuarios().containsKey(usuario);
     }
-    public void registrarUsuario(String usuario,String contrasena){
+
+    public void registrarUsuario(String usuario,String contrasena) {
         if(usuarioExiste(usuario)){
-            System.out.println("El usuario '"+usuario+"' ya está registrado.");
+            System.out.println("[AUTENTICACION] El usuario '"+usuario+"' ya existe.");
             return;
         }
-        try(BufferedWriter writer=new BufferedWriter(new FileWriter(ARCHIVO, true))){
-            writer.write(usuario+","+contrasena);
+
+        try(BufferedWriter writer=new BufferedWriter(new FileWriter(ARCHIVO,true))){
+            writer.write(usuario+","+hash(contrasena));
             writer.newLine();
-            System.out.println("Usuario registrado con éxito.");
+            System.out.println("[AUTENTICACION] Usuario registrado con éxito.");
         }catch(IOException e){
-            System.out.println("Error al registrar usuario: " +e.getMessage());
+            System.out.println("[AUTENTICACION] Error al registrar usuario: "+e.getMessage());
+        }
+    }
+
+    private String hash(String contrasena){
+        try{
+            MessageDigest md=MessageDigest.getInstance("SHA-256");
+            byte[]hash=md.digest(contrasena.getBytes(StandardCharsets.UTF_8));
+            StringBuilder sb=new StringBuilder();
+            for(byte b:hash){
+                sb.append(String.format("%02x",b));
+            }
+            return sb.toString();
+        }catch(NoSuchAlgorithmException e){
+            throw new RuntimeException("Error en el hash de contraseña",e);
         }
     }
 }
