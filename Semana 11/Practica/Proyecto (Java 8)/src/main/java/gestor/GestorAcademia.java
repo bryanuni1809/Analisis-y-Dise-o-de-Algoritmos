@@ -148,24 +148,24 @@ public class GestorAcademia{
         System.out.println("Error al cargar matrículas: "+e.getMessage());
     }
 }
-    private void cargarCalificaciones(){
-    try (BufferedReader br=new BufferedReader(new FileReader("calificaciones.txt"))){
+private void cargarCalificaciones() {
+    try (BufferedReader br = new BufferedReader(new FileReader("calificaciones.txt"))) {
         String linea;
-        while((linea=br.readLine())!=null){
-            String[]partes=linea.split(",");
-            if(partes.length>=5){
-                Calificacion c=new Calificacion(
-                    partes[0],
-                    partes[1],
-                    LocalDate.parse(partes[2]),
-                    Double.parseDouble(partes[3]),
-                    partes[4]
+        while ((linea = br.readLine()) != null) {
+            String[] partes = linea.split(",");
+            if (partes.length >= 5) {
+                Calificacion c = new Calificacion(
+                    partes[0].trim(),
+                    partes[1].trim(),
+                    partes[2].trim(),
+                    Double.parseDouble(partes[3].trim()),
+                    partes[4].trim()
                 );
                 calificaciones.add(c);
             }
         }
-    }catch(IOException e){
-        System.out.println("Error al cargar calificaciones: "+e.getMessage());
+    } catch (IOException e) {
+        System.out.println("Error al cargar calificaciones: " + e.getMessage());
     }
 }
     public void mostrarMenu(){
@@ -650,6 +650,7 @@ private void registrarCalificacion() {
             System.out.println("Curso no encontrado.");
             return;
         }
+
         LocalDate fecha = null;
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         while (fecha == null) {
@@ -677,11 +678,15 @@ private void registrarCalificacion() {
                     System.out.print("Observaciones: ");
                     String obs = scanner.nextLine().trim();
                     Validador.validarNoVacio(obs, "observaciones");
-                    Calificacion c = new Calificacion(codigoCurso, dniEst, fecha, nota, obs);
+                    String fechaTexto = fecha.format(formato);
+
+                    Calificacion c = new Calificacion(codigoCurso, dniEst, fechaTexto, nota, obs);
+
                     if (!c.validar()) {
                         System.out.println("Error de validación para " + est.getNombres() + ": " + c.getMensajeError());
                         continue;
                     }
+
                     calificaciones.add(c);
                     ArchivoUtil.guardarCalificacion(c, "calificaciones.txt");
 

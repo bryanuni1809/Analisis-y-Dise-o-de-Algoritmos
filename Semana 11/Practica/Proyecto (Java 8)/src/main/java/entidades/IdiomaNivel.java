@@ -12,58 +12,69 @@ import util.Validador;
  *
  * @author BRYAN
  */
-public class IdiomaNivel implements IEntidad,IValidable{
+public class IdiomaNivel implements IEntidad, IValidable {
     private String codigo;
     private String idioma;
     private String nivel;
     private String descripcion;
     private String mensajeError;
 
-    public IdiomaNivel(String codigo,String idioma,String nivel,String descripcion){
-        this.codigo=codigo;
-        this.idioma=idioma;
-        this.nivel=nivel;
-        this.descripcion=descripcion;
+    public IdiomaNivel(String codigo, String idioma, String nivel, String descripcion) {
+        this.codigo = codigo.trim();
+        this.idioma = idioma.trim();
+        this.nivel = nivel.trim();
+        this.descripcion = descripcion.trim();
         this.mensajeError = "";
     }
-    public String getCodigo(){return codigo;}
-    public void setCodigo(String codigo){this.codigo=codigo;}
-    
-    public String getIdioma(){return idioma;}
-    public void setIdioma(String idioma){this.idioma=idioma;}
 
-    public String getNivel(){return nivel;}
-    public void setNivel(String nivel){this.nivel=nivel;}
+    // Getters y Setters
+    public String getCodigo() { return codigo; }
+    public void setCodigo(String codigo) { this.codigo = codigo.trim(); }
 
-    public String getDescripcion(){return descripcion;}
-    public void setDescripcion(String descripcion){this.descripcion=descripcion;}
+    public String getIdioma() { return idioma; }
+    public void setIdioma(String idioma) { this.idioma = idioma.trim(); }
+
+    public String getNivel() { return nivel; }
+    public void setNivel(String nivel) { this.nivel = nivel.trim(); }
+
+    public String getDescripcion() { return descripcion; }
+    public void setDescripcion(String descripcion) { this.descripcion = descripcion.trim(); }
 
     @Override
-    public String mostrarInfo(){
-        return "Codigo: " +codigo+" | Idioma: "+idioma+ " | Nivel: "+nivel+
-               "\nDescripcion: "+descripcion;
+    public String mostrarInfo() {
+        return String.format(
+            "Código: %s | Idioma: %s | Nivel: %s%nDescripción: %s",
+            codigo, idioma, nivel, descripcion
+        );
     }
+
     @Override
-    public String getTipo(){
+    public String getTipo() {
         return "Nivel de Idioma";
     }
+
     @Override
-    public boolean validar(){
-        try{
-            Validador.validarNoVacio(codigo,"código");
+    public boolean validar() {
+        try {
+            Validador.validarNoVacio(codigo, "código");
             Validador.validarIdioma(idioma);
             Validador.validarNivelIdioma(nivel);
             Validador.validarNoVacio(descripcion, "descripción");
-            mensajeError="";
+            mensajeError = "";
             return true;
-        }catch(IllegalArgumentException e){
-            mensajeError=e.getMessage();
+        } catch (IllegalArgumentException e) {
+            mensajeError = "[IDIOMA NIVEL] " + e.getMessage();
             return false;
         }
     }
 
     @Override
-    public String getMensajeError(){
+    public String getMensajeError() {
         return mensajeError;
+    }
+
+    @Override
+    public String toString() {
+        return mostrarInfo();
     }
 }

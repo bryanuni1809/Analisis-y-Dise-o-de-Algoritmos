@@ -12,59 +12,69 @@ import util.Validador;
  *
  * @author BRYAN
  */
-public class Matricula implements IEntidad, IValidable{
+public class Matricula implements IEntidad, IValidable {
     private String codigoCurso;
     private String dniEstudiante;
-    private String fechaMatricula;
+    private String fechaMatricula; // Formato: dd/MM/yyyy
     private double monto;
     private String mensajeError;
 
-    public Matricula(String codigoCurso, String dniEstudiante,String fechaMatricula,double monto){
-        this.codigoCurso=codigoCurso;
-        this.dniEstudiante=dniEstudiante;
-        this.fechaMatricula=fechaMatricula;
-        this.monto=monto;
+    public Matricula(String codigoCurso, String dniEstudiante, String fechaMatricula, double monto) {
+        this.codigoCurso = codigoCurso.trim();
+        this.dniEstudiante = dniEstudiante.trim();
+        this.fechaMatricula = fechaMatricula.trim();
+        this.monto = monto;
+        this.mensajeError = "";
     }
 
-    public String getCodigoCurso(){return codigoCurso;}
-    public void setCodigoCurso(String codigoCurso){this.codigoCurso=codigoCurso;}
+    // Getters y Setters
+    public String getCodigoCurso() { return codigoCurso; }
+    public void setCodigoCurso(String codigoCurso) { this.codigoCurso = codigoCurso.trim(); }
 
-    public String getDniEstudiante(){return dniEstudiante;}
-    public void setDniEstudiante(String dniEstudiante){this.dniEstudiante=dniEstudiante;}
+    public String getDniEstudiante() { return dniEstudiante; }
+    public void setDniEstudiante(String dniEstudiante) { this.dniEstudiante = dniEstudiante.trim(); }
 
-    public String getFechaMatricula(){return fechaMatricula;}
-    public void setFechaMatricula(String fechaMatricula){this.fechaMatricula=fechaMatricula;}
+    public String getFechaMatricula() { return fechaMatricula; }
+    public void setFechaMatricula(String fechaMatricula) { this.fechaMatricula = fechaMatricula.trim(); }
 
-    public double getMonto(){return monto;}
-    public void setMonto(double monto){this.monto=monto;}
+    public double getMonto() { return monto; }
+    public void setMonto(double monto) { this.monto = monto; }
 
     @Override
-    public String mostrarInfo(){
-        return "Curso: "+codigoCurso+" | Estudiante: "+dniEstudiante+ 
-               " | Fecha: "+fechaMatricula+" | Monto: S/"+monto;
+    public String mostrarInfo() {
+        return String.format(
+            "Curso: %s | Estudiante: %s | Fecha: %s | Monto: S/%.2f",
+            codigoCurso, dniEstudiante, fechaMatricula, monto
+        );
     }
-     @Override
-    public String getTipo(){
+
+    @Override
+    public String getTipo() {
         return "Matrícula";
     }
 
     @Override
-    public boolean validar(){
-        try{
+    public boolean validar() {
+        try {
             Validador.validarCodigoCurso(codigoCurso);
             Validador.validarDNI(dniEstudiante);
-            Validador.validarFecha(fechaMatricula,"fecha de matrícula");
+            Validador.validarFecha(fechaMatricula, "fecha de matrícula");
             Validador.validarPrecio(monto);
-            mensajeError="";
+            mensajeError = "";
             return true;
-        }catch(IllegalArgumentException e){
-            mensajeError=e.getMessage();
+        } catch (IllegalArgumentException e) {
+            mensajeError = "[MATRÍCULA] " + e.getMessage();
             return false;
         }
     }
 
     @Override
-    public String getMensajeError(){
+    public String getMensajeError() {
         return mensajeError;
+    }
+
+    @Override
+    public String toString() {
+        return mostrarInfo();
     }
 }
