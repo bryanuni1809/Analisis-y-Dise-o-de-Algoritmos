@@ -7,69 +7,80 @@ package entidades;
 import interfaces.IEntidad;
 import interfaces.IValidable;
 import util.Validador;
+import java.time.LocalDate;
 
 /**
  *
  * @author BRYAN
  */
-public class Calificacion implements IEntidad,IValidable{
+public class Calificacion implements IEntidad, IValidable {
+
     private String codigoCurso;
     private String dniEstudiante;
-    private String fecha;
+    private LocalDate fecha;
     private double nota;
     private String observaciones;
     private String mensajeError;
 
-    public Calificacion(String codigoCurso,String dniEstudiante,String fecha,double nota,String observaciones){
-        this.codigoCurso=codigoCurso;
-        this.dniEstudiante=dniEstudiante;
-        this.fecha=fecha;
-        this.nota=nota;
-        this.observaciones=observaciones;
-        this.mensajeError="";
+    public Calificacion(String codigoCurso, String dniEstudiante, LocalDate fecha, double nota, String observaciones) {
+        this.codigoCurso = codigoCurso;
+        this.dniEstudiante = dniEstudiante;
+        this.fecha = fecha;
+        this.nota = nota;
+        this.observaciones = observaciones;
+        this.mensajeError = "";
     }
+    // Getters y Setters
+    public String getCodigoCurso() { return codigoCurso; }
+    public void setCodigoCurso(String codigoCurso) { this.codigoCurso = codigoCurso; }
 
-    public String getCodigoCurso(){return codigoCurso;}
-    public void setCodigoCurso(String codigoCurso){this.codigoCurso=codigoCurso;}
+    public String getDniEstudiante() { return dniEstudiante; }
+    public void setDniEstudiante(String dniEstudiante) { this.dniEstudiante = dniEstudiante; }
 
-    public String getDniEstudiante(){return dniEstudiante;}
-    public void setDniEstudiante(String dniEstudiante){this.dniEstudiante=dniEstudiante;}
+    public LocalDate getFecha() { return fecha; }
+    public void setFecha(LocalDate fecha) { this.fecha = fecha; }
 
-    public String getFecha(){return fecha;}
-    public void setFecha(String fecha){this.fecha=fecha;}
+    public double getNota() { return nota; }
+    public void setNota(double nota) { this.nota = nota; }
 
-    public double getNota(){return nota;}
-    public void setNota(double nota){this.nota=nota;}
-
-    public String getObservaciones(){return observaciones;}
-    public void setObservaciones(String observaciones){this.observaciones=observaciones; }
+    public String getObservaciones() { return observaciones; }
+    public void setObservaciones(String observaciones) { this.observaciones = observaciones; }
 
     @Override
-    public String mostrarInfo(){
-        return "Curso: "+codigoCurso+" | Estudiante: "+dniEstudiante+" | Nota: "+nota+"\nObservaciones: "+observaciones;
+    public String mostrarInfo() {
+        return String.format("Curso: %s | Estudiante: %s | Fecha: %s | Nota: %.2f%nObservaciones: %s",
+                codigoCurso, dniEstudiante, fecha, nota, observaciones);
     }
+
     @Override
-    public String getTipo(){
+    public String getTipo() {
         return "Calificación";
     }
+
     @Override
-    public boolean validar(){
-        try{
+    public boolean validar() {
+        try {
             Validador.validarCodigoCurso(codigoCurso);
             Validador.validarDNI(dniEstudiante);
-            Validador.validarFecha(fecha,"fecha de calificación");
+            Validador.validarFecha(fecha.toString(), "fecha de calificación");
             Validador.validarNota(nota);
-            Validador.validarNoVacio(observaciones,"observaciones");
+            Validador.validarNoVacio(observaciones, "observaciones");
             mensajeError = "";
             return true;
-        }catch(IllegalArgumentException e){
-            mensajeError=e.getMessage();
+        } catch (IllegalArgumentException e) {
+            mensajeError = "[CALIFICACION] " + e.getMessage();
             return false;
         }
     }
 
     @Override
-    public String getMensajeError(){
+    public String getMensajeError() {
         return mensajeError;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Calificacion[codigoCurso=%s, dniEstudiante=%s, fecha=%s, nota=%.2f, observaciones=%s]",
+                codigoCurso, dniEstudiante, fecha, nota, observaciones);
     }
 }

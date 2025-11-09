@@ -25,6 +25,9 @@ import entidades.QuickSortUtil;
 import interfaces.IEntidad;
 import interfaces.IValidable;
 import java.io.File;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -152,8 +155,11 @@ public class GestorAcademia{
             String[]partes=linea.split(",");
             if(partes.length>=5){
                 Calificacion c=new Calificacion(
-                    partes[0],partes[1],partes[2],
-                    Double.parseDouble(partes[3]),partes[4]
+                    partes[0],
+                    partes[1],
+                    LocalDate.parse(partes[2]),
+                    Double.parseDouble(partes[3]),
+                    partes[4]
                 );
                 calificaciones.add(c);
             }
@@ -625,65 +631,72 @@ private void mostrarMenuReportesHTML(){
         System.out.println("Matricula registrada para "+estudiante.getNombres()+" en el curso "+cursoSeleccionado.getNombre());
     }
 
-    private void registrarCalificacion(){
-        try{
+private void registrarCalificacion() {
+    try {
         System.out.println("Registro de Calificaciones:");
         System.out.print("Ingrese el código del curso: ");
         String codigoCurso = scanner.nextLine().trim();
         Validador.validarCodigoCurso(codigoCurso);
 
-        Curso cursoSeleccionado=null;
-        for(Curso c : cursos.values()){
-            if (c.getCodigo().equals(codigoCurso)){
-                cursoSeleccionado=c;
+        Curso cursoSeleccionado = null;
+        for (Curso c : cursos.values()) {
+            if (c.getCodigo().equals(codigoCurso)) {
+                cursoSeleccionado = c;
                 break;
             }
         }
-        
-        if(cursoSeleccionado==null){
+
+        if (cursoSeleccionado == null) {
             System.out.println("Curso no encontrado.");
             return;
         }
+        LocalDate fecha = null;
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        while (fecha == null) {
+            System.out.print("Fecha del registro de calificación (dd/MM/yyyy): ");
+            String fechaTexto = scanner.nextLine().trim();
+            try {
+                fecha = LocalDate.parse(fechaTexto, formato);
+            } catch (DateTimeParseException e) {
+                System.out.println("Formato de fecha inválido. Use dd/MM/yyyy, por ejemplo: 07/11/2025");
+            }
+        }
 
-        String fecha=leerFecha("Fecha del registro de calificación (dd/MM/yyyy): ");
+        boolean encontrado = false;
+        for (Matricula m : matriculas) {
+            if (m.getCodigoCurso().equals(codigoCurso)) {
+                String dniEst = m.getDniEstudiante();
+                Estudiante est = estudiantes.get(dniEst);
 
-        boolean encontrado=false;
-        for(Matricula m:matriculas){
-            if(m.getCodigoCurso().equals(codigoCurso)){
-                String dniEst=m.getDniEstudiante();
-                Estudiante est=estudiantes.get(dniEst);   
+                if (est != null) {
+                    System.out.println("Estudiante: " + est.getNombres() + " " + est.getApellidos());
 
-                if(est!=null){
-                    System.out.println("Estudiante: "+est.getNombres()+" "+est.getApellidos());
-                    
-                    double nota=leerDoubleValidado("Nota (0-20): ",0,20);
+                    double nota = leerDoubleValidado("Nota (0-20): ", 0, 20);
                     Validador.validarNota(nota);
-                    
-                    System.out.print("Observaciones: ");
-                    
-                    String obs=scanner.nextLine().trim();
-                    Validador.validarNoVacio(obs,"observaciones");
 
-                    Calificacion c=new Calificacion(codigoCurso,dniEst,fecha,nota,obs);
-                    if(!c.validar()){
-                        System.out.println("Error de validación para "+est.getNombres()+": "+c.getMensajeError());
+                    System.out.print("Observaciones: ");
+                    String obs = scanner.nextLine().trim();
+                    Validador.validarNoVacio(obs, "observaciones");
+                    Calificacion c = new Calificacion(codigoCurso, dniEst, fecha, nota, obs);
+                    if (!c.validar()) {
+                        System.out.println("Error de validación para " + est.getNombres() + ": " + c.getMensajeError());
                         continue;
                     }
                     calificaciones.add(c);
-                    ArchivoUtil.guardarCalificacion(c,"calificaciones.txt");
+                    ArchivoUtil.guardarCalificacion(c, "calificaciones.txt");
 
                     System.out.println("Calificación registrada y validada.");
-                    encontrado=true;
+                    encontrado = true;
                 }
             }
         }
 
-        if(!encontrado){
+        if (!encontrado) {
             System.out.println("No hay estudiantes matriculados en este curso.");
         }
 
-    }catch(IllegalArgumentException e){
-        System.out.println("Error de validación: "+e.getMessage());
+    } catch (IllegalArgumentException e) {
+        System.out.println("Error de validación: " + e.getMessage());
     }
 }
     private void modificarEstudiante(){
